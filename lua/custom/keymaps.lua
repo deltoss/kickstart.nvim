@@ -15,7 +15,6 @@ keymap('i', '<C-S-z>', '<C-o><C-r>', { noremap = true })
 keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
 keymap('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
 keymap('n', '<C-e>', '<C-d>zz', { noremap = true })
-keymap('n', '<C-e>', '<C-d>zz', { noremap = true })
 keymap('n', '<C-y>', '<Nop>', { noremap = true, silent = true })
 
 -- Wrapped line navigation
