@@ -55,6 +55,8 @@ keymap('n', '<leader>e', '<C-w>l', { noremap = true })
 -- Delete without yanking
 keymap('n', '<leader>d', '"_d', { noremap = true })
 keymap('v', '<leader>d', '"_d', { noremap = true })
+keymap('n', '<leader>D', '"_D', { noremap = true })
+keymap('v', '<leader>D', '"_D', { noremap = true })
 
 -- Change without yanking
 keymap('n', '<leader>c', '"_c', { noremap = true })
