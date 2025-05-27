@@ -1,5 +1,3 @@
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
 return {
   'stevearc/oil.nvim',
   ---@module 'oil'
@@ -12,6 +10,10 @@ return {
     },
   },
   dependencies = { 'nvim-tree/nvim-web-devicons' },
+  keys = {
+    { '-', '<cmd>Oil<cr>', desc = 'Open current directory' },
+  },
   -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
   lazy = false,
 }
+
