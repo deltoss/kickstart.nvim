@@ -39,6 +39,7 @@ keymap('i', '<A-.>', '<C-n>', { noremap = true })
 
 -- Map Ctrl+Backspace to delete the previous word in insert mode
 keymap('i', '<C-BS>', '<C-w>', { noremap = true })
+keymap('i', '<C-H>', '<C-w>', { noremap = true })
 -- Map Ctrl+Delete to delete the next word in insert mode
 keymap('i', '<C-Del>', '<C-o>dw', { noremap = true })
 
@@ -68,3 +69,4 @@ keymap('v', 'p', '"_dP', { noremap = true })
 
 -- Join lines
 keymap('n', '<leader>j', 'J', { noremap = true })
+
