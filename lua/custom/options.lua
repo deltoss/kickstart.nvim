@@ -14,3 +14,4 @@ opt.shiftwidth = 2 -- Length to use when shifting text (eg. <<, >> and == comman
 opt.tabstop = 2 -- Length of an actual \t character
 opt.softtabstop = 2 -- Makes backspace treat 2 spaces as a tab
 
+opt.relativenumber = true
