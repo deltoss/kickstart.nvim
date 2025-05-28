@@ -7,15 +7,14 @@ keymap('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { noremap = true, silent = tru
 keymap('n', '<C-z>', 'u', { noremap = true })
 keymap('v', '<C-z>', 'u', { noremap = true })
 keymap('i', '<C-z>', '<C-o>u', { noremap = true })
-keymap('n', '<C-S-z>', '<C-r>', { noremap = true })
-keymap('v', '<C-S-z>', '<C-r>', { noremap = true })
-keymap('i', '<C-S-z>', '<C-o><C-r>', { noremap = true })
+keymap('n', '<C-y>', '<C-r>', { noremap = true })
+keymap('v', '<C-y>', '<C-r>', { noremap = true })
+keymap('i', '<C-y>', '<C-o><C-r>', { noremap = true })
 
 -- Better Navigations
 keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
 keymap('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
 keymap('n', '<C-e>', '<C-d>zz', { noremap = true })
-keymap('n', '<C-y>', '<Nop>', { noremap = true, silent = true })
 
 -- Wrapped line navigation
 keymap('n', '<C-Up>', 'gk', { noremap = true })
@@ -69,4 +68,3 @@ keymap('v', 'p', '"_dP', { noremap = true })
 
 -- Join lines
 keymap('n', '<leader>j', 'J', { noremap = true })
-
