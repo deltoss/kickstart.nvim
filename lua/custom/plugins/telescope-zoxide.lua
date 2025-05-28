@@ -6,6 +6,6 @@ return {
   end,
   keys = {
     { '<leader>z', ':Telescope zoxide list<CR>', desc = '[Z]oxide Jump' },
-    { '<leader>gf', ':Telescope zoxide list<CR>', desc = '[S]earch [Z]oxide Jump' },
+    { '<leader>sz', ':Telescope zoxide list<CR>', desc = '[S]earch [Z]oxide Jump' },
   },
 }
