@@ -10,6 +10,8 @@ keymap('i', '<C-z>', '<C-o>u', { noremap = true })
 keymap('n', '<C-y>', '<C-r>', { noremap = true })
 keymap('v', '<C-y>', '<C-r>', { noremap = true })
 keymap('i', '<C-y>', '<C-o><C-r>', { noremap = true })
+keymap('i', '<C-r><C-r>', '<C-r>*', { noremap = true })
+keymap('i', '<C-r>r', '<C-r>*', { noremap = true })
 
 -- Better Navigations
 keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
