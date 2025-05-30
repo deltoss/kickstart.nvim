@@ -53,6 +53,10 @@ keymap('n', '<leader>y', '<C-w>h', { noremap = true })
 keymap('n', '<leader>h', '<C-w>j', { noremap = true })
 keymap('n', '<leader>a', '<C-w>k', { noremap = true })
 keymap('n', '<leader>e', '<C-w>l', { noremap = true })
+vim.keymap.set('n', '<leader><Up>', ':split<CR>', { desc = 'Horizontal split (above)' })
+vim.keymap.set('n', '<leader><Down>', ':split<CR>', { desc = 'Horizontal split (below)' })
+vim.keymap.set('n', '<leader><Left>', ':vsplit<CR>', { desc = 'Vertical split (left)' })
+vim.keymap.set('n', '<leader><Right>', ':vsplit<CR>', { desc = 'Vertical split (right)' })
 
 -- Delete without yanking
 keymap('n', '<leader>d', '"_d', { noremap = true })
