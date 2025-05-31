@@ -27,8 +27,14 @@ keymap('v', '<C-Down>', 'gj', { noremap = true })
 keymap('i', '<Down>', '<C-o>gj', { noremap = true })
 
 -- Save with Ctrl+S
-keymap('n', '<C-s>', ':update<CR>', { noremap = true, silent = true })
-keymap('i', '<C-s>', '<Esc>:update<CR>', { noremap = true, silent = true })
+
+if vim.g.started_by_firenvim then
+  keymap('n', '<C-s>', ':wq<CR>', { noremap = true, silent = true })
+  keymap('i', '<C-s>', '<Esc>:wq<CR>', { noremap = true, silent = true })
+else
+  keymap('n', '<C-s>', ':update<CR>', { noremap = true, silent = true })
+  keymap('i', '<C-s>', '<Esc>:update<CR>', { noremap = true, silent = true })
+end
 
 -- Indent and outdent with < and > in visual mode
 keymap('v', '<', '<gv', { noremap = true })
