@@ -15,3 +15,6 @@ opt.tabstop = 2 -- Length of an actual \t character
 opt.softtabstop = 2 -- Makes backspace treat 2 spaces as a tab
 
 opt.relativenumber = true
+
+-- Automatically change vim's cwd when opening a buffer.
+opt.autochdir = true
