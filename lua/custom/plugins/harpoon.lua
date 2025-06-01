@@ -9,76 +9,76 @@ return {
   end,
   keys = {
     {
-      '<leader>pa',
+      '<leader>ma',
       function()
         require('harpoon'):list():add()
       end,
-      desc = 'har[p]oon [a]dd file',
+      desc = 'harpoon [m]ark [a]dd file',
     },
     {
-      '<leader>pp',
+      '<leader>mm',
       function()
         local harpoon = require 'harpoon'
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end,
-      desc = 'har[p]oon quick menu',
+      desc = 'harpoon [m]ark quick [m]enu',
     },
     {
-      '<leader>pq',
+      '<leader>mq',
       function()
         local harpoon = require 'harpoon'
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end,
-      desc = 'har[p]oon [q]uick menu',
+      desc = 'harpoon [m]ark [q]uick menu',
     },
     {
-      '<leader>pp',
+      '<leader>mp',
       function()
         require('harpoon'):list():prev()
       end,
-      desc = 'har[p]oon to [p]revious buffer in harpoon list',
+      desc = 'harpoon [m]ark go to [p]revious marked file',
     },
     {
-      '<leader>pn',
+      '<leader>mn',
       function()
         require('harpoon'):list():next()
       end,
-      desc = 'har[p]oon to [n]next buffer in harpoon list',
+      desc = 'harpoon [m]ark go to [n]ext marked file',
     },
     {
-      '<leader>p1',
+      '<leader>m1',
       function()
         require('harpoon'):list():select(1)
       end,
-      desc = 'har[p]oon to file [1]',
+      desc = 'harpoon go to [m]arked file [1]',
     },
     {
-      '<leader>p2',
+      '<leader>m2',
       function()
         require('harpoon'):list():select(2)
       end,
-      desc = 'har[p]oon to file [2]',
+      desc = 'harpoon go to [m]arked file [2]',
     },
     {
-      '<leader>p3',
+      '<leader>m3',
       function()
         require('harpoon'):list():select(3)
       end,
-      desc = 'har[p]oon to file [3]',
+      desc = 'harpoon go to [m]arked file [3]',
     },
     {
-      '<leader>p4',
+      '<leader>m4',
       function()
         require('harpoon'):list():select(4)
       end,
-      desc = 'har[p]oon to file [4]',
+      desc = 'harpoon go to [m]arked file [4]',
     },
     {
-      '<leader>p5',
+      '<leader>m5',
       function()
         require('harpoon'):list():select(5)
       end,
-      desc = 'har[p]oon to file [5]',
+      desc = 'harpoon go to [m]arked file [5]',
     },
   },
 }
