@@ -16,6 +16,14 @@ return {
       desc = 'har[p]oon [a]dd file',
     },
     {
+      '<leader>pp',
+      function()
+        local harpoon = require 'harpoon'
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end,
+      desc = 'har[p]oon quick menu',
+    },
+    {
       '<leader>pq',
       function()
         local harpoon = require 'harpoon'
