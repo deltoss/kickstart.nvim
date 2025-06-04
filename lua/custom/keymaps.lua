@@ -28,7 +28,6 @@ keymap('v', '<C-Down>', 'gj', { noremap = true })
 keymap('i', '<Down>', '<C-o>gj', { noremap = true })
 
 -- Save with Ctrl+S
-
 if vim.g.started_by_firenvim then
   keymap('n', '<C-s>', ':wq<CR>', { noremap = true, silent = true })
   keymap('i', '<C-s>', '<Esc>:wq<CR>', { noremap = true, silent = true })
@@ -51,11 +50,31 @@ keymap('i', '<C-H>', '<C-w>', { noremap = true })
 -- Map Ctrl+Delete to delete the next word in insert mode
 keymap('i', '<C-Del>', '<C-o>dw', { noremap = true })
 
+-- Buffer operations
+keymap('n', '+', ':bn<CR>', { noremap = true, silent = true })
+keymap('n', '_', ':bp<CR>', { noremap = true, silent = true })
+
 -- Window operations
 vim.keymap.set('n', '<leader><Up>', ':split<CR>', { desc = 'Horizontal split (above)' })
 vim.keymap.set('n', '<leader><Down>', ':split<CR>', { desc = 'Horizontal split (below)' })
 vim.keymap.set('n', '<leader><Left>', ':vsplit<CR>', { desc = 'Vertical split (left)' })
 vim.keymap.set('n', '<leader><Right>', ':vsplit<CR>', { desc = 'Vertical split (right)' })
+
+-- Tab operations
+vim.keymap.set('n', '<leader>tt', ':tabnew<CR>', { desc = '[T]ab new' })
+vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', { desc = '[T]ab [n]ew' })
+vim.keymap.set('n', '<leader>ta', ':tabnew<CR>', { desc = '[T]ab [a]dd' })
+vim.keymap.set('n', '<leader>tf', ':tabf **<Left>', { desc = '[T]ab [f]ind' })
+vim.keymap.set('n', '<leader>tp', ':tabprev<CR>', { desc = '[T]ab [p]revious' })
+vim.keymap.set('n', '<leader>t<Left>', ':tabprev<CR>', { desc = '[T]ab left' })
+vim.keymap.set('n', '<S-Tab>', ':tabprev<CR>', { desc = '[T]ab previous' })
+vim.keymap.set('n', '<leader>tn', ':tabnext<CR>', { desc = '[T]ab [n]ext' })
+vim.keymap.set('n', '<leader>t<Right>', ':tabnext<CR>', { desc = '[T]ab right' })
+vim.keymap.set('n', '<Tab>', ':tabnext<CR>', { desc = '[T]ab next' })
+vim.keymap.set('n', '<leader>tm', ':tabmove ', { desc = '[T]ab [m]ove' })
+vim.keymap.set('n', '<leader>tc', ':tabclose<CR>', { desc = '[T]ab [c]lose' })
+vim.keymap.set('n', '<leader>td', ':tabdo ', { desc = '[T]ab [d]o' })
+vim.keymap.set('n', '<leader>ts', ':tabdo %s///g<Left><Left><Left>', { desc = '[T]ab [s]ubstitution' })
 
 -- Delete without yanking
 keymap('n', '<leader>d', '"_d', { noremap = true })
