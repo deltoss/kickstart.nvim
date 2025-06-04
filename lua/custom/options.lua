@@ -1,5 +1,8 @@
 local opt = vim.opt
 
+-- Required for plugins to work (e.g. bufferline.nvim)
+opt.termguicolors = true
+
 -- Timeout for key sequences
 opt.timeoutlen = 3000 -- Default in Kickstart is likely lower
 
