@@ -42,8 +42,8 @@ keymap('v', '<', '<gv', { noremap = true })
 keymap('v', '>', '>gv', { noremap = true })
 
 -- Autocompletion
-keymap('i', '<A-,>', '<C-p>', { noremap = true })
-keymap('i', '<A-.>', '<C-n>', { noremap = true })
+keymap('i', '<C-,>', '<C-p>', { noremap = true })
+keymap('i', '<C-.>', '<C-n>', { noremap = true })
 
 -- Map Ctrl+Backspace to delete the previous word in insert mode
 keymap('i', '<C-BS>', '<C-w>', { noremap = true })
