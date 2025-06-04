@@ -53,8 +53,8 @@ return {
           gitsigns.diffthis '@'
         end, { desc = 'git [D]iff against last commit' })
         -- Toggles
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
-        map('n', '<leader>tD', gitsigns.preview_hunk_inline, { desc = '[T]oggle git show [D]eleted' })
+        map('n', '<leader>ob', gitsigns.toggle_current_line_blame, { desc = '[O]ptions Toggle git show [b]lame line' })
+        map('n', '<leader>oD', gitsigns.preview_hunk_inline, { desc = '[O]ptions Toggle git show [D]eleted' })
 
         map('n', '<leader>hl', gitsigns.setloclist, { desc = 'Get hunk [l]ocations for current buffer' })
         map('n', '<leader>hL', function()
