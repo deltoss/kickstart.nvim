@@ -92,3 +92,17 @@ keymap('v', 'p', '"_dP', { noremap = true })
 
 -- Join lines
 keymap('n', '<leader>j', 'J', { noremap = true })
+
+-- Search and replace word under cursor
+keymap('n', '<leader>rw', ':%s/\\<<C-r><C-w>\\>//g<left><left>', { desc = '[R]eplace [W]ord under cursor' })
+
+-- Visual mode: replace highlighted text with entered value
+keymap('x', '<leader>rh', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>//g<Left><Left>", { desc = '[R]eplace [H]ighlighted text' })
+
+-- Visual mode: replace highlighted text with highlighted value + entered value
+keymap(
+  'x',
+  '<leader>ra',
+  "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\", '/\\&~')<CR>/g<Left><Left>",
+  { desc = '[R]eplace highlighted text with highlight and [A]ppend to it' }
+)
