@@ -1,3 +1,25 @@
+local keymap = vim.keymap.set
+
+keymap('n', '<leader>w<Up>', function()
+  local cwd = vim.fn.getcwd()
+  vim.fn.jobstart({ 'wezterm', 'cli', 'split-pane', '--top', '--percent', '30', '--cwd', cwd }, { detach = true })
+end, { desc = "[W]ezTerm split pane top with Vim's cwd" })
+
+keymap('n', '<leader>w<Right>', function()
+  local cwd = vim.fn.getcwd()
+  vim.fn.jobstart({ 'wezterm', 'cli', 'split-pane', '--right', '--percent', '30', '--cwd', cwd }, { detach = true })
+end, { desc = "[W]ezTerm split pane right with Vim's cwd" })
+
+keymap('n', '<leader>w<Down>', function()
+  local cwd = vim.fn.getcwd()
+  vim.fn.jobstart({ 'wezterm', 'cli', 'split-pane', '--bottom', '--percent', '30', '--cwd', cwd }, { detach = true })
+end, { desc = "[W]ezTerm split pane down with Vim's cwd" })
+
+keymap('n', '<leader>w<Left>', function()
+  local cwd = vim.fn.getcwd()
+  vim.fn.jobstart({ 'wezterm', 'cli', 'split-pane', '--left', '--percent', '30', '--cwd', cwd }, { detach = true })
+end, { desc = "[W]ezTerm split pane left with Vim's cwd" })
+
 vim.api.nvim_create_autocmd({ 'BufEnter', 'winenter', 'dirchanged' }, {
   callback = function(event)
     local title = '🚀 nvim'
