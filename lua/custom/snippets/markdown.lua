@@ -69,7 +69,7 @@ flowchart {}
       {
         c(1, { t 'TD', t 'LR', t 'TB', t 'RL' }), -- Direction choices
         i(2, 'A'),
-        i(3, '🚀 Descrption'),
+        i(3, '🚀 Description'),
         i(4, 'B'),
         i(5, "🔗 <a href='http://google.com'>Link</a>"),
       }
