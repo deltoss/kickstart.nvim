@@ -1,5 +1,4 @@
 require 'custom.options'
 require 'custom.keymaps'
-require 'custom.keymaps-luasnip'
 require 'custom.use-powershell'
 require 'custom.wezterm-integration'
