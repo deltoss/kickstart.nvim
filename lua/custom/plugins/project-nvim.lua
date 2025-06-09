@@ -5,7 +5,7 @@ return {
     require('project_nvim').setup {
       -- Optional settings:
       detection_methods = { 'lsp', 'pattern' },
-      patterns = { '.git', 'Makefile', '.svn', '*.sln', 'package.json' },
+      patterns = { '.git', 'Makefile', '.svn', '*.sln', 'package.json', 'readme.md' },
     }
 
     -- Load Telescope extension for switching
