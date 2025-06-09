@@ -17,7 +17,7 @@ return {
             hl_mode = 'combine',
           },
           active = {
-            virt_text = { { '●', 'PortalOrange' } },
+            virt_text = { { '●', 'DiagnosticHint' } },
             hl_mode = 'combine',
           },
         },
@@ -27,7 +27,7 @@ return {
             hl_mode = 'combine',
           },
           active = {
-            virt_text = { { '●', 'PortalBlue' } },
+            virt_text = { { '●', 'DiagnosticHint' } },
             hl_mode = 'combine',
           },
         },
