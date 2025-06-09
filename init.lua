@@ -818,6 +818,7 @@ require('lazy').setup({
             end,
           },
         },
+        config = require('custom.luasnip').config,
         opts = {},
       },
       'folke/lazydev.nvim',
