@@ -1,5 +1,8 @@
 local keymap = vim.keymap.set
 
+keymap('n', '<C-Enter>', 'o<Esc>', { desc = 'Insert newline after cursor' })
+keymap('n', '<S-Enter>', 'O<Esc>', { desc = 'Insert newline before cursor' })
+
 -- Spelling correction
 keymap('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { noremap = true, silent = true })
 
