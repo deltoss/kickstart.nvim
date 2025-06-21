@@ -358,7 +358,7 @@ require('lazy').setup({
         { '<leader>t', group = '[T]abs' },
         { '<leader>w', group = '[W]ezterm' },
         { '<leader>r', group = '[R]eplace' },
-        { '<leader>p', group = '[P]eek' },
+        { '<leader>p', group = '[P]eek/[P]aste' },
       },
     },
   },
