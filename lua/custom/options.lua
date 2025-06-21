@@ -20,3 +20,6 @@ opt.relativenumber = true
 opt.autochdir = true
 
 opt.conceallevel = 2
+
+-- Wrap lines at the end of a word (not in the middle)
+opt.linebreak = true
