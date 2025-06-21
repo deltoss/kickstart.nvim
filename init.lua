@@ -351,7 +351,7 @@ require('lazy').setup({
       -- Document existing key chains
       spec = {
         { '<leader>s', group = '[S]earch' },
-        { '<leader>o', group = '[O]ptions' },
+        { '<leader>o', group = '[O]bsidian' },
         { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
         { '<leader>h', group = '[H]arpoon' },
         { '<leader>m', group = '[M]arkdown' },
@@ -359,6 +359,7 @@ require('lazy').setup({
         { '<leader>w', group = '[W]ezterm' },
         { '<leader>r', group = '[R]eplace' },
         { '<leader>p', group = '[P]eek/[P]aste' },
+        { '<leader><leader>o', group = '[O]ptions' },
       },
     },
   },
@@ -527,7 +528,7 @@ require('lazy').setup({
           --
           -- This may be unwanted, since they displace some of your code
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-            map('<leader>oh', function()
+            map('<leader><leader>oh', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[O]ption Toggle Inlay [H]ints')
           end

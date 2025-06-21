@@ -18,3 +18,5 @@ opt.relativenumber = true
 
 -- Automatically change vim's cwd when opening a buffer.
 opt.autochdir = true
+
+opt.conceallevel = 2

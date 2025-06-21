@@ -97,9 +97,12 @@ return { -- Fuzzy Finder (files, lsp, etc)
       }
     end, { desc = '[S]earch [/] in Open Files' })
 
-    -- Shortcut for searching your Neovim configuration files
     vim.keymap.set('n', '<leader>sn', function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
     end, { desc = '[S]earch [N]eovim files' })
+
+    vim.keymap.set('n', '<leader>so', function()
+      builtin.find_files { cwd = vim.fn.expand '~/Documents/Note Taking/Zettelkasten/' }
+    end, { desc = '[S]earch [O]bsidian files' })
   end,
 }
