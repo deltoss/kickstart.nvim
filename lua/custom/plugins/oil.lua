@@ -18,6 +18,7 @@ return {
       ['<leader>t'] = { 'actions.select', opts = { tab = true } },
       ['<leader>p'] = 'actions.preview',
       ['<leader>c'] = { 'actions.close', mode = 'n' },
+      ['_'] = { 'actions.close', mode = 'n' },
     },
   },
   dependencies = { 'nvim-tree/nvim-web-devicons' },
