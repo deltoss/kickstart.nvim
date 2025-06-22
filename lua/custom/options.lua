@@ -23,3 +23,6 @@ opt.conceallevel = 2
 
 -- Wrap lines at the end of a word (not in the middle)
 opt.linebreak = true
+
+-- Set how many lines Ctrl-U and Ctrl-D scroll
+opt.scroll = 8
