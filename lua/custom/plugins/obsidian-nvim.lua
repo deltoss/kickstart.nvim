@@ -21,6 +21,9 @@ return {
           attachments = {
             img_folder = 'Zettelkasten/Assets',
           },
+          templates = {
+            folder = '.obsidian-nvim/templates',
+          },
         },
       },
     },
@@ -49,10 +52,11 @@ return {
     end,
   },
   keys = {
-    { '<leader>on', '<cmd>Obsidian new<cr>', desc = '[N]ew Note' },
-    { '<leader>ot', '<cmd>Obsidian new_from_template<cr>', desc = 'Insert [T]emplate' },
+    { '<leader>otn', '<cmd>Obsidian new_from_template<cr>', desc = '[N]ew Note' },
+    { '<leader>oti', '<cmd>Obsidian template<cr>', desc = '[I]nsert to Current Note' },
 
-    { '<leader>oc', '<cmd>Obsidian workspace<cr>', desc = 'Show Table of [C]ontents' },
+    { '<leader>on', '<cmd>Obsidian new<cr>', desc = '[N]ew Note' },
+    { '<leader>oc', '<cmd>Obsidian toc<cr>', desc = 'Show Table of [C]ontents' },
 
     { '<leader>os', '<cmd>Obsidian quick_switch<cr>', desc = '[S]earch Notes' },
     { '<leader>of', '<cmd>Obsidian search<cr>', desc = '[F]ind Notes' },
