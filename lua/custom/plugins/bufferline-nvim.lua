@@ -11,7 +11,7 @@ return {
   },
   keys = {
     {
-      'gb',
+      '<leader>0',
       ':BufferLinePick<CR>',
       desc = 'Pick buffer',
     },
