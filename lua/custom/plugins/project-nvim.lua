@@ -1,10 +1,8 @@
 return {
   'ahmedkhalf/project.nvim',
-  event = 'VeryLazy',
+  lazy = false,
   config = function()
     require('project_nvim').setup {
-      -- Optional settings:
-      detection_methods = { 'lsp', 'pattern' },
       patterns = { '.git', 'Makefile', '.svn', '*.sln', 'package.json', 'readme.md' },
     }
 
