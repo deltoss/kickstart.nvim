@@ -1,10 +1,22 @@
 local keymap = vim.keymap.set
 
+keymap('n', 'Zq', ':q<cr>', { desc = '[Q]uit' })
+keymap('n', 'ZQ', ':q<cr>', { desc = '[Q]uit' })
+keymap('n', '<leader>zq', ':q<cr>', { desc = '[Q]uit' })
+keymap('n', '<leader>zz', ':q<cr>', { desc = '[Q]uit' })
+keymap('n', 'ZW', ':wq<cr>', { desc = '[W]rite and Quit' })
+keymap('n', 'Zw', ':wq<cr>', { desc = '[W]rite and Quit' })
+keymap('n', '<leader>zw', ':wq<cr>', { desc = '[W]rite and Quit' })
+keymap('n', 'Zb', ':bd<cr>', { desc = 'Close Current [B]uffer' })
+keymap('n', 'ZB', ':bd<cr>', { desc = 'Close Current [B]uffer' })
+keymap('n', '<leader>zb', ':bd<cr>', { desc = 'Close Current [B]uffer' })
+
 keymap('n', '<C-Enter>', 'o<Esc>', { desc = 'Insert newline after cursor' })
 keymap('n', '<S-Enter>', 'O<Esc>', { desc = 'Insert newline before cursor' })
 
 -- Spelling correction
 keymap('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { noremap = true, silent = true })
+keymap('n', '<C-l>', '[s1z=`]', { noremap = true, silent = true })
 
 -- Undo/redo mappings
 keymap('n', '<C-z>', 'u', { noremap = true })
