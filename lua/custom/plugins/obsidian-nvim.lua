@@ -24,6 +24,29 @@ return {
           templates = {
             folder = '.obsidian-nvim/templates',
           },
+
+          -- Modification based on inbuilt wiki link function. Adds checks for:
+          -- * Empty string label when deciding to prepend a label.
+          -- * Label consisting only of whitespace. This is a hack for my personal use case of inserting a link to an existing note in normal mode.
+          wiki_link_func = function(opts)
+            local anchor = ''
+            local header = ''
+            if opts.anchor then
+              anchor = opts.anchor.anchor
+              header = require('obsidian.util').format_anchor_label(opts.anchor)
+            elseif opts.block then
+              anchor = '#' .. opts.block.id
+              header = '#' .. opts.block.id
+            end
+
+            if opts.id == nil then
+              return string.format('[[%s%s]]', opts.label, anchor)
+            elseif opts.label ~= '' and not opts.label:match '^%s*$' and opts.label ~= opts.id then
+              return string.format('[[%s%s|%s%s]]', opts.id, anchor, opts.label, header)
+            else
+              return string.format('[[%s%s]]', opts.id, anchor)
+            end
+          end,
         },
       },
     },
@@ -62,7 +85,20 @@ return {
     { '<leader>of', '<cmd>Obsidian search<cr>', desc = '[F]ind Notes' },
     { '<leader>od', '<cmd>Obsidian today<cr>', desc = '[D]aily Note' },
 
-    { '<leader>ol', '<cmd>Obsidian links<cr>', desc = 'Show [L]inks' },
+    -- HACK: To insert a link in normal mode, when ':Obsidian link'
+    -- command was only designed for visual mode
+    {
+      '<leader>ol',
+      function()
+        local query = vim.fn.input 'Search query (empty for all): '
+        vim.cmd [[normal! a ]] -- Adds a space to insert the link into
+        vim.cmd 'normal! v'
+        vim.cmd('Obsidian link ' .. query)
+      end,
+      desc = '[L]ink to Existing Note',
+    },
+
+    { '<leader>op', '<cmd>Obsidian links<cr>', desc = '[P]review Links' },
     { '<leader>ob', '<cmd>Obsidian backlinks<cr>', desc = 'Show [B]acklinks' },
     { '<leader>og', '<cmd>Obsidian follow_link<cr>', desc = '[G]o to Link' },
     { '<leader>o<Right>', '<cmd>Obsidian follow_link vsplit<cr>', desc = 'Open Link [Right]' },
@@ -72,7 +108,7 @@ return {
 
     { '<leader>oo', '<cmd>Obsidian open<cr>', desc = 'Open in [O]bsidian App' },
     { '<leader>or', '<cmd>Obsidian rename<cr>', desc = '[R]ename Note' },
-    { '<leader>op', '<cmd>Obsidian paste_img<cr>', desc = '[P]aste Image' },
+    { '<leader>oi', '<cmd>Obsidian paste_img<cr>', desc = 'Paste [I]mage' },
 
     {
       '<leader>oe',
@@ -82,7 +118,11 @@ return {
     },
     {
       '<leader>ol',
-      ':Obsidian link<cr>',
+      function()
+        local query = vim.fn.input 'Search query (empty for all): '
+        vim.cmd 'normal! gv'
+        vim.cmd('Obsidian link ' .. query)
+      end,
       desc = '[L]ink Selection to Existing Note',
       mode = 'x',
     },
