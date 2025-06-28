@@ -30,9 +30,9 @@ keymap('i', '<C-r>r', '<C-r>*', { noremap = true })
 keymap('c', '<C-r><C-r>', '<C-r>*', { noremap = true })
 
 -- Better Navigations
-keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
-keymap('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
-keymap('n', '<C-e>', '<C-d>zz', { noremap = true })
+keymap({ 'n', 'v' }, '<C-u>', '<C-u>zz', { noremap = true })
+keymap({ 'n', 'v' }, '<C-d>', '<C-d>zz', { noremap = true, silent = true })
+keymap({ 'n', 'v' }, '<C-e>', '<C-d>zz', { noremap = true })
 
 -- Wrapped line navigation
 keymap('n', '<C-Up>', 'gk', { noremap = true })
