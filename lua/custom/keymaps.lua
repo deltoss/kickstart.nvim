@@ -90,10 +90,10 @@ keymap('n', '<leader>td', ':tabdo ', { desc = '[T]ab [d]o' })
 keymap('n', '<leader>ts', ':tabdo %s///g<Left><Left><Left>', { desc = '[T]ab [s]ubstitution' })
 
 -- Delete without yanking
-keymap('n', '<leader>d', '"_d', { noremap = true })
-keymap('v', '<leader>d', '"_d', { noremap = true })
-keymap('n', '<leader>D', '"_D', { noremap = true })
-keymap('v', '<leader>D', '"_D', { noremap = true })
+keymap({ 'n', 'v' }, '<leader>d', '"_d', { noremap = true })
+keymap({ 'n', 'v' }, '<leader>D', '"_D', { noremap = true })
+keymap({ 'n', 'v' }, '<leader>x', '"_d', { noremap = true })
+keymap({ 'n', 'v' }, '<leader>X', '"_D', { noremap = true })
 
 -- Change without yanking
 keymap('n', '<leader>c', '"_c', { noremap = true })
