@@ -92,8 +92,8 @@ keymap('n', '<leader>ts', ':tabdo %s///g<Left><Left><Left>', { desc = '[T]ab [s]
 -- Delete without yanking
 keymap({ 'n', 'v' }, '<leader>d', '"_d', { noremap = true })
 keymap({ 'n', 'v' }, '<leader>D', '"_D', { noremap = true })
-keymap({ 'n', 'v' }, '<leader>x', '"_d', { noremap = true })
-keymap({ 'n', 'v' }, '<leader>X', '"_D', { noremap = true })
+keymap({ 'n', 'v' }, '<leader>x', '"_x', { noremap = true })
+keymap({ 'n', 'v' }, '<leader>X', '"_X', { noremap = true })
 
 -- Change without yanking
 keymap('n', '<leader>c', '"_c', { noremap = true })
