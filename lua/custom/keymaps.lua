@@ -88,6 +88,8 @@ keymap('n', '<leader>tn', ':tabnext<CR>', { desc = '[T]ab [n]ext' })
 keymap('n', '<leader>t<Right>', ':tabnext<CR>', { desc = '[T]ab right' })
 keymap('n', '<leader>tm', ':tabmove ', { desc = '[T]ab [m]ove' })
 keymap('n', '<leader>tc', ':tabclose<CR>', { desc = '[T]ab [c]lose' })
+keymap('n', '<leader>tx', ':tabclose<CR>', { desc = '[T]ab E[x]it' })
+keymap('n', '<leader>tq', ':tabclose<CR>', { desc = '[T]ab [Q]uit' })
 keymap('n', '<leader>td', ':tabdo ', { desc = '[T]ab [d]o' })
 keymap('n', '<leader>ts', ':tabdo %s///g<Left><Left><Left>', { desc = '[T]ab [s]ubstitution' })
 
