@@ -1,5 +1,9 @@
 local keymap = vim.keymap.set
 
+-- Remove default s mapping in normal and visual mode
+-- This is used for mini-surround, and other plugins.
+keymap({ 'n', 'v' }, 's', '<Nop>')
+
 keymap('n', 'Zq', ':q<cr>', { desc = '[Q]uit' })
 keymap('n', 'ZQ', ':q<cr>', { desc = '[Q]uit' })
 keymap('n', '<leader>zq', ':q<cr>', { desc = '[Q]uit' })
