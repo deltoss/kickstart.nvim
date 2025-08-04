@@ -9,76 +9,76 @@ return {
   end,
   keys = {
     {
-      '<leader>ha',
+      '<leader>ma',
       function()
         require('harpoon'):list():add()
       end,
-      desc = '[H]arpoon [A]dd File',
+      desc = '[M]ark [A]dd File',
     },
     {
-      '<leader>hh',
+      '<leader>mm',
       function()
         local harpoon = require 'harpoon'
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end,
-      desc = '[H]arpoon Quick Menu',
+      desc = '[M]ark Quick Menu',
     },
     {
-      '<leader>hq',
+      '<leader>mq',
       function()
         local harpoon = require 'harpoon'
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end,
-      desc = '[H]arpoon [Q]uick Menu',
+      desc = '[M]ark [Q]uick Menu',
     },
     {
-      '<leader>hp',
+      '<leader>m,',
       function()
         require('harpoon'):list():prev()
       end,
-      desc = '[H]arpoon go to [P]revious Marked File',
+      desc = '[M]ark go to Previous Marked File',
     },
     {
-      '<leader>hn',
+      '<leader>m.',
       function()
         require('harpoon'):list():next()
       end,
-      desc = '[H]arpoon go to [N]ext Marked File',
+      desc = '[M]ark go to Next File',
     },
     {
-      '<leader>h1',
+      '<leader>m1',
       function()
         require('harpoon'):list():select(1)
       end,
-      desc = '[H]arpoon go to Marked File [1]',
+      desc = '[M]ark go to File [1]',
     },
     {
-      '<leader>h2',
+      '<leader>m2',
       function()
         require('harpoon'):list():select(2)
       end,
-      desc = '[H]arpoon go to Marked File [2]',
+      desc = '[M]ark go to File [2]',
     },
     {
-      '<leader>h3',
+      '<leader>m3',
       function()
         require('harpoon'):list():select(3)
       end,
-      desc = '[H]arpoon go to Marked File [3]',
+      desc = '[M]ark go to File [3]',
     },
     {
-      '<leader>h4',
+      '<leader>m4',
       function()
         require('harpoon'):list():select(4)
       end,
-      desc = '[H]arpoon go to Marked File [4]',
+      desc = '[M]ark go to File [4]',
     },
     {
-      '<leader>h5',
+      '<leader>m5',
       function()
         require('harpoon'):list():select(5)
       end,
-      desc = '[H]arpoon go to Marked File [5]',
+      desc = '[M]ark go to File [5]',
     },
   },
 }
