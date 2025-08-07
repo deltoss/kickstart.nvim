@@ -3,9 +3,6 @@ return {
   version = '*',
   lazy = true,
   ft = 'markdown',
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-  },
   opts = {
     legacy_commands = false,
     workspaces = {
