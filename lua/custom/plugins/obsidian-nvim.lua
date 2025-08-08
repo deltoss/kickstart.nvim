@@ -4,6 +4,9 @@ return {
   lazy = true,
   ft = 'markdown',
   opts = {
+    footer = { -- backlinks in footer as causing issues
+      enabled = false,
+    },
     legacy_commands = false,
     workspaces = {
       {
