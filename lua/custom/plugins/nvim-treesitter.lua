@@ -1,3 +1,7 @@
+vim.cmd [[
+  autocmd BufRead,BufNewFile *.tmpl set filetype=templ
+]]
+
 return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
@@ -25,6 +29,7 @@ return {
       'javascript',
       'http',
       'dockerfile',
+      'templ',
     },
     -- Autoinstall languages that are not installed
     auto_install = true,
