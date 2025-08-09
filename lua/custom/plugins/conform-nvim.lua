@@ -7,13 +7,14 @@ return {
       lsp_format = 'fallback',
     },
     formatters_by_ft = {
-      csharp = { 'csharpier' },
+      -- For list of filetypes, type :echo getcompletion('<BlankOrSearchTerm>', 'filetype')
+      csh = { 'csharpier' },
       css = { 'css_beautify' },
       json = { 'jq' },
       yaml = { 'yq' },
       xml = { 'yq' },
       toml = { 'taplo' },
-      templ = { 'templ' },
+      template = { 'templ' },
       lua = { 'stylua' },
       -- Conform will run multiple formatters sequentially
       python = { 'isort', 'black' },
