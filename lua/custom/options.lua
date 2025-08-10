@@ -27,3 +27,10 @@ opt.linebreak = true
 
 -- Set how many lines Ctrl-U and Ctrl-D scroll
 opt.scroll = 8
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'yaml', 'json', 'xml', 'toml' },
+  callback = function()
+    vim.opt_local.foldmethod = 'indent'
+  end,
+})
