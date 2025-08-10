@@ -50,10 +50,10 @@ return {
             [']['] = { query = { '@class.outer', '@function.outer' }, desc = 'Next class/function end' },
           },
           goto_previous_start = {
-            ['[['] = { query = { '@class.outer', '@function.outer' }, desc = 'Next class/function end' },
+            ['[['] = { query = { '@class.outer', '@function.outer' }, desc = 'Previous class/function start' },
           },
           goto_previous_end = {
-            ['[]'] = { query = { '@class.outer', '@function.outer' }, desc = 'Next class/function end' },
+            ['[]'] = { query = { '@class.outer', '@function.outer' }, desc = 'Previous class/function end' },
           },
         },
         swap = {

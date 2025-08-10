@@ -21,6 +21,8 @@ return {
         'rustfmt',
         'prettierd',
         'prettier',
+        'yamlfmt',
+        'xmlformatter',
       },
     }
   end,

@@ -1,6 +1,6 @@
 return {
   'obsidian-nvim/obsidian.nvim',
-  version = '*',
+  version = 'v3.11.0',
   lazy = true,
   ft = 'markdown',
   opts = {
