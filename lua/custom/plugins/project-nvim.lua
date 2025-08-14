@@ -1,6 +1,6 @@
 return {
   'ahmedkhalf/project.nvim',
-  lazy = false,
+  event = 'VeryLazy',
   config = function()
     require('project_nvim').setup {
       patterns = { '.git', 'Makefile', '.svn', '*.sln', 'package.json', 'readme.md' },
