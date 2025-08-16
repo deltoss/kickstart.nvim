@@ -56,6 +56,7 @@ return {
       { '<leader>r', group = '[R]eplace' },
       { '<leader>p', group = '[P]eek/[P]aste' },
       { '<leader><leader>o', group = '[O]ptions' },
+      { '<leader><leader>d', group = '[D]ebug' },
     },
   },
 }
