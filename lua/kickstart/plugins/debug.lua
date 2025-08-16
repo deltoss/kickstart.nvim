@@ -1,15 +1,5 @@
--- debug.lua
---
--- Shows how to use the DAP plugin to debug your code.
---
--- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
-
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
@@ -20,9 +10,6 @@ return {
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
-
-    -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -55,14 +42,14 @@ return {
       desc = 'Debug: Step Out',
     },
     {
-      '<leader>b',
+      '<leader><leader>db',
       function()
         require('dap').toggle_breakpoint()
       end,
       desc = 'Debug: Toggle Breakpoint',
     },
     {
-      '<leader>B',
+      '<leader><leader>dB',
       function()
         require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
       end,
@@ -94,29 +81,85 @@ return {
       -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
-        'delve',
+        -- See:
+        --   https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
+        'js',
+        'coreclr',
       },
     }
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
+    -- Based on:
+    --   https://aaronbos.dev/posts/debugging-csharp-neovim-nvim-dap
     dapui.setup {
-      -- Set icons to characters that are more likely to work in every terminal.
-      --    Feel free to remove or use ones that you like more! :)
-      --    Don't feel like these are good choices.
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-      controls = {
-        icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
-          terminate = '⏹',
-          disconnect = '⏏',
+      mappings = {
+        -- Use a table to apply multiple mappings
+        expand = { '<CR>', '<2-LeftMouse>' },
+        open = 'o',
+        remove = 'd',
+        edit = 'e',
+        repl = 'r',
+        toggle = 't',
+      },
+      -- Expand lines larger than the window
+      -- Requires >= 0.7
+      expand_lines = vim.fn.has 'nvim-0.7' == 1,
+      -- Layouts define sections of the screen to place windows.
+      -- The position can be "left", "right", "top" or "bottom".
+      -- The size specifies the height/width depending on position. It can be an Int
+      -- or a Float. Integer specifies height/width directly (i.e. 20 lines/columns) while
+      -- Float value specifies percentage (i.e. 0.3 - 30% of available lines/columns)
+      -- Elements are the elements shown in the layout (in order).
+      -- Layouts are opened in order so that earlier layouts take priority in window sizing.
+      layouts = {
+        {
+          elements = {
+            -- Elements can be strings or table with id and size keys.
+            { id = 'scopes', size = 0.25 },
+            'breakpoints',
+            'stacks',
+            'watches',
+          },
+          size = 40, -- 40 columns
+          position = 'left',
         },
+        {
+          elements = {
+            'repl',
+            'console',
+          },
+          size = 0.25, -- 25% of total lines
+          position = 'bottom',
+        },
+      },
+      controls = {
+        enabled = true,
+        element = 'repl',
+        icons = {
+          pause = '',
+          play = '',
+          step_into = '',
+          step_over = '',
+          step_out = '',
+          step_back = '',
+          run_last = '↻',
+          terminate = '□',
+        },
+      },
+      floating = {
+        max_height = nil, -- These can be integers or a float between 0 and 1.
+        max_width = nil, -- Floats will be treated as percentage of your screen.
+        border = 'single', -- Border style. Can be "single", "double" or "rounded"
+        mappings = {
+          close = { 'q', '<Esc>' },
+        },
+      },
+      windows = { indent = 1 },
+      render = {
+        max_type_length = nil, -- Can be integer or nil.
+        max_value_lines = 100, -- Can be integer or nil.
       },
     }
 
@@ -136,12 +179,33 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    -- Install golang specific config
-    require('dap-go').setup {
-      delve = {
-        -- On Windows delve must be run attached or it crashes.
-        -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-        detached = vim.fn.has 'win32' == 0,
+    dap.adapters.coreclr = {
+      type = 'executable',
+      command = '/usr/local/bin/netcoredbg/netcoredbg',
+      args = { '--interpreter=vscode' },
+    }
+
+    dap.configurations.cs = {
+      {
+        type = 'coreclr',
+        name = 'launch - netcoredbg',
+        request = 'launch',
+        program = function()
+          return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+        end,
+        justMyCode = false,
+        stopAtEntry = false,
+        env = {
+          ASPNETCORE_ENVIRONMENT = function()
+            return vim.fn.input('ASPNETCORE_ENVIRONMENT: ', 'Development')
+          end,
+          ASPNETCORE_URLS = function()
+            return vim.fn.input('ASPNETCORE_URLS: ', 'http://localhost:5050')
+          end,
+        },
+        cwd = function()
+          return vim.fn.input('Workspace folder: ', vim.fn.getcwd() .. '/', 'file')
+        end,
       },
     }
   end,
