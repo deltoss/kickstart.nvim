@@ -18,7 +18,7 @@ return {
 
     -- Visual mode mappings
     { 'gN', '<Plug>(bullets-renumber)', mode = 'v', desc = 'Renumber bullets' },
-    { '>', '<Plug>(bullets-demote)', mode = 'v', desc = 'Demote bullet' },
-    { '<', '<Plug>(bullets-promote)', mode = 'v', desc = 'Promote bullet' },
+    { '>', '<Plug>(bullets-demote)gv', mode = 'v', desc = 'Demote bullet' },
+    { '<', '<Plug>(bullets-promote)gv', mode = 'v', desc = 'Promote bullet' },
   },
 }
