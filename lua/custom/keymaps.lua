@@ -33,10 +33,10 @@ keymap('i', '<C-r><C-r>', '<C-r>*', { noremap = true })
 keymap('i', '<C-r>r', '<C-r>*', { noremap = true })
 keymap('c', '<C-r><C-r>', '<C-r>*', { noremap = true })
 
--- Better Navigations
-keymap({ 'n', 'v' }, '<C-u>', '<C-u>zz', { noremap = true })
-keymap({ 'n', 'v' }, '<C-d>', '<C-d>zz', { noremap = true, silent = true })
-keymap({ 'n', 'v' }, '<C-e>', '<C-d>zz', { noremap = true })
+-- Better Navigation - Note this interferes with neoscroll plugin
+-- keymap({ 'n', 'v' }, '<C-u>', '<C-u>zz')
+-- keymap({ 'n', 'v' }, '<C-d>', '<C-d>zz')
+-- keymap({ 'n', 'v' }, '<C-e>', '<C-d>zz')
 
 -- Wrapped line navigation
 keymap('n', '<C-Up>', 'gk', { noremap = true })
