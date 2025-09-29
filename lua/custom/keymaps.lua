@@ -41,6 +41,8 @@ keymap('c', '<C-r><C-r>', '<C-r>*', { noremap = true })
 -- keymap({ 'n', 'v' }, '<C-u>', '<C-u>zz')
 -- keymap({ 'n', 'v' }, '<C-d>', '<C-d>zz')
 -- keymap({ 'n', 'v' }, '<C-e>', '<C-d>zz')
+-- keymap({ 'n', 'v' }, 'n', 'nzz')
+-- keymap({ 'n', 'v' }, 'N', 'Nzz')
 
 -- Wrapped line navigation
 keymap('n', '<C-Up>', 'gk', { noremap = true })

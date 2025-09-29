@@ -26,6 +26,14 @@ return {
       ['<C-f>'] = function()
         neoscroll.ctrl_f { duration = 450, easing = 'circular' }
       end,
+      ['n'] = function()
+        vim.cmd 'normal! n'
+        neoscroll.zz { half_win_duration = 350, easing = 'sine' }
+      end,
+      ['N'] = function()
+        vim.cmd 'normal! N'
+        neoscroll.zz { half_win_duration = 350, easing = 'sine' }
+      end,
     }
     local modes = { 'n', 'v', 'x' }
     for key, func in pairs(keymap) do
