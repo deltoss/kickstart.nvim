@@ -4,6 +4,7 @@ local keymap = vim.keymap.set
 -- This is used for mini-surround, and other plugins.
 keymap({ 'n', 'v' }, 's', '<Nop>')
 
+-- Close mappings
 keymap('n', 'Zq', ':q<cr>', { desc = '[Q]uit' })
 keymap('n', 'ZQ', ':q<cr>', { desc = '[Q]uit' })
 keymap('n', '<leader>zq', ':q<cr>', { desc = '[Q]uit' })
@@ -15,6 +16,7 @@ keymap('n', 'Zb', ':bd<cr>', { desc = 'Close Current [B]uffer' })
 keymap('n', 'ZB', ':bd<cr>', { desc = 'Close Current [B]uffer' })
 keymap('n', '<leader>zb', ':bd<cr>', { desc = 'Close Current [B]uffer' })
 
+-- Newline mappings
 keymap('n', '<C-Enter>', 'o<Esc>', { desc = 'Insert newline after cursor' })
 keymap('n', '<S-Enter>', 'O<Esc>', { desc = 'Insert newline before cursor' })
 
@@ -29,6 +31,8 @@ keymap('i', '<C-z>', '<C-o>u', { noremap = true })
 keymap('n', '<C-y>', '<C-r>', { noremap = true })
 keymap('v', '<C-y>', '<C-r>', { noremap = true })
 keymap('i', '<C-y>', '<C-o><C-r>', { noremap = true })
+
+-- Paste mappings
 keymap('i', '<C-r><C-r>', '<C-r>*', { noremap = true })
 keymap('i', '<C-r>r', '<C-r>*', { noremap = true })
 keymap('c', '<C-r><C-r>', '<C-r>*', { noremap = true })
