@@ -30,6 +30,9 @@ return {
       'http',
       'dockerfile',
       'templ',
+      'gitcommit',
+      'git_rebase',
+      'gitignore',
     },
     -- Autoinstall languages that are not installed
     auto_install = true,
