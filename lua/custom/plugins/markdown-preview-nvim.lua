@@ -17,6 +17,6 @@ return {
     end
   end,
   keys = {
-    { '<leader>mp', '<cmd>MarkdownPreviewToggle<cr>', desc = '[M]arkdown [P]review Toggle' },
+    { '<leader>Mp', '<cmd>MarkdownPreviewToggle<cr>', desc = '[P]review Toggle' },
   },
 }

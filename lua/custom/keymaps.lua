@@ -86,22 +86,22 @@ keymap('n', '<leader><Left>', ':vsplit<CR>', { desc = 'Vertical split (left)' })
 keymap('n', '<leader><Right>', ':vsplit<CR>', { desc = 'Vertical split (right)' })
 
 -- Tab operations
-keymap('n', '<leader>tt', ':tabnew<CR>', { desc = '[T]ab new' })
-keymap('n', '<leader>tn', ':tabnew<CR>', { desc = '[T]ab [n]ew' })
-keymap('n', '<leader>ta', ':tabnew<CR>', { desc = '[T]ab [a]dd' })
-keymap('n', '<leader>tf', ':tabf **<Left>', { desc = '[T]ab [f]ind' })
-keymap('n', '<leader>to', ':tabprev<CR>', { desc = '[T]ab previous' })
-keymap('n', '<leader>tp', ':tabprev<CR>', { desc = '[T]ab [p]revious' })
-keymap('n', '<leader>t<Left>', ':tabprev<CR>', { desc = '[T]ab left' })
-keymap('n', '<leader>tu', ':tabnext<CR>', { desc = '[T]ab next' })
-keymap('n', '<leader>tn', ':tabnext<CR>', { desc = '[T]ab [n]ext' })
-keymap('n', '<leader>t<Right>', ':tabnext<CR>', { desc = '[T]ab right' })
-keymap('n', '<leader>tm', ':tabmove ', { desc = '[T]ab [m]ove' })
-keymap('n', '<leader>tc', ':tabclose<CR>', { desc = '[T]ab [c]lose' })
-keymap('n', '<leader>tx', ':tabclose<CR>', { desc = '[T]ab E[x]it' })
-keymap('n', '<leader>tq', ':tabclose<CR>', { desc = '[T]ab [Q]uit' })
-keymap('n', '<leader>td', ':tabdo ', { desc = '[T]ab [d]o' })
-keymap('n', '<leader>ts', ':tabdo %s///g<Left><Left><Left>', { desc = '[T]ab [s]ubstitution' })
+keymap('n', '<leader>tt', ':tabnew<CR>', { desc = 'New' })
+keymap('n', '<leader>tn', ':tabnew<CR>', { desc = '[N]ew' })
+keymap('n', '<leader>ta', ':tabnew<CR>', { desc = '[A]dd' })
+keymap('n', '<leader>tf', ':tabf **<Left>', { desc = '[F]ind' })
+keymap('n', '<leader>to', ':tabprev<CR>', { desc = 'Previous' })
+keymap('n', '<leader>tp', ':tabprev<CR>', { desc = '[P]revious' })
+keymap('n', '<leader>t<Left>', ':tabprev<CR>', { desc = 'Left' })
+keymap('n', '<leader>tu', ':tabnext<CR>', { desc = 'Next' })
+keymap('n', '<leader>tn', ':tabnext<CR>', { desc = '[N]ext' })
+keymap('n', '<leader>t<Right>', ':tabnext<CR>', { desc = 'Right' })
+keymap('n', '<leader>tm', ':tabmove ', { desc = '[M]ove' })
+keymap('n', '<leader>tc', ':tabclose<CR>', { desc = '[C]lose' })
+keymap('n', '<leader>tx', ':tabclose<CR>', { desc = 'E[x]it' })
+keymap('n', '<leader>tq', ':tabclose<CR>', { desc = '[Q]uit' })
+keymap('n', '<leader>td', ':tabdo ', { desc = '[D]o' })
+keymap('n', '<leader>ts', ':tabdo %s///g<Left><Left><Left>', { desc = '[S]ubstitution' })
 
 -- Delete without yanking
 keymap({ 'n', 'v' }, '<leader>d', '"_d', { noremap = true })
@@ -121,18 +121,13 @@ keymap('v', 'p', '"_dP', { noremap = true })
 keymap('n', '<leader>j', 'J', { noremap = true })
 
 -- Search and replace word under cursor
-keymap('n', '<leader>rw', ':%s/\\<<C-r><C-w>\\>//g<left><left>', { desc = '[R]eplace [W]ord under cursor' })
+keymap('n', '<leader>rw', ':%s/\\<<C-r><C-w>\\>//g<left><left>', { desc = '[W]ord under cursor' })
 
 -- Visual mode: replace highlighted text with entered value
-keymap('x', '<leader>rh', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>//g<Left><Left>", { desc = '[R]eplace [H]ighlighted text' })
+keymap('x', '<leader>rh', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>//g<Left><Left>", { desc = '[H]ighlighted text' })
 
 -- Visual mode: replace highlighted text with highlighted value + entered value
-keymap(
-  'x',
-  '<leader>ra',
-  "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\", '/\\&~')<CR>/g<Left><Left>",
-  { desc = '[R]eplace highlighted text with highlight and [A]ppend to it' }
-)
+keymap('x', '<leader>ra', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\", '/\\&~')<CR>/g<Left><Left>", { desc = '[A]ppend to highlighted text' })
 
 -- Quickfix: Use Telescope search, then load it into quickfix for navigation with <C-q>
 keymap('n', '<leader>q', function()

@@ -5,6 +5,6 @@ return {
     require('telescope').load_extension 'everything'
   end,
   keys = {
-    { '<leader>se', ':Telescope everything<CR>', desc = '[S]earch [E]verything' },
+    { '<leader>se', ':Telescope everything<CR>', desc = '[E]verything' },
   },
 }

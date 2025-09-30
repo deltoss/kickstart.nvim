@@ -5,7 +5,7 @@ return {
     'nvim-telescope/telescope.nvim',
   },
   keys = {
-    { '<leader>sy', ':YAMLTelescope<CR>', desc = '[S]earch [Y]aml', ft = { 'yaml' }, mode = 'n' },
+    { '<leader>sy', ':YAMLTelescope<CR>', desc = '[Y]aml', ft = { 'yaml' }, mode = 'n' },
   },
   config = function()
     vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorMoved' }, {
