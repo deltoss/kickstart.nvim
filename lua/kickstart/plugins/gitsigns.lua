@@ -48,10 +48,10 @@ return {
         map('n', '<leader>gR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
         map('n', '<leader>gp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
         map('n', '<leader>gb', gitsigns.blame_line, { desc = 'git [b]lame line' })
-        map('n', '<leader>gd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
-        map('n', '<leader>gD', function()
+        map('n', '<leader>gc', gitsigns.diffthis, { desc = 'git file [c]hanges compared to index' })
+        map('n', '<leader>gC', function()
           gitsigns.diffthis '@'
-        end, { desc = 'git [D]iff against last commit' })
+        end, { desc = 'git file [C]hanges compared to last commit' })
         -- Toggles
         map('n', '<leader><leader>ob', gitsigns.toggle_current_line_blame, { desc = '[O]ptions Toggle git show [b]lame line' })
         map('n', '<leader><leader>oD', gitsigns.preview_hunk_inline, { desc = '[O]ptions Toggle git show [D]eleted' })
