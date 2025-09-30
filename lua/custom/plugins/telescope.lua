@@ -66,18 +66,18 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>sc', builtin.current_buffer_fuzzy_find, { desc = '[S]earch [C]urrent File' })
-    vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-    vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-    vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-    vim.keymap.set('n', '<leader>ss', builtin.symbols, { desc = '[S]earch [S]ymbols' })
-    vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = '[S]earch Select [T]elescope' })
-    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('n', '<leader>s.', builtin.resume, { desc = '[S]earch Resume ("." for repeat)' })
-    vim.keymap.set('n', '<leader>sr', builtin.oldfiles, { desc = '[S]earch [R]ecent Files' })
-    vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch existing [B]uffers' })
+    vim.keymap.set('n', '<leader>sc', builtin.current_buffer_fuzzy_find, { desc = '[C]urrent File' })
+    vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[H]elp' })
+    vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[K]eymaps' })
+    vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[F]iles' })
+    vim.keymap.set('n', '<leader>ss', builtin.symbols, { desc = '[S]ymbols' })
+    vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = '[T]elescope Commands' })
+    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Current [W]ord' })
+    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'By [G]rep' })
+    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[D]iagnostics' })
+    vim.keymap.set('n', '<leader>s.', builtin.resume, { desc = 'Resume ("." for repeat)' })
+    vim.keymap.set('n', '<leader>sr', builtin.oldfiles, { desc = '[R]ecent Files' })
+    vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = 'Existing [B]uffers' })
     vim.keymap.set('n', '<leader><leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
     -- Slightly advanced example of overriding default behavior and theme
@@ -96,14 +96,14 @@ return { -- Fuzzy Finder (files, lsp, etc)
         grep_open_files = true,
         prompt_title = 'Live Grep in Open Files',
       }
-    end, { desc = '[S]earch [/] in Open Files' })
+    end, { desc = '[/] in Open Files' })
 
     vim.keymap.set('n', '<leader>sn', function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
-    end, { desc = '[S]earch [N]eovim files' })
+    end, { desc = '[N]eovim files' })
 
     vim.keymap.set('n', '<leader>so', function()
       builtin.find_files { cwd = vim.fn.expand '~/Documents/Note Taking/Zettelkasten/' }
-    end, { desc = '[S]earch [O]bsidian files' })
+    end, { desc = '[O]bsidian files' })
   end,
 }

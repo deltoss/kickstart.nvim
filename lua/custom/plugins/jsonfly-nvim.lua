@@ -6,6 +6,6 @@ return {
     require('telescope').load_extension 'jsonfly'
   end,
   keys = {
-    { '<leader>sj', ':Telescope jsonfly<CR>', desc = '[S]earch [J]son(fly)', ft = { 'json' }, mode = 'n' },
+    { '<leader>sj', ':Telescope jsonfly<CR>', desc = '[J]son(fly)', ft = { 'json' }, mode = 'n' },
   },
 }

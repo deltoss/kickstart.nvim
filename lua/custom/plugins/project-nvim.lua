@@ -15,7 +15,7 @@ return {
       function()
         require('telescope').extensions.projects.projects()
       end,
-      desc = '[S]earch [P]roject',
+      desc = '[P]roject',
     },
   },
 }

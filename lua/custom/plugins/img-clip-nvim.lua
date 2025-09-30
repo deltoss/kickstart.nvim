@@ -3,6 +3,6 @@ return {
   event = 'VeryLazy',
   opts = {},
   keys = {
-    { '<leader>pi', '<cmd>PasteImage<cr>', desc = '[P]aste [I]mage from system clipboard' },
+    { '<leader>Pi', '<cmd>PasteImage<cr>', desc = '[I]mage from system clipboard' },
   },
 }

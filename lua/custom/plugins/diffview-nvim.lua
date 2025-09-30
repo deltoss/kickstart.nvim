@@ -17,21 +17,21 @@ return {
       function()
         toggle_diffview 'DiffviewOpen'
       end,
-      desc = '[G]it [D]iff Index',
+      desc = '[D]iff Index',
     },
     {
       '<leader>gD',
       function()
         toggle_diffview 'DiffviewOpen master..HEAD'
       end,
-      desc = '[G]it [D]iff master',
+      desc = '[D]iff master',
     },
     {
       '<leader>gh',
       function()
         toggle_diffview 'DiffviewFileHistory %'
       end,
-      desc = 'Open [G]it [H]istory for current File',
+      desc = '[H]istory for current file',
     },
   },
 }

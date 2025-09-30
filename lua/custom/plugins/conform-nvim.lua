@@ -27,25 +27,25 @@ return {
         require('conform').format { async = true, lsp_format = 'fallback' }
       end,
       mode = '',
-      desc = 'Format buffer',
+      desc = '[F]ormat buffer',
     },
     {
       '<leader><leader>ofd',
       ':FormatDisable!<CR>',
       mode = '',
-      desc = '[O]ptions [F]ormat/Conform - [D]isable for buffer',
+      desc = '[D]isable for buffer',
     },
     {
       '<leader><leader>ofD',
       ':FormatDisable<CR>',
       mode = '',
-      desc = '[O]ptions [F]ormat/Conform - [D]isable',
+      desc = '[D]isable',
     },
     {
       '<leader><leader>ofe',
       ':FormatEnable<CR>',
       mode = '',
-      desc = '[O]ptions [F]ormat/Conform - [E]nable',
+      desc = '[E]nable',
     },
   },
   -- This will provide type hinting with LuaLS
