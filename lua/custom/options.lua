@@ -28,6 +28,9 @@ opt.linebreak = true
 -- Set how many lines Ctrl-U and Ctrl-D scroll
 opt.scroll = 8
 
+-- Diff options
+opt.diffopt = 'iwhiteall,indent-heuristic,filler,internal,closeoff,algorithm:histogram,context:5,linematch:60'
+
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'yaml', 'json', 'xml', 'toml' },
   callback = function()
