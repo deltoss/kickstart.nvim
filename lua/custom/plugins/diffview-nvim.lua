@@ -14,7 +14,7 @@ return {
     enhanced_diff_hl = true,
     view = {
       default = { layout = 'diff2_horizontal' },
-      merge_tool = { layout = 'diff3_horizontal' },
+      merge_tool = { layout = 'diff3_mixed' },
     },
   },
   keys = {
