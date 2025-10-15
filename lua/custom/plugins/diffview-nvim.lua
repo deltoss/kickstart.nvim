@@ -10,7 +10,13 @@ return {
   'sindrets/diffview.nvim',
   dependencies = { 'nvim-lua/plenary.nvim' },
   cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles', 'DiffviewRefresh' },
-  opts = {},
+  opts = {
+    enhanced_diff_hl = true,
+    view = {
+      default = { layout = 'diff2_horizontal' },
+      merge_tool = { layout = 'diff3_horizontal' },
+    },
+  },
   keys = {
     {
       '<leader>gd',

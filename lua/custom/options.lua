@@ -29,7 +29,19 @@ opt.linebreak = true
 opt.scroll = 8
 
 -- Diff options
-opt.diffopt = 'iwhiteall,indent-heuristic,filler,internal,closeoff,algorithm:histogram,context:5,linematch:60'
+opt.diffopt = {
+  'vertical', -- Use vertical splits for diffs
+  'iwhiteall', -- Ignore all whitespace
+  'indent-heuristic', -- Better diff alignment
+  'algorithm:histogram', -- Good diff algorithm
+  'linematch:120', -- Increased for better word/character-level diffs
+  'filler', -- Show filler lines
+  'closeoff', -- Close diff when one window closes
+  'internal', -- Use internal diff library
+  'context:10', -- Show more context lines
+  'followwrap', -- Follow wrapped lines
+  'hiddenoff', -- Turn off diff mode when buffer becomes hidden
+}
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'yaml', 'json', 'xml', 'toml' },
