@@ -4,6 +4,14 @@ local keymap = vim.keymap.set
 -- This is used for mini-surround, and other plugins.
 keymap({ 'n', 'v' }, 's', '<Nop>')
 
+-- Disable defaults gr* mappings (defaults with Neovim nightly)
+-- We use the more popular g* mappings
+pcall(vim.keymap.del, 'n', 'gra')
+pcall(vim.keymap.del, 'n', 'gri')
+pcall(vim.keymap.del, 'n', 'grn')
+pcall(vim.keymap.del, 'n', 'grr')
+pcall(vim.keymap.del, 'n', 'grt')
+
 -- Close mappings
 keymap('n', 'Zq', ':q<cr>', { desc = '[Q]uit' })
 keymap('n', 'ZQ', ':q<cr>', { desc = '[Q]uit' })
