@@ -28,6 +28,14 @@ opt.linebreak = true
 -- Set how many lines Ctrl-U and Ctrl-D scroll
 opt.scroll = 8
 
+opt.listchars:append {
+  eol = '↲',
+  tab = '→ ',
+  trail = '·',
+  extends = '›',
+  precedes = '‹',
+}
+
 -- Diff options
 opt.diffopt = {
   'vertical', -- Use vertical splits for diffs
