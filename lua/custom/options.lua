@@ -43,7 +43,6 @@ opt.diffopt = {
   'indent-heuristic', -- Better diff alignment
   'algorithm:histogram', -- Good diff algorithm
   'linematch:120', -- Increased for better word/character-level diffs
-  'filler', -- Show filler lines
   'closeoff', -- Close diff when one window closes
   'internal', -- Use internal diff library
   'context:10', -- Show more context lines
