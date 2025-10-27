@@ -25,8 +25,7 @@ keymap('n', 'ZB', ':bd<cr>', { desc = 'Close Current [B]uffer' })
 keymap('n', '<leader>zb', ':bd<cr>', { desc = 'Close Current [B]uffer' })
 
 -- Newline mappings
-keymap('n', '<C-Enter>', 'o<Esc>', { desc = 'Insert newline after cursor' })
-keymap('n', '<S-Enter>', 'O<Esc>', { desc = 'Insert newline before cursor' })
+keymap('n', '<leader>O', 'o<Esc>', { desc = 'Insert newline after cursor' })
 
 -- Spelling correction
 keymap('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { noremap = true, silent = true })
