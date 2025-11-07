@@ -60,7 +60,9 @@ return {
       { '<leader><leader>', group = 'Extended Commands' },
       { '<leader><leader>o', group = '[O]ptions' },
       { '<leader><leader>of', group = '+[F]ormatter (Conform)' },
-      { '<leader><leader>d', group = '[D]ebug' },
+      { '<leader>b', group = 'De[b]ug' },
+      { '<leader>e', group = '[E]rror' },
+      { '<leader>S', group = '[S]wap' },
     },
   },
 }
