@@ -12,6 +12,12 @@ return {
         shortcut = {
           { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
           {
+            desc = '󰂺 New File',
+            group = 'DiagnosticHint',
+            action = 'enew',
+            key = 'n',
+          },
+          {
             desc = ' Zoxide',
             group = 'DiagnosticHint',
             action = 'Telescope zoxide list',
@@ -37,7 +43,7 @@ return {
             action = function()
               require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' }
             end,
-            key = 'n',
+            key = 'c',
           },
         },
       },
