@@ -153,6 +153,14 @@ local function copyLineNumber()
 end
 vim.keymap.set('n', '<leader>pl', copyLineNumber, { noremap = true, silent = true, desc = 'Copy [L]ine Number' })
 
+local function copyVSLaunchCommand()
+  local path = vim.fn.expand '%:p'
+  local lineNumber = vim.fn.line '.'
+  local command = 'devenv /edit "' .. path .. '" /command "edit.goto ' .. lineNumber .. '"'
+  vim.fn.setreg('+', command) -- write to clipboard
+end
+vim.keymap.set('n', '<leader>pv', copyVSLaunchCommand, { noremap = true, silent = true, desc = 'Copy [V]isual Studio Launch Command' })
+
 -- Replace currently selected text with default register without yanking it
 keymap('v', '<leader>p', '"_dP', { noremap = true })
 keymap('v', 'p', '"_dP', { noremap = true })
