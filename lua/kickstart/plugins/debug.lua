@@ -42,14 +42,14 @@ return {
       desc = 'Debug: Step Out',
     },
     {
-      '<leader><leader>db',
+      '<leader>ba',
       function()
         require('dap').toggle_breakpoint()
       end,
       desc = 'Debug: Toggle Breakpoint',
     },
     {
-      '<leader><leader>dB',
+      '<leader>bA',
       function()
         require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
       end,
@@ -179,11 +179,16 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    dap.adapters.coreclr = {
+    local mason_path = vim.fn.stdpath 'data' .. '\\mason\\packages\\netcoredbg\\netcoredbg\\netcoredbg'
+
+    local netcoredbg_adapter = {
       type = 'executable',
-      command = '/usr/local/bin/netcoredbg/netcoredbg',
+      command = mason_path,
       args = { '--interpreter=vscode' },
     }
+
+    dap.adapters.netcoredbg = netcoredbg_adapter -- needed for normal debugging
+    dap.adapters.coreclr = netcoredbg_adapter -- needed for unit test debugging
 
     dap.configurations.cs = {
       {
