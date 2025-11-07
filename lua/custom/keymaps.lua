@@ -120,6 +120,33 @@ keymap({ 'n', 'v' }, '<leader>X', '"_X', { noremap = true })
 keymap('n', '<leader>c', '"_c', { noremap = true })
 keymap('v', '<leader>c', '"_c', { noremap = true })
 
+vim.keymap.set('n', '<leader>~', ':cd %:p:h<CR>', { noremap = true, silent = true, desc = 'Change CWD to Current' })
+
+-- Copying paths to clipboards
+local function copyFileName()
+  local filepath = vim.fn.expand '%:t'
+  vim.fn.setreg('+', filepath) -- write to clipboard
+end
+vim.keymap.set('n', '<leader>pf', copyFileName, { noremap = true, silent = true, desc = 'Copy [F]ile Name' })
+
+local function copyFullPath()
+  local filepath = vim.fn.expand '%:p'
+  vim.fn.setreg('+', filepath) -- write to clipboard
+end
+vim.keymap.set('n', '<leader>pa', copyFullPath, { noremap = true, silent = true, desc = 'Copy [A]bsolute Path' })
+
+local function copyRelativePath()
+  local filepath = vim.fn.expand '%'
+  vim.fn.setreg('+', filepath) -- write to clipboard
+end
+vim.keymap.set('n', '<leader>pr', copyRelativePath, { noremap = true, silent = true, desc = 'Copy [R]elative Path' })
+
+local function copyDirectoryPath()
+  local filepath = vim.fn.expand '%:h'
+  vim.fn.setreg('+', filepath) -- write to clipboard
+end
+vim.keymap.set('n', '<leader>pd', copyDirectoryPath, { noremap = true, silent = true, desc = 'Copy [D]irectory Path' })
+
 -- Replace currently selected text with default register without yanking it
 keymap('v', '<leader>p', '"_dP', { noremap = true })
 keymap('v', 'p', '"_dP', { noremap = true })

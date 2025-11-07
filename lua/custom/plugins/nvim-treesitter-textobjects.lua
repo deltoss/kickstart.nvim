@@ -9,8 +9,8 @@ return {
           border = 'rounded',
           floating_preview_opts = {},
           peek_definition_code = {
-            ['<leader>pc'] = { query = '@class.outer', desc = '[C]lass', silent = true },
-            ['<leader>pf'] = { query = '@function.outer', desc = '[F]unction', silent = true },
+            ['<leader>kc'] = { query = '@class.outer', desc = '[C]lass', silent = true },
+            ['<leader>kf'] = { query = '@function.outer', desc = '[F]unction', silent = true },
           },
         },
         select = {
