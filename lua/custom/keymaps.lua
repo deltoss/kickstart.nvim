@@ -168,6 +168,10 @@ keymap('n', 'K', function()
   vim.lsp.buf.signature_help() -- Second call brings focus to the floating window
 end, { noremap = true })
 
+-- Code actions
+vim.keymap.set({ 'n', 'v' }, '<leader>.', vim.lsp.buf.code_action, { desc = 'Code actions' })
+vim.keymap.set({ 'n', 'v' }, '<C-.>', vim.lsp.buf.code_action, { desc = 'Code actions' })
+
 -- Replace currently selected text with default register without yanking it
 keymap('v', '<leader>p', '"_dP', { noremap = true })
 keymap('v', 'p', '"_dP', { noremap = true })
