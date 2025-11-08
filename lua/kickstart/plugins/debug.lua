@@ -7,6 +7,10 @@ return {
     -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
 
+    -- For various utilities to debug with dotnet
+    -- E.g. Finds the dll for dotnet debugging automatically
+    'ramboe/ramboe-dotnet-utils',
+
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
@@ -179,6 +183,28 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
+    -- https://git.ramboe.io/YouTube/neovim-c-the-sane-debugging-setup-nvim-dap-ui
+    -- https://emojipedia.org/en/stickers/search?q=circle
+    vim.fn.sign_define('DapBreakpoint', {
+      text = '🔴',
+      texthl = 'DapBreakpointSymbol',
+      linehl = 'DapBreakpoint',
+      numhl = 'DapBreakpoint',
+    })
+
+    vim.fn.sign_define('DapStopped', {
+      text = '🟥',
+      texthl = 'yellow',
+      linehl = 'DapBreakpoint',
+      numhl = 'DapBreakpoint',
+    })
+    vim.fn.sign_define('DapBreakpointRejected', {
+      text = '⭕',
+      texthl = 'DapStoppedSymbol',
+      linehl = 'DapBreakpoint',
+      numhl = 'DapBreakpoint',
+    })
+
     local mason_path = vim.fn.stdpath 'data' .. '\\mason\\packages\\netcoredbg\\netcoredbg\\netcoredbg'
 
     local netcoredbg_adapter = {
@@ -196,7 +222,7 @@ return {
         name = 'launch - netcoredbg',
         request = 'launch',
         program = function()
-          return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+          return require('dap-dll-autopicker').build_dll_path()
         end,
         justMyCode = false,
         stopAtEntry = false,
