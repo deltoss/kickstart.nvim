@@ -161,6 +161,13 @@ local function copyVSLaunchCommand()
 end
 vim.keymap.set('n', '<leader>pv', copyVSLaunchCommand, { noremap = true, silent = true, desc = 'Copy [V]isual Studio Launch Command' })
 
+-- Help
+keymap('n', 'k', vim.lsp.buf.hover, { noremap = true })
+keymap('n', 'K', function()
+  vim.lsp.buf.signature_help() -- First calls shows the window
+  vim.lsp.buf.signature_help() -- Second call brings focus to the floating window
+end, { noremap = true })
+
 -- Replace currently selected text with default register without yanking it
 keymap('v', '<leader>p', '"_dP', { noremap = true })
 keymap('v', 'p', '"_dP', { noremap = true })
