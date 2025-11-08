@@ -18,54 +18,96 @@ return {
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
     {
+      '<C-A-Up>',
+      function()
+        require('dap').continue()
+      end,
+      desc = 'Start/Continue',
+    },
+    {
+      '<leader>bs',
+      function()
+        require('dap').continue()
+      end,
+      desc = 'Start/Continue',
+    },
+    {
       '<F5>',
       function()
         require('dap').continue()
       end,
-      desc = 'Debug: Start/Continue',
+      desc = 'Start/Continue',
+    },
+    {
+      '<C-A-Right>',
+      function()
+        require('dap').step_into()
+      end,
+      desc = 'Step Into',
     },
     {
       '<F1>',
       function()
         require('dap').step_into()
       end,
-      desc = 'Debug: Step Into',
+      desc = 'Step Into',
+    },
+    {
+      '<C-A-Down>',
+      function()
+        require('dap').step_over()
+      end,
+      desc = 'Step Over',
     },
     {
       '<F2>',
       function()
         require('dap').step_over()
       end,
-      desc = 'Debug: Step Over',
+      desc = 'Step Over',
+    },
+    {
+      '<C-A-Left>',
+      function()
+        require('dap').step_out()
+      end,
+      desc = 'Step Out',
     },
     {
       '<F3>',
       function()
         require('dap').step_out()
       end,
-      desc = 'Debug: Step Out',
+      desc = 'Step Out',
     },
     {
       '<leader>ba',
       function()
         require('dap').toggle_breakpoint()
       end,
-      desc = 'Debug: Toggle Breakpoint',
+      desc = 'Toggle Breakpoint',
     },
     {
       '<leader>bA',
       function()
         require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
       end,
-      desc = 'Debug: Set Breakpoint',
+      desc = 'Set Conditional Breakpoint',
     },
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
+    {
+      '<leader>bh',
+      function()
+        require('dapui').toggle()
+      end,
+      desc = 'See last session result.',
+    },
     {
       '<F7>',
       function()
         require('dapui').toggle()
       end,
-      desc = 'Debug: See last session result.',
+      desc = 'See last session result.',
     },
   },
   config = function()
