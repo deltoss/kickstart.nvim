@@ -14,6 +14,17 @@ return {
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
+
+    -- Restores breakpoints on load
+    {
+      'Weissle/persistent-breakpoints.nvim',
+      config = function()
+        require('persistent-breakpoints').setup {
+          save_dir = vim.fn.stdpath 'data' .. '/breakpoints',
+          load_breakpoints_event = { 'BufReadPost' },
+        }
+      end,
+    },
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -101,20 +112,21 @@ return {
       end,
       desc = '[C]all Hierarchy',
     },
-    {
-      '<leader>ba',
-      function()
-        require('dap').toggle_breakpoint()
-      end,
-      desc = '[A]dd/Toggle Breakpoint',
-    },
-    {
-      '<leader>bA',
-      function()
-        require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-      end,
-      desc = '[A]dd Conditional Breakpoint',
-    },
+    -- Commented out the below so persistent-breakpoints.nvim can handle these keymaps
+    -- {
+    --   '<leader>ba',
+    --   function()
+    --     require('dap').toggle_breakpoint()
+    --   end,
+    --   desc = '[A]dd/Toggle Breakpoint',
+    -- },
+    -- {
+    --   '<leader>bA',
+    --   function()
+    --     require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
+    --   end,
+    --   desc = '[A]dd Conditional Breakpoint',
+    -- },
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     {
       '<leader>bl',
