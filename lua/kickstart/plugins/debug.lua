@@ -29,7 +29,7 @@ return {
       function()
         require('dap').continue()
       end,
-      desc = 'Start/Continue',
+      desc = '[S]tart/Continue',
     },
     {
       '<F5>',
@@ -51,6 +51,13 @@ return {
         require('dap').step_into()
       end,
       desc = 'Step Into',
+    },
+    {
+      '<leader>bq',
+      function()
+        require('dap').terminate()
+      end,
+      desc = '[Q]uit',
     },
     {
       '<C-A-Down>',
@@ -81,33 +88,63 @@ return {
       desc = 'Step Out',
     },
     {
+      '<leader>bf',
+      function()
+        require('dapui').float_element()
+      end,
+      desc = 'Show [F]loating DAP Element',
+    },
+    {
+      '<leader>bc',
+      function()
+        require('dapui').float_element 'stacks'
+      end,
+      desc = '[C]all Hierarchy',
+    },
+    {
       '<leader>ba',
       function()
         require('dap').toggle_breakpoint()
       end,
-      desc = 'Toggle Breakpoint',
+      desc = '[A]dd/Toggle Breakpoint',
     },
     {
       '<leader>bA',
       function()
         require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
       end,
-      desc = 'Set Conditional Breakpoint',
+      desc = '[A]dd Conditional Breakpoint',
     },
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     {
-      '<leader>bh',
+      '<leader>bl',
       function()
         require('dapui').toggle()
       end,
-      desc = 'See last session result.',
+      desc = 'See [L]ast Session Result',
     },
     {
       '<F7>',
       function()
         require('dapui').toggle()
       end,
-      desc = 'See last session result.',
+      desc = 'See Last Session Result',
+    },
+    {
+      '<leader>bk',
+      function()
+        require('dapui').eval(nil, { enter = true })
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Quic[k]watch',
+    },
+    {
+      '<leader>K',
+      function()
+        require('dapui').eval(nil, { enter = true })
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Quic[k]watch',
     },
   },
   config = function()
@@ -152,6 +189,7 @@ return {
       -- Expand lines larger than the window
       -- Requires >= 0.7
       expand_lines = vim.fn.has 'nvim-0.7' == 1,
+      controls = { enabled = false }, -- no extra play/step buttons
       -- Layouts define sections of the screen to place windows.
       -- The position can be "left", "right", "top" or "bottom".
       -- The size specifies the height/width depending on position. It can be an Int
@@ -163,89 +201,51 @@ return {
         {
           elements = {
             -- Elements can be strings or table with id and size keys.
-            { id = 'scopes', size = 0.25 },
             'breakpoints',
             'stacks',
-            'watches',
+            'repl',
           },
-          size = 40, -- 40 columns
+          size = 45, -- 45 columns
           position = 'left',
         },
         {
           elements = {
-            'repl',
-            'console',
+            { id = 'watches', size = 0.5 }, -- 50% of this panel is scopes
+            'scopes',
           },
-          size = 0.25, -- 25% of total lines
+          size = 0.35, -- 35% of total lines
           position = 'bottom',
-        },
-      },
-      controls = {
-        enabled = true,
-        element = 'repl',
-        icons = {
-          pause = '',
-          play = '',
-          step_into = '',
-          step_over = '',
-          step_out = '',
-          step_back = '',
-          run_last = '↻',
-          terminate = '□',
         },
       },
       floating = {
         max_height = nil, -- These can be integers or a float between 0 and 1.
         max_width = nil, -- Floats will be treated as percentage of your screen.
-        border = 'single', -- Border style. Can be "single", "double" or "rounded"
+        border = 'rounded', -- Border style. Can be "single", "double" or "rounded"
         mappings = {
           close = { 'q', '<Esc>' },
         },
       },
       windows = { indent = 1 },
       render = {
-        max_type_length = nil, -- Can be integer or nil.
-        max_value_lines = 100, -- Can be integer or nil.
+        max_type_length = 60, -- Can be integer or nil.
+        max_value_lines = 200, -- Can be integer or nil.
       },
     }
-
     -- Change breakpoint icons
-    -- vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
-    -- vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })
-    -- local breakpoint_icons = vim.g.have_nerd_font
-    --     and { Breakpoint = '', BreakpointCondition = '', BreakpointRejected = '', LogPoint = '', Stopped = '' }
-    --   or { Breakpoint = '●', BreakpointCondition = '⊜', BreakpointRejected = '⊘', LogPoint = '◆', Stopped = '⭔' }
-    -- for type, icon in pairs(breakpoint_icons) do
-    --   local tp = 'Dap' .. type
-    --   local hl = (type == 'Stopped') and 'DapStop' or 'DapBreak'
-    --   vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
-    -- end
+    vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
+    vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })
+    local breakpoint_icons = vim.g.have_nerd_font
+        and { Breakpoint = '🔴', BreakpointCondition = '⭕', BreakpointRejected = '⚪', LogPoint = '🔶', Stopped = '🟥' }
+      or { Breakpoint = '🔴', BreakpointCondition = '⭕', BreakpointRejected = '⚪', LogPoint = '🔶', Stopped = '🟥' }
+    for type, icon in pairs(breakpoint_icons) do
+      local tp = 'Dap' .. type
+      local hl = (type == 'Stopped') and 'DapStop' or 'DapBreak'
+      vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
+    end
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
-
-    -- https://git.ramboe.io/YouTube/neovim-c-the-sane-debugging-setup-nvim-dap-ui
-    -- https://emojipedia.org/en/stickers/search?q=circle
-    vim.fn.sign_define('DapBreakpoint', {
-      text = '🔴',
-      texthl = 'DapBreakpointSymbol',
-      linehl = 'DapBreakpoint',
-      numhl = 'DapBreakpoint',
-    })
-
-    vim.fn.sign_define('DapStopped', {
-      text = '🟥',
-      texthl = 'yellow',
-      linehl = 'DapBreakpoint',
-      numhl = 'DapBreakpoint',
-    })
-    vim.fn.sign_define('DapBreakpointRejected', {
-      text = '⭕',
-      texthl = 'DapStoppedSymbol',
-      linehl = 'DapBreakpoint',
-      numhl = 'DapBreakpoint',
-    })
 
     local mason_path = vim.fn.stdpath 'data' .. '/mason/packages/netcoredbg/netcoredbg/netcoredbg'
 
@@ -276,9 +276,6 @@ return {
             return vim.fn.input('ASPNETCORE_URLS: ', 'http://localhost:5050')
           end,
         },
-        cwd = function()
-          return vim.fn.input('Workspace folder: ', vim.fn.getcwd() .. '/', 'file')
-        end,
       },
     }
   end,
