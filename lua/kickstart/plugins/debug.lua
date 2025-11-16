@@ -106,11 +106,18 @@ return {
       desc = 'Show [F]loating DAP Element',
     },
     {
+      '<leader>bb',
+      function()
+        require('dapui').float_element('breakpoints', { enter = true })
+      end,
+      desc = 'Show [B]reakpoints',
+    },
+    {
       '<leader>bc',
       function()
-        require('dapui').float_element 'stacks'
+        require('dapui').float_element('stacks', { enter = true })
       end,
-      desc = '[C]all Hierarchy',
+      desc = 'Show [C]all Hierarchy',
     },
     -- Commented out the below so persistent-breakpoints.nvim can handle these keymaps
     -- {
@@ -212,18 +219,16 @@ return {
       layouts = {
         {
           elements = {
-            'scopes',
-            'watches',
+            -- Elements can be strings or table with id and size keys.
             'repl',
+            'watches',
           },
           size = 0.35, -- % of height
           position = 'bottom',
         },
         {
           elements = {
-            -- Elements can be strings or table with id and size keys.
-            'breakpoints',
-            'stacks',
+            'scopes',
           },
           size = 45, -- Number of columns
           position = 'right',
