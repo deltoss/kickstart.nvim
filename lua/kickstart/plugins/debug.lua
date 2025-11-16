@@ -200,21 +200,21 @@ return {
       layouts = {
         {
           elements = {
-            -- Elements can be strings or table with id and size keys.
-            'breakpoints',
-            'stacks',
+            'scopes',
+            'watches',
             'repl',
           },
-          size = 45, -- 45 columns
-          position = 'left',
+          size = 0.35, -- % of height
+          position = 'bottom',
         },
         {
           elements = {
-            { id = 'watches', size = 0.5 }, -- 50% of this panel is scopes
-            'scopes',
+            -- Elements can be strings or table with id and size keys.
+            'breakpoints',
+            'stacks',
           },
-          size = 0.35, -- 35% of total lines
-          position = 'bottom',
+          size = 45, -- Number of columns
+          position = 'right',
         },
       },
       floating = {
