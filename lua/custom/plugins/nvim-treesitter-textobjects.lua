@@ -44,16 +44,16 @@ return {
           enable = true,
           set_jumps = true,
           goto_next_start = {
-            [']]'] = { query = { '@class.outer', '@function.outer' }, desc = 'Next class/function start' },
+            [']f'] = { query = { '@class.outer', '@function.outer' }, desc = 'Next class/function start' },
           },
           goto_next_end = {
-            [']['] = { query = { '@class.outer', '@function.outer' }, desc = 'Next class/function end' },
+            [']F'] = { query = { '@class.outer', '@function.outer' }, desc = 'Next class/function end' },
           },
           goto_previous_start = {
-            ['[['] = { query = { '@class.outer', '@function.outer' }, desc = 'Previous class/function start' },
+            ['[f'] = { query = { '@class.outer', '@function.outer' }, desc = 'Previous class/function start' },
           },
           goto_previous_end = {
-            ['[]'] = { query = { '@class.outer', '@function.outer' }, desc = 'Previous class/function end' },
+            ['[F'] = { query = { '@class.outer', '@function.outer' }, desc = 'Previous class/function end' },
           },
         },
         swap = {

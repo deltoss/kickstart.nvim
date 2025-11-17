@@ -56,10 +56,10 @@ return {
         map('n', '<leader><leader>ob', gitsigns.toggle_current_line_blame, { desc = 'Toggle git show [b]lame line' })
         map('n', '<leader><leader>oD', gitsigns.preview_hunk_inline, { desc = 'Toggle git show [D]eleted' })
 
-        map('n', '<leader>gl', gitsigns.setloclist, { desc = 'Get hunk [l]ocations for current buffer' })
-        map('n', '<leader>gL', function()
+        map('n', '<leader>gHl', gitsigns.setloclist, { desc = 'Get [h]unk [l]ocations for current buffer' })
+        map('n', '<leader>gHL', function()
           gitsigns.setloclist(nil, 'all')
-        end, { desc = 'Get hunk [L]ocations for repository' })
+        end, { desc = 'Get [h]unk [L]ocations for repository' })
 
         map('n', '<leader>gq', gitsigns.setqflist, { desc = 'Get [q]uickfix list for current buffer' })
         map('n', '<leader>gQ', function()
