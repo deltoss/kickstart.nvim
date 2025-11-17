@@ -48,7 +48,7 @@ return {
       { '<leader>o', group = '[O]bsidian' },
       { '<leader>ot', group = '+[T]emplates' },
       { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
-      { '<leader>h', group = '[H]TTP' },
+      { '<leader>h', group = '[H]TTP (Bruno)' },
       { '<leader>he', group = '+[E]nv' },
       { '<leader>m', group = '[M]ark' },
       { '<leader>M', group = '[M]arkdown' },
