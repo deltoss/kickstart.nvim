@@ -4,4 +4,14 @@ return {
   opts = {
     picker = { enabled = true },
   },
+  keys = {
+    {
+      '<leader>en',
+      function()
+        Snacks.picker.notifications()
+      end,
+      desc = '[E]rror Notifications',
+      mode = { 'n', 'v' },
+    },
+  },
 }
