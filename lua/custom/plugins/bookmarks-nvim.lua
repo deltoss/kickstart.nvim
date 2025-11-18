@@ -44,6 +44,11 @@ return {
       desc = '[A]dd',
     },
     {
+      '<leader>mA',
+      ':BookmarksDesc<CR>',
+      desc = '[A]dd Description',
+    },
+    {
       '<leader>ms',
       ':BookmarksGoto<CR>',
       desc = '[S]earch',
