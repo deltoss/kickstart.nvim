@@ -51,7 +51,7 @@ return {
       { '<leader>gH', group = '+[H]unks', mode = { 'n', 'v' } },
       { '<leader>h', group = '[H]TTP (Bruno)' },
       { '<leader>he', group = '+[E]nv' },
-      { '<leader>m', group = '[M]ark' },
+      { '<leader>m', group = '[M]arks' },
       { '<leader>M', group = '[M]arkdown' },
       { '<leader>t', group = '[T]abs' },
       { '<leader>w', group = '[W]ezterm' },
