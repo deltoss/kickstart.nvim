@@ -65,6 +65,7 @@ return {
       { '<leader>b', group = 'De[b]ug' },
       { '<leader>e', group = '[E]rror' },
       { '<leader>S', group = '[S]wap' },
+      { '<leader>N', group = 'Quick [N]otes/Scratch' },
     },
   },
 }
