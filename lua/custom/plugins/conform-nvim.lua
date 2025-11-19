@@ -1,3 +1,19 @@
+-- Disable auto formatting on save by default
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { "*" },
+  callback = function()
+    vim.b.disable_autoformat = true
+  end,
+})
+
+-- Enable auto formatting on save for certain file types
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { "lua", "ps1", "dosbatch", "winbatch", "nu", "javascript" },
+  callback = function()
+    vim.b.disable_autoformat = false
+  end,
+})
+
 vim.api.nvim_create_user_command('FormatDisable', function(args)
   if args.bang then
     -- FormatDisable! will disable formatting just for this buffer
