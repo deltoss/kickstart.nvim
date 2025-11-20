@@ -13,14 +13,14 @@ return {
       desc = 'Lazygit',
     },
     {
-      '<leader>gl',
+      '<leader>gL',
       function()
         Snacks.lazygit.log()
       end,
       desc = 'Lazygit [L]og',
     },
     {
-      '<leader>gf',
+      '<leader>gF',
       function()
         Snacks.lazygit.log_file()
       end,
