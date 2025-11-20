@@ -41,30 +41,29 @@ return {
           gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = 'git [r]eset hunk' })
         -- normal mode
-        map('n', '<leader>gs', gitsigns.stage_hunk, { desc = '[s]tage hunk' })
-        map('n', '<leader>gr', gitsigns.reset_hunk, { desc = '[r]eset hunk' })
-        map('n', '<leader>gS', gitsigns.stage_buffer, { desc = '[S]tage buffer' })
-        map('n', '<leader>gu', gitsigns.stage_hunk, { desc = '[u]ndo stage hunk' })
-        map('n', '<leader>gR', gitsigns.reset_buffer, { desc = '[R]eset buffer' })
-        map('n', '<leader>gp', gitsigns.preview_hunk, { desc = '[p]review hunk' })
-        map('n', '<leader>gb', gitsigns.blame_line, { desc = '[b]lame line' })
-        map('n', '<leader>gc', gitsigns.diffthis, { desc = '[c]hanges compared to index' })
-        map('n', '<leader>gC', function()
+        map('n', '<leader>ghs', gitsigns.stage_hunk, { desc = '[s]tage' })
+        map('n', '<leader>ghr', gitsigns.reset_hunk, { desc = '[r]eset' })
+        map('n', '<leader>ghS', gitsigns.stage_buffer, { desc = '[S]tage buffer' })
+        map('n', '<leader>ghu', gitsigns.stage_hunk, { desc = '[u]ndo stage hunk' })
+        map('n', '<leader>ghR', gitsigns.reset_buffer, { desc = '[R]eset buffer' })
+        map('n', '<leader>ghp', gitsigns.preview_hunk, { desc = '[p]review hunk' })
+        map('n', '<leader>ghc', gitsigns.diffthis, { desc = '[c]hanges compared to index' })
+        map('n', '<leader>ghC', function()
           gitsigns.diffthis '@'
         end, { desc = '[C]hanges compared to last commit' })
         -- Toggles
         map('n', '<leader><leader>ob', gitsigns.toggle_current_line_blame, { desc = 'Toggle git show [b]lame line' })
         map('n', '<leader><leader>oD', gitsigns.preview_hunk_inline, { desc = 'Toggle git show [D]eleted' })
 
-        map('n', '<leader>gHl', gitsigns.setloclist, { desc = 'Get [h]unk [l]ocations for current buffer' })
-        map('n', '<leader>gHL', function()
+        map('n', '<leader>ghl', gitsigns.setloclist, { desc = '[h]unk [l]ocations for current buffer' })
+        map('n', '<leader>ghL', function()
           gitsigns.setloclist(nil, 'all')
-        end, { desc = 'Get [h]unk [L]ocations for repository' })
+        end, { desc = '[h]unk [L]ocations for repository' })
 
-        map('n', '<leader>gq', gitsigns.setqflist, { desc = 'Get [q]uickfix list for current buffer' })
-        map('n', '<leader>gQ', function()
+        map('n', '<leader>ghq', gitsigns.setqflist, { desc = '[q]uickfix list for current buffer' })
+        map('n', '<leader>ghQ', function()
           gitsigns.setqflist 'all'
-        end, { desc = 'Get [Q]uickfix list for repository' })
+        end, { desc = '[Q]uickfix list for repository' })
       end,
     },
   },

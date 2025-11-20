@@ -19,21 +19,21 @@ return {
   },
   keys = {
     {
-      '<leader>gd',
+      '<leader>gvd',
       function()
         toggle_diffview 'DiffviewOpen'
       end,
       desc = '[D]iff Index',
     },
     {
-      '<leader>gD',
+      '<leader>gvd',
       function()
         toggle_diffview 'DiffviewOpen master..HEAD'
       end,
       desc = '[D]iff master',
     },
     {
-      '<leader>gh',
+      '<leader>gvh',
       function()
         toggle_diffview 'DiffviewFileHistory %'
       end,

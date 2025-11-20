@@ -16,7 +16,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
         return vim.fn.executable 'make' == 1
       end,
     },
-    { 'nvim-telescope/telescope-ui-select.nvim' },
 
     -- Useful for getting pretty icons, but requires a Nerd Font.
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
@@ -52,59 +51,11 @@ return { -- Fuzzy Finder (files, lsp, etc)
       --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
       --   },
       -- },
-      -- pickers = {}
-      extensions = {
-        ['ui-select'] = {
-          require('telescope.themes').get_dropdown(),
-        },
-      },
+      -- pickers = {},
+      -- extensions = {},
     }
 
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
-    pcall(require('telescope').load_extension, 'ui-select')
-
-    -- See `:help telescope.builtin`
-    local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>sc', builtin.current_buffer_fuzzy_find, { desc = '[C]urrent File' })
-    vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[H]elp' })
-    vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[K]eymaps' })
-    vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[F]iles' })
-    vim.keymap.set('n', '<leader>sE', builtin.symbols, { desc = '[E]mojis' })
-    vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = '[T]elescope Commands' })
-    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Current [W]ord' })
-    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'By [G]rep' })
-    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[D]iagnostics' })
-    vim.keymap.set('n', '<leader>s.', builtin.resume, { desc = 'Resume ("." for repeat)' })
-    vim.keymap.set('n', '<leader>sr', builtin.oldfiles, { desc = '[R]ecent Files' })
-    vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = 'Existing [B]uffers' })
-    vim.keymap.set('n', '<leader>sG', builtin.git_status, { desc = '[G]it Changed Files' })
-    vim.keymap.set('n', '<leader><leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-
-    -- Slightly advanced example of overriding default behavior and theme
-    vim.keymap.set('n', '<leader>/', function()
-      -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        winblend = 10,
-        previewer = false,
-      })
-    end, { desc = '[/] Fuzzily search in current buffer' })
-
-    -- It's also possible to pass additional configuration options.
-    --  See `:help telescope.builtin.live_grep()` for information about particular keys
-    vim.keymap.set('n', '<leader>s/', function()
-      builtin.live_grep {
-        grep_open_files = true,
-        prompt_title = 'Live Grep in Open Files',
-      }
-    end, { desc = '[/] in Open Files' })
-
-    vim.keymap.set('n', '<leader>sn', function()
-      builtin.find_files { cwd = vim.fn.stdpath 'config' }
-    end, { desc = '[N]eovim files' })
-
-    vim.keymap.set('n', '<leader>so', function()
-      builtin.find_files { cwd = vim.fn.expand '~/Documents/Note Taking/Zettelkasten/' }
-    end, { desc = '[O]bsidian files' })
   end,
 }
