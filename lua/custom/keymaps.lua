@@ -76,11 +76,12 @@ keymap('v', '>', '>gv', { noremap = true })
 keymap('i', '<C-,>', '<C-p>', { noremap = true })
 keymap('i', '<C-.>', '<C-n>', { noremap = true })
 
--- Map Ctrl+Backspace to delete the previous word in insert mode
+-- Delete the previous word in insert mode
 keymap('i', '<C-BS>', '<C-w>', { noremap = true })
 keymap('i', '<C-H>', '<C-w>', { noremap = true })
--- Map Ctrl+Delete to delete the next word in insert mode
+-- Delete the next word in insert mode
 keymap('i', '<C-Del>', '<C-o>dw', { noremap = true })
+keymap('i', '<C-d>', '<C-o>dw', { noremap = true })
 
 -- Buffer operations
 keymap('n', '+', ':bn<CR>', { noremap = true, silent = true })
