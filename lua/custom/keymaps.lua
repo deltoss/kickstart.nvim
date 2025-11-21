@@ -76,12 +76,13 @@ keymap('v', '>', '>gv', { noremap = true })
 keymap('i', '<C-,>', '<C-p>', { noremap = true })
 keymap('i', '<C-.>', '<C-n>', { noremap = true })
 
--- Delete the previous word in insert mode
-keymap('i', '<C-BS>', '<C-w>', { noremap = true })
-keymap('i', '<C-H>', '<C-w>', { noremap = true })
--- Delete the next word in insert mode
-keymap('i', '<C-Del>', '<C-o>dw', { noremap = true })
-keymap('i', '<C-d>', '<C-o>dw', { noremap = true })
+-- Insert mode deletion bindings
+-- Matches terminal behavior
+keymap('i', '<C-BS>', '<C-w>', { noremap = true, desc = 'Delete the previous word' })
+keymap('i', '<C-H>', '<C-w>', { noremap = true, desc = 'Delete the previous word' })
+keymap('i', '<C-Del>', '<C-o>dw', { noremap = true, desc = 'Delete the next word' })
+keymap('i', '<C-d>', '<C-o>dw', { noremap = true, desc = 'Delete the next word' })
+keymap('i', '<C-k>', '<C-o>D', { noremap = true, desc = 'Delete to end of line' })
 
 -- Buffer operations
 keymap('n', '+', ':bn<CR>', { noremap = true, silent = true })
