@@ -10,7 +10,6 @@ return {
     -- Normal mode mappings
     { 'o', '<Plug>(bullets-newline)', desc = 'Bullets newline' },
     { 'gN', '<Plug>(bullets-renumber)', desc = 'Renumber bullets' },
-    -- { '<leader>x', '<Plug>(bullets-toggle-checkbox)', desc = 'Toggle checkbox' },
     { '>>', '<Plug>(bullets-demote)', desc = 'Demote bullet' },
     { '<<', '<Plug>(bullets-promote)', desc = 'Promote bullet' },
 
