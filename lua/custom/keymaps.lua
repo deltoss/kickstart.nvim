@@ -169,6 +169,9 @@ keymap('n', 'K', function()
   vim.lsp.buf.signature_help() -- First calls shows the window
   vim.lsp.buf.signature_help() -- Second call brings focus to the floating window
 end, { noremap = true })
+keymap('i', '<C-k>', function()
+  vim.lsp.buf.signature_help()
+end, { noremap = true }) -- Note this is overwritten by blink.cmp by default
 
 -- Code actions
 vim.keymap.set({ 'n', 'v' }, '<leader>.', vim.lsp.buf.code_action, { desc = 'Code actions' })
