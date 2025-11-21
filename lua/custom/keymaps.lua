@@ -187,21 +187,3 @@ keymap('x', '<leader>rh', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>//g<Left><Left>",
 
 -- Visual mode: replace highlighted text with highlighted value + entered value
 keymap('x', '<leader>ra', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\", '/\\&~')<CR>/g<Left><Left>", { desc = '[A]ppend to highlighted text' })
-
--- Quickfix: Use Telescope search, then load it into quickfix for navigation with <C-q>
-keymap('n', '<leader>q', function()
-  local qf_winid = vim.fn.getqflist({ winid = 0 }).winid
-  local action = qf_winid > 0 and 'cclose' or 'copen'
-  vim.cmd('botright ' .. action)
-end, { desc = 'Toggle [Q]uickfix list', silent = true })
-keymap('n', 'cP', ':colder<CR>')
-keymap('n', 'cn', ':cnext<CR>')
-keymap('n', 'cp', ':cprev<CR>')
-keymap('n', 'cN', ':cnewer<CR>')
-
-keymap('n', '<leader>l', function()
-  local win = vim.api.nvim_get_current_win()
-  local qf_winid = vim.fn.getloclist(win, { winid = 0 }).winid
-  local action = qf_winid > 0 and 'lclose' or 'lopen'
-  vim.cmd(action)
-end, { desc = 'Toggle [L]ocations list', silent = true })
