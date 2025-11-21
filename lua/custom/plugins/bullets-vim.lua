@@ -6,8 +6,6 @@ return {
     -- Insert mode mappings
     { '<cr>', '<Plug>(bullets-newline)', mode = 'i', desc = 'Bullets newline' },
     { '<C-cr>', '<cr>', mode = 'i', desc = 'Regular newline' },
-    { '<C-t>', '<Plug>(bullets-demote)', mode = 'i', desc = 'Demote bullet' },
-    { '<C-d>', '<Plug>(bullets-promote)', mode = 'i', desc = 'Promote bullet' },
 
     -- Normal mode mappings
     { 'o', '<Plug>(bullets-newline)', desc = 'Bullets newline' },
