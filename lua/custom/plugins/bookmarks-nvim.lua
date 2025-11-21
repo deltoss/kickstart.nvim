@@ -9,7 +9,26 @@ return {
     { 'stevearc/dressing.nvim' }, -- optional: better UI
   },
   config = function()
-    local opts = {} -- check the "./lua/bookmarks/default-config.lua" file for all the options
+    local opts = {
+      -- See https://github.com/LintaoAmons/bookmarks.nvim/blob/main/lua/bookmarks/default-config.lua
+      treeview = {
+        window_split_dimension = 50,
+        keymap = {
+          ['<localleader><Up>'] = {
+            action = 'move_up',
+            desc = 'Move current node up in the list',
+          },
+          ['<localleader><Down>'] = {
+            action = 'move_down',
+            desc = 'Move current node down in the list',
+          },
+          ['<C-CR>'] = {
+            action = 'goto',
+            desc = 'Go to bookmark location in previous window',
+          },
+        },
+      },
+    } -- check the "./lua/bookmarks/default-config.lua" file for all the options
     require('bookmarks').setup(opts) -- you must call setup to init sqlite db
   end,
   init = function()
