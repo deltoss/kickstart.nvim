@@ -1,3 +1,11 @@
+local function build()
+  vim.g.dotnet_errors_only = true
+  vim.g.dotnet_show_project_file = false
+
+  vim.cmd 'compiler dotnet'
+  vim.cmd 'make!' -- ! to skip saving the buffer
+  vim.cmd 'cwindow'
+end
 vim.keymap.set('n', '<leader>n', function()
   local pickers = require 'telescope.pickers'
   local finders = require 'telescope.finders'
@@ -6,9 +14,20 @@ vim.keymap.set('n', '<leader>n', function()
   local action_state = require 'telescope.actions.state'
 
   local menu_items = {
-    { name = 'Build', cmd = 'dotnet build', desc = 'Build the project' },
+    {
+      name = 'Build',
+      callback = build,
+      desc = 'Build the project',
+    },
     { name = 'Build (Release)', cmd = 'dotnet build -c Release', desc = 'Build in Release mode' },
-    { name = 'Rebuild', cmd = 'dotnet clean && dotnet build', desc = 'Clean and build' },
+    {
+      name = 'Rebuild',
+      callback = function()
+        vim.cmd 'dotnet clean'
+        build()
+      end,
+      desc = 'Clean and build',
+    },
     { name = 'Clean', cmd = 'dotnet clean', desc = 'Clean build outputs' },
     { name = 'Restore', cmd = 'dotnet restore', desc = 'Restore dependencies' },
     { name = 'Run', cmd = 'dotnet run', desc = 'Run the project' },
