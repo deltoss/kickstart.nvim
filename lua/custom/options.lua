@@ -17,9 +17,6 @@ opt.shiftwidth = 2
 
 opt.relativenumber = true
 
--- Automatically change vim's cwd when opening a buffer.
-opt.autochdir = true
-
 opt.conceallevel = 2
 
 -- Wrap lines at the end of a word (not in the middle)

@@ -18,6 +18,7 @@ return {
   ---@type quicker.SetupOptions
   opts = {
     keys = {
+      -- <C-Enter>  Go to quickfix location
       {
         '>',
         function()
