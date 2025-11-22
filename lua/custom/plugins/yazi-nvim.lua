@@ -14,13 +14,13 @@ return {
       desc = "Open the file manager in nvim's working directory",
     },
     {
-      '<leader>_',
+      '<leader>-',
       mode = { 'n', 'v' },
       '<cmd>Yazi<cr>',
       desc = 'Open yazi at the current file',
     },
     {
-      '<leader>-',
+      '<leader>_',
       '<cmd>Yazi toggle<cr>',
       desc = 'Resume the last yazi session',
     },
