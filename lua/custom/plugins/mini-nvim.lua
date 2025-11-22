@@ -1,5 +1,15 @@
 return { -- Collection of various small independent plugins/modules
   'echasnovski/mini.nvim',
+  dependencies = {
+    {
+      'folke/which-key.nvim',
+      opts = function(_, opts)
+        opts.spec = opts.spec or {}
+        table.insert(opts.spec, { '<leader><leader>s', group = '[S]urround' })
+        return opts
+      end,
+    },
+  },
   config = function()
     -- Better Around/Inside textobjects
     --
@@ -9,20 +19,19 @@ return { -- Collection of various small independent plugins/modules
     --  - ci'  - [C]hange [I]nside [']quote
     require('mini.ai').setup { n_lines = 500 }
 
-    vim.keymap.set('n', 'h', '<Nop>', { silent = true })
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
     --
-    -- - haiw) - [H]ave [A]dd [I]nner [W]ord [)]Paren
-    -- - hd'   - [H]ave [D]elete [']quotes
-    -- - hr)'  - [H]ave [R]eplace [)] [']
+    -- - <leader><leader>saiw) - [S]urround [A]dd [I]nner [W]ord [)]Parent
+    -- - <leader><leader>sd'   - [S]urround [D]elete [']quotes
+    -- - <leader><leader>sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup {
       mappings = {
-        add = 'ha', -- Add surrounding in Normal and Visual modes
-        delete = 'hd', -- Delete surrounding
-        find = 'hf', -- Find surrounding (to the right)
-        find_left = 'hF', -- Find surrounding (to the left)
-        highlight = 'hh', -- Highlight surrounding
-        replace = 'hr', -- Replace surrounding
+        add = '<leader><leader>sy', -- Add surrounding in Normal and Visual modes
+        delete = '<leader><leader>sd', -- Delete surrounding
+        find = '<leader><leader>sf', -- Find surrounding (to the right)
+        find_left = '<leader><leader>sF', -- Find surrounding (to the left)
+        highlight = '<leader><leader>sh', -- Highlight surrounding
+        replace = '<leader><leader>sr', -- Replace surrounding
 
         suffix_last = 'l', -- Suffix to search with "prev" method
         suffix_next = 'n', -- Suffix to search with "next" method
