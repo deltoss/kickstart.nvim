@@ -22,6 +22,19 @@ return {
     telescope.load_extension 'zoxide'
   end,
   keys = {
-    { '<leader>sz', ':Telescope zoxide list<CR>', desc = '[Z]oxide' },
+    {
+      '<leader>sz',
+      function()
+        local opts = {}
+
+        if vim.o.shell == 'pwsh' or vim.o.shell == 'powershell' then
+          local zoxideListCmd = require('telescope._extensions.zoxide.config').get_config().list_command
+          opts.cmd = { vim.o.shell, '-NoLogo', '-NoProfile', '-Command', zoxideListCmd }
+        end
+
+        require('telescope').extensions.zoxide.list(opts)
+      end,
+      desc = '[Z]oxide',
+    },
   },
 }
