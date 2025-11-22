@@ -196,6 +196,10 @@ keymap('x', '<leader>rh', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>//g<Left><Left>",
 -- Visual mode: replace highlighted text with highlighted value + entered value
 keymap('x', '<leader>ra', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\", '/\\&~')<CR>/g<Left><Left>", { desc = '[A]ppend to highlighted text' })
 
+-- Quickly change word
+-- From https://github.com/folke/dot/blob/master/nvim/lua/config/keymaps.lua
+keymap('n', '<C-c>', 'ciw')
+
 -- Lua Executions
 keymap('n', '<leader>Ls', '<cmd>source %<CR>', { desc = '[S]ource Current File' })
 keymap('n', '<leader>Lx', ':.lua<CR>', { desc = 'E[x]ecute Line' })
