@@ -3,8 +3,8 @@ return {
   event = 'VimEnter', -- Sets the loading event to 'VimEnter'
 
   opts = function(_, opts)
-    opts.spec = opts.spec or {}
-    table.insert(opts.spec, {
+    opts = opts or {}
+    table.insert(opts, {
       -- delay between pressing a key and opening which-key (milliseconds)
       -- this setting is independent of vim.o.timeoutlen
       delay = 0,
