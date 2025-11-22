@@ -18,9 +18,11 @@ vim.api.nvim_create_autocmd('BufEnter', {
   callback = function(event)
     local win = vim.api.nvim_get_current_win()
     local config = vim.api.nvim_win_get_config(win)
+    local buftype = vim.bo[event.buf].buftype
 
-    -- Check if it's a floating window
-    if config.relative ~= '' then
+    -- Check if it's a floating window AND a temporary/special buffer
+    -- Otherwise, it'd also apply to split windows too, which we don't want
+    if config.relative ~= '' and (buftype == 'nofile' or buftype == 'help' or buftype == 'quickfix') then
       vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = event.buf, silent = true })
       vim.keymap.set('n', '<Esc>', '<cmd>close<cr>', { buffer = event.buf, silent = true })
     end
