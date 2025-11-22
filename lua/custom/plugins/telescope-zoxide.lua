@@ -29,7 +29,7 @@ return {
 
         if vim.o.shell == 'pwsh' or vim.o.shell == 'powershell' then
           local zoxideListCmd = require('telescope._extensions.zoxide.config').get_config().list_command
-          opts.cmd = { vim.o.shell, '-NoLogo', '-NoProfile', '-Command', zoxideListCmd }
+          opts.cmd = { vim.o.shell, '-NoLogo', '-NoProfile', '-NonInteractive', '-Command', zoxideListCmd }
         end
 
         require('telescope').extensions.zoxide.list(opts)
