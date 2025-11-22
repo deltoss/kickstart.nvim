@@ -243,5 +243,12 @@ return {
       end,
       desc = 'GitHub [P]ull Requests (all)',
     },
+    {
+      '<leader>E',
+      function()
+        Snacks.explorer()
+      end,
+      desc = 'File [E]xplorer',
+    },
   },
 }
