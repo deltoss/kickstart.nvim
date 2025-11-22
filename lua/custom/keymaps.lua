@@ -184,6 +184,8 @@ keymap('v', 'p', '"_dP', { noremap = true })
 -- Join lines
 keymap('n', '<leader>j', 'J', { noremap = true })
 
+keymap('n', '<leader>*', '*``cgn', { desc = 'Multi-Cursor Edit' })
+
 -- Search and replace word under cursor
 keymap('n', '<leader>rw', ':%s/\\<<C-r><C-w>\\>//g<left><left>', { desc = '[W]ord under cursor' })
 
