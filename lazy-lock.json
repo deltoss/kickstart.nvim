@@ -46,6 +46,7 @@
   "ramboe-dotnet-utils": { "branch": "main", "commit": "051ed455e797853b548f857f895c81599803ba12" },
   "roslyn.nvim": { "branch": "main", "commit": "88f837a658df7304ae47fdf251c9560ffbc6bf2b" },
   "smart-splits.nvim": { "branch": "master", "commit": "ca996f2844a4c77d74912a2414af939dc76a73cc" },
+  "smear-cursor.nvim": { "branch": "main", "commit": "ab3741e2ca22fe0cae3948d4d65b52e376c83c6a" },
   "snacks.nvim": { "branch": "main", "commit": "fe7cfe9800a182274d0f868a74b7263b8c0c020b" },
   "sqlite.lua": { "branch": "master", "commit": "50092d60feb242602d7578398c6eb53b4a8ffe7b" },
   "telescope-everything.nvim": { "branch": "main", "commit": "28f5772f7fc9cfc87833077a37137ec7183e1cfb" },
