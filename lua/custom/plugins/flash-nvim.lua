@@ -4,7 +4,7 @@ return {
   ---@type Flash.Config
   opts = {
     -- labels = "abcdefghijklmnopqrstuvwxyz",
-    labels = 'yhaeifoujkp',
+    labels = 'haeifouypjk',
     search = {
       ---@type Flash.Pattern.Mode
       -- Each mode will take ignorecase and smartcase into account.
@@ -38,7 +38,7 @@ return {
       -- options used for treesitter selections
       -- `require("flash").treesitter()`
       treesitter = {
-        labels = 'haeiyfoujkp',
+        labels = 'haeifouypjk',
       },
     },
   },
