@@ -1,15 +1,5 @@
 return { -- Collection of various small independent plugins/modules
   'echasnovski/mini.nvim',
-  dependencies = {
-    {
-      'folke/which-key.nvim',
-      opts = function(_, opts)
-        opts.spec = opts.spec or {}
-        table.insert(opts.spec, { '<leader><leader>s', group = '[S]urround' })
-        return opts
-      end,
-    },
-  },
   config = function()
     -- Better Around/Inside textobjects
     --
