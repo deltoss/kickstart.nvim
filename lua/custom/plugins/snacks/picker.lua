@@ -27,6 +27,14 @@ return {
       desc = 'Help Pages',
     },
     {
+      '<leader>sN',
+      function()
+        Snacks.picker.notifications()
+      end,
+      desc = '[N]otifications',
+      mode = { 'n', 'v' },
+    },
+    {
       '<leader>en',
       function()
         Snacks.picker.notifications()
