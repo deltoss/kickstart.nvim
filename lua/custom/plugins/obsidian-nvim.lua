@@ -2,7 +2,7 @@ return {
   'obsidian-nvim/obsidian.nvim',
   version = 'v3.11.0',
   lazy = true,
-  ft = 'markdown',
+  ft = { 'markdown', 'codecompanion' },
   opts = {
     footer = { -- backlinks in footer as causing issues
       enabled = false,

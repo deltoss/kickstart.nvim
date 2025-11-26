@@ -46,16 +46,16 @@ return {
     vim.o.autoread = true
 
     -- Recommended/example keymaps.
-    vim.keymap.set({ 'n', 'x' }, '<leader>aq', function()
+    vim.keymap.set({ 'n', 'x' }, '<leader>aoq', function()
       require('opencode').ask('@this: ', { submit = true })
     end, { desc = 'Ask Opencode a [Q]uestion' })
-    vim.keymap.set({ 'n', 'x' }, '<leader>ax', function()
+    vim.keymap.set({ 'n', 'x' }, '<leader>aox', function()
       require('opencode').select()
     end, { desc = 'E[x]ecute Opencode Action…' })
-    vim.keymap.set({ 'n', 'x' }, '<leader>aa', function()
+    vim.keymap.set({ 'n', 'x' }, '<leader>aoa', function()
       require('opencode').prompt '@this'
     end, { desc = '[A]dd to Opencode' })
-    vim.keymap.set({ 'n', 't' }, '<leader>at', function()
+    vim.keymap.set({ 'n', 't' }, '<leader>aot', function()
       require('opencode').toggle()
     end, { desc = '[T]oggle Opencode' })
     vim.keymap.set('n', '<S-C-u>', function()
