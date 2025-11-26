@@ -32,7 +32,6 @@ return {
         Snacks.picker.notifications()
       end,
       desc = '[N]otifications',
-      mode = { 'n', 'v' },
     },
     {
       '<leader>en',
@@ -40,7 +39,6 @@ return {
         Snacks.picker.notifications()
       end,
       desc = '[E]rror Notifications',
-      mode = { 'n', 'v' },
     },
     {
       '<leader>sC',
