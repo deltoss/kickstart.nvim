@@ -198,7 +198,8 @@ keymap('x', '<leader>ra', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\"
 
 -- Quickly change word
 -- From https://github.com/folke/dot/blob/master/nvim/lua/config/keymaps.lua
-keymap('n', '<C-c>', 'ciw')
+keymap('n', '<C-c>', 'ciw', { noremap = true })
+keymap('v', '<C-c>', 'c', { noremap = true })
 
 -- Lua Executions
 keymap('n', '<leader>Ls', '<cmd>source %<CR>', { desc = '[S]ource Current File' })
