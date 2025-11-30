@@ -46,8 +46,8 @@ return {
     -- Document existing key chains
     spec = {
       { '<leader>s', group = '[S]earch' },
-      { '<leader>o', group = '[O]bsidian' },
-      { '<leader>ot', group = '+[T]emplates' },
+      { '<leader>O', group = '[O]bsidian' },
+      { '<leader>Ot', group = '+[T]emplates' },
       { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
       { '<leader>gh', group = '+[H]unks', mode = { 'n', 'v' } },
       { '<leader>gH', group = '+Git[H]ub', mode = { 'n', 'v' } },

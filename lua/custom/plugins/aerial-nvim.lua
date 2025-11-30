@@ -13,9 +13,9 @@ return {
   },
   keys = {
     {
-      '<leader>O',
+      '<leader>oa',
       '<cmd>AerialToggle!<CR>',
-      desc = '[O]utline',
+      desc = '[O]utline ([A]erial)',
     },
   },
 }
