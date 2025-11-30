@@ -72,43 +72,50 @@ return {
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
-        map('<leader>rr', vim.lsp.buf.rename, '[R]e[n]ame')
+        map('<leader>rr', '<cmd>Lspsaga rename<cr>', '[R]ename')
+
+        map('<leader>ol', '<cmd>Lspsaga outline<cr>', '[O]utline ([L]spSaga)')
+
+        -- Peek documentation
+        map('k', '<cmd>Lspsaga hover_doc<cr>', 'Pee[k] Documentation')
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        map('ga', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+        map('ga', '<cmd>Lspsaga code_action<cr>', '[G]oto Code [A]ction', { 'n', 'x' })
 
         -- Find references for the word under your cursor.
-        map('gr', function()
-          Snacks.picker.lsp_references()
-        end, '[G]oto [R]eferences')
+        map('gr', '<cmd>Lspsaga finder<cr>', '[G]oto [R]eferences')
 
-        map('gI', function()
-          Snacks.picker.lsp_declarations()
-        end, '[G]oto [I]ncoming')
+        map('gI', '<cmd>Lspsaga incoming_calls<cr>', '[G]oto [I]ncoming')
+        map('gO', '<cmd>Lspsaga outgoing_calls<cr>', '[G]oto [O]utgoing')
 
-        map('gO', function()
-          Snacks.picker.lsp_declarations()
-        end, '[G]oto [O]utgoing')
+        map(']d', function()
+          require('lspsaga.diagnostic'):goto_next()
+        end, 'Diagnostic')
+        map('[d', function()
+          require('lspsaga.diagnostic'):goto_prev()
+        end, 'Diagnostic')
+        map(']e', function()
+          require('lspsaga.diagnostic'):goto_next { severity = vim.diagnostic.severity.ERROR }
+        end, 'Error')
+        map('[e', function()
+          require('lspsaga.diagnostic'):goto_prev { severity = vim.diagnostic.severity.ERROR }
+        end, 'Error')
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
-        map('gi', function()
-          Snacks.picker.lsp_implementations()
-        end, '[G]oto [I]mplementation')
+        map('gi', '<cmd>Lspsaga finder imp<cr>', '[G]oto [I]mplementation')
 
         -- Jump to the definition of the word under your cursor.
         --  This is where a variable was first declared, or where a function is defined, etc.
         --  To jump back, press <C-t>.
-        map('gd', function()
-          Snacks.picker.lsp_definitions()
-        end, '[G]oto [D]efinition')
+        map('gd', '<cmd>Lspsaga goto_definition<cr>', '[G]oto [D]efinition')
+        map('<leader>kd', '<cmd>Lspsaga peek_definition<cr>', '[D]efinition')
 
         -- WARN: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
-        map('gD', function()
-          Snacks.picker.lsp_declarations()
-        end, '[G]oto [D]eclaration')
+        map('gD', '<cmd>Lspsaga goto_type_definition<cr>', '[G]oto [D]eclaration')
+        map('<leader>kD', '<cmd>Lspsaga peek_type_definition<cr>', '[D]eclaration')
 
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
