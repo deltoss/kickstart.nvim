@@ -20,9 +20,9 @@ keymap('n', '<leader>zz', ':q<cr>', { desc = '[Q]uit' })
 keymap('n', 'ZW', ':wq<cr>', { desc = '[W]rite and Quit' })
 keymap('n', 'Zw', ':wq<cr>', { desc = '[W]rite and Quit' })
 keymap('n', '<leader>zw', ':wq<cr>', { desc = '[W]rite and Quit' })
-keymap('n', 'Zb', ':bd<cr>', { desc = 'Close Current [B]uffer' })
-keymap('n', 'ZB', ':bd<cr>', { desc = 'Close Current [B]uffer' })
-keymap('n', '<leader>zb', ':bd<cr>', { desc = 'Close Current [B]uffer' })
+keymap('n', 'Zb', ':bd<cr>', { desc = 'Close [B]uffer' })
+keymap('n', 'ZB', ':bd<cr>', { desc = 'Close [B]uffer' })
+keymap('n', '<leader>zb', ':bd<cr>', { desc = '[B]uffer' })
 
 -- Spelling correction
 keymap('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { noremap = true, silent = true })

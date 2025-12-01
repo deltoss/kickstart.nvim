@@ -74,7 +74,7 @@ return {
         --  Most Language Servers support renaming across files, etc.
         map('<leader>rr', '<cmd>Lspsaga rename<cr>', '[R]ename')
 
-        map('<leader>ol', '<cmd>Lspsaga outline<cr>', '[O]utline ([L]spSaga)')
+        map('<leader>ol', '<cmd>Lspsaga outline<cr>', '[L]spSaga')
 
         -- Peek documentation
         map('k', '<cmd>Lspsaga hover_doc<cr>', 'Pee[k] Documentation')
