@@ -12,11 +12,11 @@ return {
   },
   keys = {
     {
-      '<leader>un',
+      '<leader>zn',
       function()
         Snacks.notifier.hide()
       end,
-      desc = 'Dismiss All Notifications',
+      desc = '[N]otifications',
     },
   },
 }

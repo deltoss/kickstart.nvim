@@ -15,7 +15,7 @@ return {
     {
       '<leader>oa',
       '<cmd>AerialToggle!<CR>',
-      desc = '[O]utline ([A]erial)',
+      desc = '[A]erial',
     },
   },
 }

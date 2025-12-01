@@ -6,7 +6,7 @@ local function build()
   vim.cmd 'make!' -- ! to skip saving the buffer
   vim.cmd 'cwindow'
 end
-vim.keymap.set('n', '<leader>n', function()
+vim.keymap.set('n', '<leader>N', function()
   local pickers = require 'telescope.pickers'
   local finders = require 'telescope.finders'
   local conf = require('telescope.config').values

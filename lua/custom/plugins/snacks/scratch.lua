@@ -8,14 +8,14 @@ return {
   },
   keys = {
     {
-      '<leader>Nn',
+      '<leader>nn',
       function()
         Snacks.scratch()
       end,
       desc = 'Toggle Buffer',
     },
     {
-      '<leader>Ns',
+      '<leader>ns',
       function()
         Snacks.scratch.select()
       end,
