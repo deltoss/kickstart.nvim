@@ -90,7 +90,7 @@ return {
     },
     {
       '<leader>acC',
-      '<cmd>CodeCompanionCmd ',
+      ':CodeCompanionCmd ',
       desc = 'Neovim [C]ommands',
     },
     {
