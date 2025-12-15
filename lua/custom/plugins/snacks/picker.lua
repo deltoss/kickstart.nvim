@@ -24,7 +24,14 @@ return {
       function()
         Snacks.picker.help()
       end,
-      desc = 'Help Pages',
+      desc = '[H]elp Pages',
+    },
+    {
+      '<leader>sH',
+      function()
+        Snacks.picker.highlights()
+      end,
+      desc = '[H]ighlights',
     },
     {
       '<leader>sN',
