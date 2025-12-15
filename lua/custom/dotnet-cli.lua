@@ -39,7 +39,7 @@ vim.keymap.set('n', '<leader>N', function()
     },
     format = function(item, picker)
       return {
-        { item.text, '' }, -- Searchable field
+        { item.text, 'Bold' }, -- Searchable field
         -- Display-only metadata
         { '  ' .. item.desc .. '', 'Comment', virtual = true },
       }
