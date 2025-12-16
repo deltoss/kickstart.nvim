@@ -33,7 +33,7 @@ return {
             desc = '󰂺 Projects',
             group = 'DiagnosticHint',
             action = function()
-              require('telescope').extensions.projects.projects()
+              Snacks.picker.projects()
             end,
             key = 'p',
           },
@@ -41,7 +41,7 @@ return {
             desc = '󰂺 Neovim Configs',
             group = 'DiagnosticHint',
             action = function()
-              require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' }
+              Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
             end,
             key = 'c',
           },
