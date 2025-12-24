@@ -150,18 +150,18 @@ return {
       desc = '[I]cons',
     },
     {
-      '<leader>sn',
+      '<leader>sc',
       function()
         Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
       end,
-      desc = '[N]eovim Files',
+      desc = '[C]onfigs',
     },
     {
-      '<leader>so',
+      '<leader>sn',
       function()
         Snacks.picker.files { cwd = vim.fn.expand '~/Documents/Note Taking/Zettelkasten/' }
       end,
-      desc = '[O]bsidian Files',
+      desc = '[N]otes',
     },
     {
       '<leader>sT',
