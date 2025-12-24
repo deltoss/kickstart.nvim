@@ -1,6 +1,5 @@
 return {
   'obsidian-nvim/obsidian.nvim',
-  version = 'v3.11.0',
   lazy = true,
   ft = { 'markdown', 'codecompanion' },
   opts = {
@@ -51,7 +50,9 @@ return {
         },
       },
     },
-    disable_frontmatter = true,
+    frontmatter = {
+      enabled = false,
+    },
     completion = {
       -- Enables completion using nvim_cmp
       nvim_cmp = false,
@@ -76,20 +77,20 @@ return {
     end,
   },
   keys = {
-    { '<leader>Otn', '<cmd>Obsidian new_from_template<cr>', desc = '[N]ew Note' },
-    { '<leader>Oti', '<cmd>Obsidian template<cr>', desc = '[I]nsert to Current Note' },
+    { '<leader>ntn', '<cmd>Obsidian new_from_template<cr>', desc = '[N]ew Note' },
+    { '<leader>nti', '<cmd>Obsidian template<cr>', desc = '[I]nsert to Current Note' },
 
-    { '<leader>On', '<cmd>Obsidian new<cr>', desc = '[N]ew Note' },
-    { '<leader>Oc', '<cmd>Obsidian toc<cr>', desc = 'Show Table of [C]ontents' },
+    { '<leader>nn', '<cmd>Obsidian new<cr>', desc = '[N]ew Note' },
+    { '<leader>nc', '<cmd>Obsidian toc<cr>', desc = 'Show Table of [C]ontents' },
 
-    { '<leader>Os', '<cmd>Obsidian quick_switch<cr>', desc = '[S]earch Notes' },
-    { '<leader>Of', '<cmd>Obsidian search<cr>', desc = '[F]ind Notes' },
-    { '<leader>Od', '<cmd>Obsidian today<cr>', desc = '[D]aily Note' },
+    { '<leader>ns', '<cmd>Obsidian quick_switch<cr>', desc = '[S]earch Notes' },
+    { '<leader>nf', '<cmd>Obsidian search<cr>', desc = '[F]ind Notes' },
+    { '<leader>nd', '<cmd>Obsidian today<cr>', desc = '[D]aily Note' },
 
     -- HACK: To insert a link in normal mode, when ':Obsidian link'
     -- command was only designed for visual mode
     {
-      '<leader>Ol',
+      '<leader>nl',
       function()
         local query = vim.fn.input 'Search query (empty for all): '
         vim.cmd [[normal! a ]] -- Adds a space to insert the link into
@@ -99,26 +100,27 @@ return {
       desc = '[L]ink to Existing Note',
     },
 
-    { '<leader>Op', '<cmd>Obsidian links<cr>', desc = '[P]review Links' },
-    { '<leader>Ob', '<cmd>Obsidian backlinks<cr>', desc = 'Show [B]acklinks' },
-    { '<leader>Og', '<cmd>Obsidian follow_link<cr>', desc = '[G]o to Link' },
-    { '<leader>O<Right>', '<cmd>Obsidian follow_link vsplit<cr>', desc = 'Open Link [Right]' },
-    { '<leader>O<Down>', '<cmd>Obsidian follow_link hsplit<cr>', desc = 'Open Link [Down]' },
+    { '<leader>np', '<cmd>Obsidian links<cr>', desc = '[P]review Links' },
+    { '<leader>nb', '<cmd>Obsidian backlinks<cr>', desc = 'Show [B]acklinks' },
+    { 'gf', '<cmd>Obsidian follow_link<cr>', desc = '[G]o to Link' },
+    { '<leader>ng', '<cmd>Obsidian follow_link<cr>', desc = '[G]o to Link' },
+    { '<leader>n<Right>', '<cmd>Obsidian follow_link vsplit<cr>', desc = 'Open Link [Right]' },
+    { '<leader>n<Down>', '<cmd>Obsidian follow_link hsplit<cr>', desc = 'Open Link [Down]' },
 
-    { '<leader>Oo', '<cmd>Obsidian workspace<cr>', desc = 'Switch [W]orkspace' },
+    { '<leader>no', '<cmd>Obsidian workspace<cr>', desc = 'Switch [W]orkspace' },
 
-    { '<leader>Oo', '<cmd>Obsidian open<cr>', desc = 'Open in [O]bsidian App' },
-    { '<leader>Or', '<cmd>Obsidian rename<cr>', desc = '[R]ename Note' },
-    { '<leader>Oi', '<cmd>Obsidian paste_img<cr>', desc = 'Paste [I]mage' },
+    { '<leader>no', '<cmd>Obsidian open<cr>', desc = 'Open in [O]bsidian App' },
+    { '<leader>nr', '<cmd>Obsidian rename<cr>', desc = '[R]ename Note' },
+    { '<leader>ni', '<cmd>Obsidian paste_img<cr>', desc = 'Paste [I]mage' },
 
     {
-      '<leader>Oe',
+      '<leader>ne',
       ':Obsidian extract_note<cr>',
       desc = '[E]xtract Selection to New Note',
       mode = 'x',
     },
     {
-      '<leader>Ol',
+      '<leader>nl',
       function()
         local query = vim.fn.input 'Search query (empty for all): '
         vim.cmd 'normal! gv'
@@ -128,7 +130,7 @@ return {
       mode = 'x',
     },
     {
-      '<leader>On',
+      '<leader>nn',
       ':Obsidian link_new<cr>',
       desc = 'Link Selection to [N]ew Note',
       mode = 'x',
