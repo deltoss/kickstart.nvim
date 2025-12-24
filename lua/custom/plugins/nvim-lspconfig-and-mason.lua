@@ -28,6 +28,34 @@ return {
     'saghen/blink.cmp',
   },
   config = function()
+    local function is_lsp_attached_for_current_buffer()
+      return not vim.tbl_isempty(vim.lsp.get_clients { bufnr = 0 })
+    end
+
+    vim.keymap.set('n', '<leader>o', function()
+      if is_lsp_attached_for_current_buffer() then
+        vim.cmd 'Lspsaga outline'
+      else
+        vim.cmd 'AerialToggle!'
+      end
+    end, { desc = '[O]utline' })
+
+    vim.keymap.set('n', '{', function()
+      if is_lsp_attached_for_current_buffer() then
+        vim.cmd 'Lspsaga outline'
+      else
+        vim.cmd 'AerialPrev'
+      end
+    end, { desc = 'Previous Symbol' })
+
+    vim.keymap.set('n', '}', function()
+      if is_lsp_attached_for_current_buffer() then
+        vim.cmd 'Lspsaga outline'
+      else
+        vim.cmd 'AerialNext'
+      end
+    end, { desc = 'Next Symbol' })
+
     -- Brief aside: **What is LSP?**
     --
     -- LSP is an initialism you've probably heard, but might not understand what it is.
@@ -73,8 +101,6 @@ return {
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
         map('<leader>rr', '<cmd>Lspsaga rename<cr>', '[R]ename')
-
-        map('<leader>ol', '<cmd>Lspsaga outline<cr>', '[L]spSaga')
 
         -- Peek documentation
         map('k', '<cmd>Lspsaga hover_doc<cr>', 'Pee[k] Documentation')
