@@ -6,6 +6,15 @@ return {
       lightbulb = {
         enable = false,
       },
+      outline = {
+        keys = {
+          jump = '<cr>',
+          quit = '<esc>',
+          toggle_or_jump = '<C-cr>',
+        },
+        close_after_jump = true,
+        layout = 'float',
+      },
     }
   end,
   dependencies = {

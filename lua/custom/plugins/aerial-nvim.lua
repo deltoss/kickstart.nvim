@@ -5,7 +5,9 @@ return {
     'nvim-tree/nvim-web-devicons',
     'folke/snacks.nvim',
   },
-  opts = {},
+  opts = {
+    filter_kind = false,
+  },
   keys = {
     {
       '<leader>so',
@@ -13,21 +15,6 @@ return {
         require('aerial').snacks_picker()
       end,
       desc = '[O]utline (Aerial)',
-    },
-    {
-      '{',
-      '<cmd>AerialPrev<CR><cmd>AerialOpen!<CR>',
-      desc = 'Previous Symbol (Aerial)',
-    },
-    {
-      '}',
-      '<cmd>AerialNext<CR><cmd>AerialOpen!<CR>',
-      desc = 'Next Symbol (Aerial)',
-    },
-    {
-      '<leader>oa',
-      '<cmd>AerialToggle!<CR>',
-      desc = '[A]erial',
     },
   },
 }
