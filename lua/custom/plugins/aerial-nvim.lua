@@ -3,15 +3,27 @@ return {
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
     'nvim-tree/nvim-web-devicons',
+    'folke/snacks.nvim',
   },
-  opts = {
-    on_attach = function(bufnr)
-      -- Jump forwards/backwards with '{' and '}'
-      vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', { buffer = bufnr })
-      vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
-    end,
-  },
+  opts = {},
   keys = {
+    {
+      '<leader>so',
+      function()
+        require('aerial').snacks_picker()
+      end,
+      desc = '[O]utline (Aerial)',
+    },
+    {
+      '{',
+      '<cmd>AerialPrev<CR><cmd>AerialOpen!<CR>',
+      desc = 'Previous Symbol (Aerial)',
+    },
+    {
+      '}',
+      '<cmd>AerialNext<CR><cmd>AerialOpen!<CR>',
+      desc = 'Next Symbol (Aerial)',
+    },
     {
       '<leader>oa',
       '<cmd>AerialToggle!<CR>',
