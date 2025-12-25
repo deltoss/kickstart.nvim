@@ -36,7 +36,7 @@ return {
       if is_lsp_attached_for_current_buffer() then
         vim.cmd 'Lspsaga outline'
       else
-        vim.cmd 'AerialToggle!'
+        require('aerial').toggle()
       end
     end, { desc = '[O]utline' })
 
@@ -44,7 +44,7 @@ return {
       if is_lsp_attached_for_current_buffer() then
         vim.cmd 'Lspsaga outline'
       else
-        vim.cmd 'AerialPrev'
+        require('aerial').prev()
       end
     end, { desc = 'Previous Symbol' })
 
@@ -52,7 +52,7 @@ return {
       if is_lsp_attached_for_current_buffer() then
         vim.cmd 'Lspsaga outline'
       else
-        vim.cmd 'AerialNext'
+        require('aerial').next()
       end
     end, { desc = 'Next Symbol' })
 
