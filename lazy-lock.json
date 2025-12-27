@@ -63,6 +63,7 @@
   "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },
   "vim-be-good": { "branch": "master", "commit": "0ae3de14eb8efc6effe7704b5e46495e91931cc5" },
   "vim-wordy": { "branch": "master", "commit": "590927f57277666e032702b26e4e0c82717cc3cb" },
+  "vscode-diff.nvim": { "branch": "main", "commit": "f2c6907410161f430e3301fb170fd1d2094174aa" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
   "yazi.nvim": { "branch": "main", "commit": "d666962582840f889161109cf970d311c7a447d0" }
 }

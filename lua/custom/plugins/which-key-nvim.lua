@@ -49,6 +49,7 @@ return {
       { '<leader>n', group = '[N]otes' },
       { '<leader>nt', group = '+[T]emplates' },
       { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
+      { '<leader>gd', group = '+[D]iffs', mode = { 'n', 'v' } },
       { '<leader>gh', group = '+[H]unks', mode = { 'n', 'v' } },
       { '<leader>gH', group = '+Git[H]ub', mode = { 'n', 'v' } },
       { '<leader>gv', group = '+Diff[v]iew', mode = { 'n', 'v' } },
