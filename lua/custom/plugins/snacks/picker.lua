@@ -193,11 +193,11 @@ return {
       desc = 'Git [S]tatus',
     },
     {
-      '<leader>gd',
+      '<leader>gdh',
       function()
         Snacks.picker.git_diff()
       end,
-      desc = 'Git [D]iff (Hunks)',
+      desc = '[H]unks',
     },
     {
       '<leader>gl',
