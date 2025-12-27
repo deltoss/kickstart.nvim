@@ -20,7 +20,9 @@ return {
           {
             desc = ' Zoxide',
             group = 'DiagnosticHint',
-            action = 'Telescope zoxide list',
+            action = function()
+              Snacks.picker.zoxide()
+            end,
             key = 'z',
           },
           {

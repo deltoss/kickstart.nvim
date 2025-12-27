@@ -20,6 +20,13 @@ return {
       desc = 'Opened Buffers',
     },
     {
+      '<leader>sz',
+      function()
+        Snacks.picker.zoxide()
+      end,
+      desc = '[Z]oxide',
+    },
+    {
       '<leader>sh',
       function()
         Snacks.picker.help()
