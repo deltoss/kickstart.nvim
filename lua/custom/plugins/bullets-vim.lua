@@ -10,8 +10,8 @@ return {
     -- Normal mode mappings
     { 'o', '<Plug>(bullets-newline)', desc = 'Bullets newline' },
     { 'gN', '<Plug>(bullets-renumber)', desc = 'Renumber bullets' },
-    { '>>', '<Plug>(bullets-demote)', desc = 'Demote bullet' },
-    { '<<', '<Plug>(bullets-promote)', desc = 'Promote bullet' },
+    -- { '>>', '<Plug>(bullets-demote)', desc = 'Demote bullet' },
+    -- { '<<', '<Plug>(bullets-promote)', desc = 'Promote bullet' },
 
     -- Visual mode mappings
     { 'gN', '<Plug>(bullets-renumber)', mode = 'v', desc = 'Renumber bullets' },

@@ -82,8 +82,8 @@ keymap('i', '<C-d>', '<C-o>dw', { noremap = true, desc = 'Delete the next word' 
 keymap('i', '<C-k>', '<C-o>D', { noremap = true, desc = 'Delete to end of line' })
 
 -- Buffer operations
-keymap('n', '+', ':bn<CR>', { noremap = true, silent = true })
-keymap('n', '_', ':bp<CR>', { noremap = true, silent = true })
+keymap('n', '<', ':bn<CR>', { noremap = true, silent = true })
+keymap('n', '>', ':bp<CR>', { noremap = true, silent = true })
 
 -- Window operations
 keymap('n', '<leader><Up>', ':split<CR>', { desc = 'Horizontal split (above)' })
@@ -92,22 +92,9 @@ keymap('n', '<leader><Left>', ':vsplit<CR>', { desc = 'Vertical split (left)' })
 keymap('n', '<leader><Right>', ':vsplit<CR>', { desc = 'Vertical split (right)' })
 
 -- Tab operations
-keymap('n', '<leader>tt', ':tabnew<CR>', { desc = 'New' })
-keymap('n', '<leader>tn', ':tabnew<CR>', { desc = '[N]ew' })
-keymap('n', '<leader>ta', ':tabnew<CR>', { desc = '[A]dd' })
-keymap('n', '<leader>tf', ':tabf **<Left>', { desc = '[F]ind' })
-keymap('n', '<leader>to', ':tabprev<CR>', { desc = 'Previous' })
-keymap('n', '<leader>tp', ':tabprev<CR>', { desc = '[P]revious' })
-keymap('n', '<leader>t<Left>', ':tabprev<CR>', { desc = 'Left' })
-keymap('n', '<leader>tu', ':tabnext<CR>', { desc = 'Next' })
-keymap('n', '<leader>tn', ':tabnext<CR>', { desc = '[N]ext' })
-keymap('n', '<leader>t<Right>', ':tabnext<CR>', { desc = 'Right' })
-keymap('n', '<leader>tm', ':tabmove ', { desc = '[M]ove' })
-keymap('n', '<leader>tc', ':tabclose<CR>', { desc = '[C]lose' })
-keymap('n', '<leader>tx', ':tabclose<CR>', { desc = 'E[x]it' })
-keymap('n', '<leader>tq', ':tabclose<CR>', { desc = '[Q]uit' })
-keymap('n', '<leader>td', ':tabdo ', { desc = '[D]o' })
-keymap('n', '<leader>ts', ':tabdo %s///g<Left><Left><Left>', { desc = '[S]ubstitution' })
+keymap('n', '<', ':tabprev<CR>', { desc = 'Previous' })
+keymap('n', '>', ':tabnext<CR>', { desc = 'Next' })
+keymap('n', '<C-t>', ':tabnew<CR>', { desc = 'New' })
 
 -- Delete without yanking
 keymap({ 'n', 'v' }, '<leader>d', '"_d', { noremap = true })
@@ -202,3 +189,11 @@ keymap('v', '<C-c>', 'c', { noremap = true })
 keymap('n', '<leader>Ls', '<cmd>source %<CR>', { desc = '[S]ource Current File' })
 keymap('n', '<leader>Lx', ':.lua<CR>', { desc = 'E[x]ecute Line' })
 keymap('v', '<leader>Lx', ':lua<CR>', { desc = 'E[x]ecute' })
+
+-- Copy file paths
+keymap('n', '<leader>yp', ":let @+=expand('%:.')<cr>", { desc = 'Copy relative path' })
+keymap('n', '<leader>yP', ':let @+=@%<cr>', { desc = 'Copy absolute path' })
+keymap('n', '<leader>yp', ":let @+=expand('%:.:h')<cr>", { desc = 'Copy relative directory path' })
+keymap('n', '<leader>yP', ":let @+=expand('%:p:h')<cr>", { desc = 'Copy absolute directory path' })
+keymap('n', '<leader>yn', ":let @+=expand('%:t:r')<cr>", { desc = 'Copy filename' })
+keymap('n', '<leader>yf', ":let @+=expand('%:t')<cr>", { desc = 'Copy filename with extension' })
