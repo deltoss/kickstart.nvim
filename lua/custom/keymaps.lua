@@ -106,38 +106,36 @@ keymap({ 'n', 'v' }, '<leader>X', '"_X', { noremap = true })
 keymap('n', '<leader>c', '"_c', { noremap = true })
 keymap('v', '<leader>c', '"_c', { noremap = true })
 
-vim.keymap.set('n', '<leader>~', ':cd %:p:h<CR>', { noremap = true, silent = true, desc = 'Change CWD to Current' })
-
 -- Copying paths to clipboards
 local function copyFileName()
   local path = vim.fn.expand '%:t'
   vim.fn.setreg('+', path) -- write to clipboard
 end
-vim.keymap.set('n', '<leader>pf', copyFileName, { noremap = true, silent = true, desc = 'Copy [F]ile Name' })
+keymap('n', '<leader>pf', copyFileName, { noremap = true, silent = true, desc = 'Copy [F]ile Name' })
 
 local function copyFullPath()
   local path = vim.fn.expand '%:p'
   vim.fn.setreg('+', path) -- write to clipboard
 end
-vim.keymap.set('n', '<leader>pa', copyFullPath, { noremap = true, silent = true, desc = 'Copy [A]bsolute Path' })
+keymap('n', '<leader>pa', copyFullPath, { noremap = true, silent = true, desc = 'Copy [A]bsolute Path' })
 
 local function copyRelativePath()
   local path = vim.fn.expand '%'
   vim.fn.setreg('+', path) -- write to clipboard
 end
-vim.keymap.set('n', '<leader>pr', copyRelativePath, { noremap = true, silent = true, desc = 'Copy [R]elative Path' })
+keymap('n', '<leader>pr', copyRelativePath, { noremap = true, silent = true, desc = 'Copy [R]elative Path' })
 
 local function copyDirectoryPath()
   local path = vim.fn.expand '%:h'
   vim.fn.setreg('+', path) -- write to clipboard
 end
-vim.keymap.set('n', '<leader>pd', copyDirectoryPath, { noremap = true, silent = true, desc = 'Copy [D]irectory Path' })
+keymap('n', '<leader>pd', copyDirectoryPath, { noremap = true, silent = true, desc = 'Copy [D]irectory Path' })
 
 local function copyLineNumber()
   local lineNumber = vim.fn.expand '%' .. ':' .. vim.fn.line '.'
   vim.fn.setreg('+', lineNumber) -- write to clipboard
 end
-vim.keymap.set('n', '<leader>pl', copyLineNumber, { noremap = true, silent = true, desc = 'Copy [L]ine Number' })
+keymap('n', '<leader>pl', copyLineNumber, { noremap = true, silent = true, desc = 'Copy [L]ine Number' })
 
 local function copyVSLaunchCommand()
   local path = vim.fn.expand '%:p'
@@ -145,7 +143,7 @@ local function copyVSLaunchCommand()
   local command = 'devenv /edit "' .. path .. '" /command "edit.goto ' .. lineNumber .. '"'
   vim.fn.setreg('+', command) -- write to clipboard
 end
-vim.keymap.set('n', '<leader>pv', copyVSLaunchCommand, { noremap = true, silent = true, desc = 'Copy [V]isual Studio Launch Command' })
+keymap('n', '<leader>pv', copyVSLaunchCommand, { noremap = true, silent = true, desc = 'Copy [V]isual Studio Launch Command' })
 
 -- Help
 keymap('n', 'k', vim.lsp.buf.hover, { noremap = true })
@@ -158,8 +156,8 @@ keymap('i', '<C-k>', function()
 end, { noremap = true }) -- Note this is overwritten by blink.cmp by default
 
 -- Code actions
-vim.keymap.set({ 'n', 'v' }, '<leader>.', vim.lsp.buf.code_action, { desc = 'Code actions' })
-vim.keymap.set({ 'n', 'v' }, '<C-.>', vim.lsp.buf.code_action, { desc = 'Code actions' })
+keymap({ 'n', 'v' }, '<leader>.', vim.lsp.buf.code_action, { desc = 'Code actions' })
+keymap({ 'n', 'v' }, '<C-.>', vim.lsp.buf.code_action, { desc = 'Code actions' })
 
 -- Replace currently selected text with default register without yanking it
 keymap('v', '<leader>p', '"_dP', { noremap = true })
