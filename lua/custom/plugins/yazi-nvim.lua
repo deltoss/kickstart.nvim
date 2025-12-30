@@ -9,18 +9,18 @@ return {
   keys = {
     {
       -- Open in the current working directory
-      '-',
+      '_',
       '<cmd>Yazi cwd<cr>',
       desc = "Open the file manager in nvim's working directory",
     },
     {
-      '<leader>-',
+      '-',
       mode = { 'n', 'v' },
       '<cmd>Yazi<cr>',
       desc = 'Open yazi at the current file',
     },
     {
-      '<leader>_',
+      '<leader>-',
       '<cmd>Yazi toggle<cr>',
       desc = 'Resume the last yazi session',
     },
@@ -28,7 +28,7 @@ return {
   ---@type YaziConfig | {}
   opts = {
     open_for_directories = true,
-    change_neovim_cwd_on_close = true,
+    change_neovim_cwd_on_close = false,
     keymaps = {
       show_help = '<f2>',
       open_file_in_vertical_split = '<c-Right>',
