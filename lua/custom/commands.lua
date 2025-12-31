@@ -1,7 +1,7 @@
 local current_git_root = nil
 
 local function get_git_root(dir)
-  local root = vim.fn.systemlist('git -C ' .. vim.fn.fnameescape(dir) .. ' rev-parse --show-toplevel')[1]
+  local root = vim.fn.systemlist('git -C ' .. dir .. ' rev-parse --show-toplevel')[1]
   if vim.v.shell_error == 0 and root ~= '' then
     return root
   end
