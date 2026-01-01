@@ -146,11 +146,11 @@ return {
     {
       '<leader>gds',
       function()
+        local query = ''
         local mode = vim.fn.mode()
         if mode == 'v' or mode == 'V' or mode == '\22' then
           vim.cmd 'normal! y'
-          local text = vim.fn.getreg '"'
-          query = text
+          query = vim.fn.getreg '"'
         end
         git_pickaxe { global = false, query = query }
       end,
@@ -160,11 +160,11 @@ return {
     {
       '<leader>gdS',
       function()
+        local query = ''
         local mode = vim.fn.mode()
         if mode == 'v' or mode == 'V' or mode == '\22' then
           vim.cmd 'normal! y'
-          local text = vim.fn.getreg '"'
-          query = text
+          query = vim.fn.getreg '"'
         end
         git_pickaxe { global = true, query = query }
       end,
