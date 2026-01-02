@@ -1,5 +1,17 @@
 local keymap = vim.keymap.set
 
+local function isInWezterm()
+  if vim.fn.getenv 'TERM_PROGRAM' == 'WezTerm' then
+    return true
+  else
+    return false
+  end
+end
+
+if isInWezterm() == false then
+  return
+end
+
 keymap('n', '<leader>w<Up>', function()
   local cwd = vim.fn.getcwd()
   vim.fn.jobstart({ 'wezterm', 'cli', 'split-pane', '--top', '--percent', '30', '--cwd', cwd }, { detach = true })
