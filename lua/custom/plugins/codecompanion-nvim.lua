@@ -51,6 +51,14 @@ return {
       mode = { 'v' },
     },
     {
+      '<leader>acm',
+      function()
+        require('codecompanion').prompt 'commit'
+      end,
+      desc = 'Commit [M]essage',
+      mode = { 'n', 'v' },
+    },
+    {
       '<leader>ace',
       function()
         require('codecompanion').prompt 'explain'
