@@ -106,45 +106,6 @@ keymap({ 'n', 'v' }, '<leader>X', '"_X', { noremap = true })
 keymap('n', '<leader>c', '"_c', { noremap = true })
 keymap('v', '<leader>c', '"_c', { noremap = true })
 
--- Copying paths to clipboards
-local function copyFileName()
-  local path = vim.fn.expand '%:t'
-  vim.fn.setreg('+', path) -- write to clipboard
-end
-keymap('n', '<leader>pf', copyFileName, { noremap = true, silent = true, desc = 'Copy [F]ile Name' })
-
-local function copyFullPath()
-  local path = vim.fn.expand '%:p'
-  vim.fn.setreg('+', path) -- write to clipboard
-end
-keymap('n', '<leader>pa', copyFullPath, { noremap = true, silent = true, desc = 'Copy [A]bsolute Path' })
-
-local function copyRelativePath()
-  local path = vim.fn.expand '%'
-  vim.fn.setreg('+', path) -- write to clipboard
-end
-keymap('n', '<leader>pr', copyRelativePath, { noremap = true, silent = true, desc = 'Copy [R]elative Path' })
-
-local function copyDirectoryPath()
-  local path = vim.fn.expand '%:h'
-  vim.fn.setreg('+', path) -- write to clipboard
-end
-keymap('n', '<leader>pd', copyDirectoryPath, { noremap = true, silent = true, desc = 'Copy [D]irectory Path' })
-
-local function copyLineNumber()
-  local lineNumber = vim.fn.expand '%' .. ':' .. vim.fn.line '.'
-  vim.fn.setreg('+', lineNumber) -- write to clipboard
-end
-keymap('n', '<leader>pl', copyLineNumber, { noremap = true, silent = true, desc = 'Copy [L]ine Number' })
-
-local function copyVSLaunchCommand()
-  local path = vim.fn.expand '%:p'
-  local lineNumber = vim.fn.line '.'
-  local command = 'devenv /edit "' .. path .. '" /command "edit.goto ' .. lineNumber .. '"'
-  vim.fn.setreg('+', command) -- write to clipboard
-end
-keymap('n', '<leader>pv', copyVSLaunchCommand, { noremap = true, silent = true, desc = 'Copy [V]isual Studio Launch Command' })
-
 -- Help
 keymap('n', 'k', vim.lsp.buf.hover, { noremap = true })
 keymap('n', 'K', function()
