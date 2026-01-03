@@ -23,6 +23,7 @@ return {
       'vimdoc',
       'c_sharp',
       'powershell',
+      'nu',
       'regex',
       'typescript',
       'sql',
