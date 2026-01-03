@@ -64,7 +64,6 @@ return {
       { '<leader>r', group = '[R]eplace' },
       { '<leader>k', group = 'Pee[k]' },
       { '<leader>z', group = 'Close' },
-      { '<leader>p', group = '[P]aths', mode = { 'n', 'v' } },
       { '<leader>P', group = '[P]aste', mode = { 'n', 'v' } },
       { '<leader><leader>', group = 'Extended Commands' },
       { '<leader><leader>s', group = '[S]urround' },
