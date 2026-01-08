@@ -1,6 +1,6 @@
 -- Disable auto formatting on save by default
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { "*" },
+  pattern = { '*' },
   callback = function()
     vim.b.disable_autoformat = true
   end,
@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- Enable auto formatting on save for certain file types
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { "lua", "ps1", "dosbatch", "winbatch", "nu", "javascript" },
+  pattern = { 'lua', 'ps1', 'dosbatch', 'winbatch', 'nu', 'javascript' },
   callback = function()
     vim.b.disable_autoformat = false
   end,
@@ -32,6 +32,40 @@ end, {
   desc = 'Re-enable autoformat-on-save',
 })
 
+-- Helper to run external formatter tools
+local function run_formatter(cmd, tool)
+  if vim.fn.executable(tool) == 0 then
+    vim.notify(tool .. ' is not installed or not in PATH', vim.log.levels.ERROR)
+    return
+  end
+
+  if mode == 'v' or mode == 'V' then
+    vim.cmd("'<,'>!" .. cmd)
+  else
+    vim.cmd('%!' .. cmd)
+  end
+end
+
+local function format()
+  local ft = vim.bo.filetype
+  local filename = vim.fn.expand '%:t'
+  local mode = vim.fn.mode()
+
+  local is_xml = ft == 'xml' or filename:match '%.xml$'
+  local is_json = ft == 'json' or filename:match '%.json$'
+  local is_yaml = ft == 'yaml' or ft == 'yml' or filename:match '%.ya?ml$'
+
+  if is_xml then
+    run_formatter('yq -p xml -o xml', 'yq')
+  elseif is_json then
+    run_formatter('jq .', 'jq')
+  elseif is_yaml then
+    run_formatter('yq -p yaml -o yaml', 'yq')
+  else
+    require('conform').format { async = true, lsp_format = 'fallback' }
+  end
+end
+
 return {
   'stevearc/conform.nvim',
   event = { 'BufWritePre' },
@@ -39,9 +73,7 @@ return {
   keys = {
     {
       '<leader>f',
-      function()
-        require('conform').format { async = true, lsp_format = 'fallback' }
-      end,
+      format,
       mode = '',
       desc = '[F]ormat buffer',
     },
