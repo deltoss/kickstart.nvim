@@ -106,7 +106,7 @@ local function git_pickaxe(opts)
 end
 
 return {
-  'esmuellert/vscode-diff.nvim',
+  'esmuellert/codediff.nvim',
   dependencies = {
     'MunifTanjim/nui.nvim',
     'folke/snacks.nvim',
