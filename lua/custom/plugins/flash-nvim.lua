@@ -22,7 +22,7 @@ return {
         'cmp_menu',
         'noice',
         'flash_prompt',
-        'blink-cmp-menu',
+        'blink-cmp-menu', -- Can remove this entire exclude setting once this PR gets merged & released -> https://github.com/folke/flash.nvim/pull/437
         function(win)
           return not vim.api.nvim_win_get_config(win).focusable
         end,
