@@ -4,7 +4,7 @@ return {
   ---@type Flash.Config
   opts = {
     -- labels = "abcdefghijklmnopqrstuvwxyz",
-    labels = 'haeifouypjk',
+    labels = '0123456789',
     search = {
       ---@type Flash.Pattern.Mode
       -- Each mode will take ignorecase and smartcase into account.
@@ -17,6 +17,16 @@ return {
       --     return "\\<" .. str
       --   end,
       mode = 'fuzzy',
+      exclude = {
+        'notify',
+        'cmp_menu',
+        'noice',
+        'flash_prompt',
+        'blink-cmp-menu',
+        function(win)
+          return not vim.api.nvim_win_get_config(win).focusable
+        end,
+      },
     },
     label = {
       -- allow uppercase labels
@@ -38,7 +48,7 @@ return {
       -- options used for treesitter selections
       -- `require("flash").treesitter()`
       treesitter = {
-        labels = 'haeifouypjk',
+        labels = '0123456789',
       },
     },
   },
