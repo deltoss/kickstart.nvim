@@ -19,7 +19,7 @@ return {
             template = nil,
           },
           attachments = {
-            img_folder = 'Zettelkasten/Assets',
+            folder = 'Zettelkasten/Assets',
           },
           templates = {
             folder = '.obsidian-nvim/templates',
