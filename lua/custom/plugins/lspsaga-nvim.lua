@@ -13,7 +13,6 @@ return {
           toggle_or_jump = '<C-cr>',
         },
         close_after_jump = true,
-        layout = 'float',
       },
     }
   end,

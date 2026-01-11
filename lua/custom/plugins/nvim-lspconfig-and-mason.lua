@@ -40,22 +40,6 @@ return {
       end
     end, { desc = '[O]utline' })
 
-    vim.keymap.set('n', '{', function()
-      if is_lsp_attached_for_current_buffer() then
-        vim.cmd 'Lspsaga outline'
-      else
-        require('aerial').prev()
-      end
-    end, { desc = 'Previous Symbol' })
-
-    vim.keymap.set('n', '}', function()
-      if is_lsp_attached_for_current_buffer() then
-        vim.cmd 'Lspsaga outline'
-      else
-        require('aerial').next()
-      end
-    end, { desc = 'Next Symbol' })
-
     -- Brief aside: **What is LSP?**
     --
     -- LSP is an initialism you've probably heard, but might not understand what it is.
