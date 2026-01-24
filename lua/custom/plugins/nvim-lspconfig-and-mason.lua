@@ -323,6 +323,10 @@ return {
       },
     }
 
+    -- Nushell LSP is from the CLI itself. See https://github.com/mason-org/mason-lspconfig.nvim/issues/553
+    -- We only use lspconfig & not mason to manage the lsp, as there is no separate lsp package to install currently.
+    vim.lsp.enable 'nushell'
+
     vim.lsp.config('roslyn', {
       settings = {
         ['csharp|inlay_hints'] = {
