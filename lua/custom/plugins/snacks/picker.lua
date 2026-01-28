@@ -41,18 +41,11 @@ return {
       desc = '[H]ighlights',
     },
     {
-      '<leader>sN',
+      '<leader>sm',
       function()
         Snacks.picker.notifications()
       end,
-      desc = '[N]otifications',
-    },
-    {
-      '<leader>en',
-      function()
-        Snacks.picker.notifications()
-      end,
-      desc = '[E]rror Notifications',
+      desc = '[M]essages',
     },
     {
       '<leader>sC',
