@@ -303,6 +303,7 @@ return {
       'templ',
       'xmlformatter',
       'yamlfmt',
+      'yaml-language-server',
       'yq',
       'powershell-editor-services',
     })
