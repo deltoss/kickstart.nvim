@@ -27,7 +27,16 @@ local function set_cwd_to_git_root()
 end
 
 vim.api.nvim_create_autocmd('BufReadPost', {
-  callback = set_cwd_to_git_root,
+  callback = function(event)
+    local win = vim.api.nvim_get_current_win()
+    local config = vim.api.nvim_win_get_config(win)
+    local buftype = vim.bo[event.buf].buftype
+
+    -- Only for main buffers
+    if config.relative == '' and buftype == '' and vim.bo[event.buf].buflisted then
+      set_cwd_to_git_root()
+    end
+  end,
 })
 
 -- User command to manually set cwd to git root
