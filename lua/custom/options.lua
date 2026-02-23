@@ -38,7 +38,7 @@ opt.diffopt = {
   'vertical', -- Use vertical splits for diffs
   'iwhiteall', -- Ignore all whitespace
   'indent-heuristic', -- Better diff alignment
-  'algorithm:patience', -- Good diff algorithm
+  'algorithm:histogram', -- Good diff algorithm
   'closeoff', -- Close diff when one window closes
   'internal', -- Use internal diff library
   'context:10', -- Show more context lines
