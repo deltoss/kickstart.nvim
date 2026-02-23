@@ -39,7 +39,6 @@ opt.diffopt = {
   'iwhiteall', -- Ignore all whitespace
   'indent-heuristic', -- Better diff alignment
   'algorithm:patience', -- Good diff algorithm
-  'inline:word',
   'closeoff', -- Close diff when one window closes
   'internal', -- Use internal diff library
   'context:10', -- Show more context lines
