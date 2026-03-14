@@ -1,5 +1,3 @@
-local current_git_root = nil
-
 local function get_git_root(dir)
   local root = vim.fn.systemlist('git -C "' .. dir .. '" rev-parse --show-toplevel')[1]
   if vim.v.shell_error == 0 and root ~= '' then
@@ -14,15 +12,10 @@ local function set_cwd_to_git_root()
   local git_root = get_git_root(file_dir)
 
   if git_root then
-    -- Only change directory if we're entering a different repo
-    if git_root ~= current_git_root then
-      current_git_root = git_root
-      vim.cmd('cd ' .. vim.fn.fnameescape(git_root))
-      print('cd → ' .. git_root)
-    end
+    vim.cmd('cd ' .. vim.fn.fnameescape(git_root))
+    print('cd → ' .. git_root)
   else
-    -- Not in a git repo
-    current_git_root = nil
+    print 'Not in a git repo'
   end
 end
 
