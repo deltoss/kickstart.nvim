@@ -264,7 +264,12 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    local mason_path = vim.fn.stdpath 'data' .. '/mason/packages/netcoredbg/netcoredbg/netcoredbg'
+    local mason_path = null
+    if vim.fn.has 'win32' == 1 then
+      mason_path = vim.fn.stdpath 'data' .. '/mason/packages/netcoredbg/netcoredbg/netcoredbg'
+    else
+      mason_path = vim.fn.stdpath 'data' .. '/mason/packages/netcoredbg'
+    end
 
     local netcoredbg_adapter = {
       type = 'executable',
