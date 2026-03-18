@@ -3,7 +3,7 @@ return {
   lazy = true,
   ft = { 'markdown', 'codecompanion' },
   opts = {
-    footer = { -- backlinks in footer as causing issues
+    footer = { -- Disable backlinks in footer as it's causing lag issues
       enabled = false,
     },
     legacy_commands = false,
@@ -12,8 +12,6 @@ return {
         name = 'Zettelkasten',
         path = '~/Documents/Note Taking',
         overrides = {
-          notes_subdir = 'Zettelkasten/Notes',
-          new_notes_location = 'notes_subdir',
           attachments = {
             folder = 'Zettelkasten/Assets',
           },
@@ -92,11 +90,13 @@ return {
     { '<leader>ntn', '<cmd>Obsidian new_from_template<cr>', desc = '[N]ew Note' },
     { '<leader>nti', '<cmd>Obsidian template<cr>', desc = '[I]nsert to Current Note' },
 
-    { '<leader>nn', '<cmd>Obsidian new<cr>', desc = '[N]ew Note' },
+    -- Don't use below. Prefer to use templates, which controls where the note gets placed
+    -- { '<leader>nn', '<cmd>Obsidian new<cr>', desc = '[N]ew Note' },
+    { '<leader>nn', '<cmd>Obsidian new_from_template<cr>', desc = '[N]ew Note' },
     { '<leader>nc', '<cmd>Obsidian toc<cr>', desc = 'Show Table of [C]ontents' },
 
     { '<leader>ns', '<cmd>Obsidian quick_switch<cr>', desc = '[S]earch Notes' },
-    { '<leader>nf', '<cmd>Obsidian search<cr>', desc = '[F]ind Notes' },
+    { '<leader>ng', '<cmd>Obsidian search<cr>', desc = '[G]rep Notes' },
     { '<leader>nd', '<cmd>Obsidian today<cr>', desc = '[D]aily Note' },
 
     -- HACK: To insert a link in normal mode, when ':Obsidian link'
@@ -115,7 +115,6 @@ return {
     { '<leader>np', '<cmd>Obsidian links<cr>', desc = '[P]review Links' },
     { '<leader>nb', '<cmd>Obsidian backlinks<cr>', desc = 'Show [B]acklinks' },
     { 'gf', '<cmd>Obsidian follow_link<cr>', desc = '[G]o to Link' },
-    { '<leader>ng', '<cmd>Obsidian follow_link<cr>', desc = '[G]o to Link' },
     { '<leader>n<Right>', '<cmd>Obsidian follow_link vsplit<cr>', desc = 'Open Link [Right]' },
     { '<leader>n<Down>', '<cmd>Obsidian follow_link hsplit<cr>', desc = 'Open Link [Down]' },
 
