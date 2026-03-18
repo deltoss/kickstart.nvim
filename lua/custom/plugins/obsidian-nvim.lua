@@ -14,15 +14,29 @@ return {
         overrides = {
           notes_subdir = 'Zettelkasten/Notes',
           new_notes_location = 'notes_subdir',
-          daily_notes = {
-            folder = 'Zettelkasten/Fleeting Notes',
-            template = nil,
-          },
           attachments = {
             folder = 'Zettelkasten/Assets',
           },
+          daily_notes = {
+            folder = 'Work-Zettelkasten/Dailies',
+            template = nil,
+          },
           templates = {
             folder = '.obsidian-nvim/templates',
+            customizations = {
+              Book = {
+                notes_subdir = 'Zettelkasten/Notes',
+              },
+              Quote = {
+                notes_subdir = 'Zettelkasten/Notes',
+              },
+              Personal_Note = {
+                notes_subdir = 'Zettelkasten/Notes',
+              },
+              Work_Note = {
+                notes_subdir = 'Work-Zettelkasten/Notes',
+              },
+            },
           },
 
           -- Modification based on inbuilt wiki link function. Adds checks for:
