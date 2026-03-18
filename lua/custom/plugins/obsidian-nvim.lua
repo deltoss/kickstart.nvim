@@ -18,6 +18,7 @@ return {
           daily_notes = {
             folder = 'Work-Zettelkasten/Dailies',
             template = nil,
+            date_format = 'YYYY-MM-DD-dddd',
           },
           templates = {
             folder = '.obsidian-nvim/templates',
