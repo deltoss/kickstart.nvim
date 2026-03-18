@@ -24,16 +24,14 @@ return {
           templates = {
             folder = '.obsidian-nvim/templates',
             customizations = {
-              Book = {
-                notes_subdir = 'Zettelkasten/Notes',
+              -- Override settings for work templates
+              Work_Project = {
+                notes_subdir = 'Work-Zettelkasten/Notes',
               },
-              Quote = {
-                notes_subdir = 'Zettelkasten/Notes',
+              Work_Concept = {
+                notes_subdir = 'Work-Zettelkasten/Notes',
               },
-              Personal_Note = {
-                notes_subdir = 'Zettelkasten/Notes',
-              },
-              Work_Note = {
+              Work_Pattern = {
                 notes_subdir = 'Work-Zettelkasten/Notes',
               },
             },
