@@ -35,29 +35,10 @@ return {
               },
             },
           },
-
-          -- Modification based on inbuilt wiki link function. Adds checks for:
-          -- * Empty string label when deciding to prepend a label.
-          -- * Label consisting only of whitespace. This is a hack for my personal use case of inserting a link to an existing note in normal mode.
-          wiki_link_func = function(opts)
-            local anchor = ''
-            local header = ''
-            if opts.anchor then
-              anchor = opts.anchor.anchor
-              header = require('obsidian.util').format_anchor_label(opts.anchor)
-            elseif opts.block then
-              anchor = '#' .. opts.block.id
-              header = '#' .. opts.block.id
-            end
-
-            if opts.id == nil then
-              return string.format('[[%s%s]]', opts.label, anchor)
-            elseif opts.label ~= '' and not opts.label:match '^%s*$' and opts.label ~= opts.id then
-              return string.format('[[%s%s|%s%s]]', opts.id, anchor, opts.label, header)
-            else
-              return string.format('[[%s%s]]', opts.id, anchor)
-            end
-          end,
+          link = {
+            style = 'wiki',
+            format = 'shortest',
+          },
         },
       },
     },
@@ -133,11 +114,7 @@ return {
     },
     {
       '<leader>nl',
-      function()
-        local query = vim.fn.input 'Search query (empty for all): '
-        vim.cmd 'normal! gv'
-        vim.cmd('Obsidian link ' .. query)
-      end,
+      ':Obsidian link<cr>',
       desc = '[L]ink Selection to Existing Note',
       mode = 'x',
     },
