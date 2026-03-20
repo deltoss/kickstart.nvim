@@ -156,3 +156,37 @@ keymap('n', '<leader>yp', ":let @+=expand('%:.:h')<cr>", { desc = 'Copy relative
 keymap('n', '<leader>yP', ":let @+=expand('%:p:h')<cr>", { desc = 'Copy absolute directory path' })
 keymap('n', '<leader>yn', ":let @+=expand('%:t:r')<cr>", { desc = 'Copy filename' })
 keymap('n', '<leader>yf', ":let @+=expand('%:t')<cr>", { desc = 'Copy filename with extension' })
+
+local function nav_file(offset)
+  local current = vim.fn.expand('%:p'):gsub('\\', '/')
+  local dir = vim.fn.expand '%:p:h'
+  local files = vim.fn.glob(dir .. '/*', false, true)
+
+  files = vim.tbl_filter(function(f)
+    return vim.fn.isdirectory(f) == 0
+  end, files)
+
+  table.sort(files)
+
+  for i, f in ipairs(files) do
+    if f:gsub('\\', '/') == current then
+      local target = files[i + offset]
+      if target then
+        vim.cmd('edit ' .. vim.fn.fnameescape(target))
+      else
+        local msg = offset > 0 and 'Already at last file' or 'Already at first file'
+        vim.notify(msg, vim.log.levels.WARN)
+      end
+      return
+    end
+  end
+
+  vim.notify('Current file not found in directory listing', vim.log.levels.WARN)
+end
+
+vim.keymap.set('n', ']n', function()
+  nav_file(1)
+end, { desc = 'Next file in dir' })
+vim.keymap.set('n', '[n', function()
+  nav_file(-1)
+end, { desc = 'Prev file in dir' })
