@@ -25,7 +25,6 @@ vim.api.nvim_create_user_command('CDgit', function()
   local git_root = get_git_root(file_dir)
 
   if git_root then
-    current_git_root = git_root
     vim.cmd('cd ' .. vim.fn.fnameescape(git_root))
     print('cd → ' .. git_root)
   else
