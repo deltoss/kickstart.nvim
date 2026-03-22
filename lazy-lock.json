@@ -52,6 +52,7 @@
   "quicker.nvim": { "branch": "master", "commit": "fc041830fa7cf093786b0d5990d99cf3c7b0c129" },
   "ramboe-dotnet-utils": { "branch": "main", "commit": "051ed455e797853b548f857f895c81599803ba12" },
   "roslyn.nvim": { "branch": "main", "commit": "0687e3c12731e3d76d3d8bfb5aa873b736105981" },
+  "screenkey.nvim": { "branch": "main", "commit": "16390931d847b1d5d77098daccac4e55654ac9e2" },
   "smart-splits.nvim": { "branch": "master", "commit": "5442c06d2003a342c27213e580f58af8ddd577c4" },
   "smear-cursor.nvim": { "branch": "main", "commit": "c85bdbb25db096fbcf616bc4e1357bd61fe2c199" },
   "snacks.nvim": { "branch": "main", "commit": "fe7cfe9800a182274d0f868a74b7263b8c0c020b" },
