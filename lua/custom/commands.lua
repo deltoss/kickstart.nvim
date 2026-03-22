@@ -13,9 +13,9 @@ local function set_cwd_to_git_root()
 
   if git_root then
     vim.cmd('cd ' .. vim.fn.fnameescape(git_root))
-    print('cd → ' .. git_root)
+    vim.notify('cd → ' .. git_root)
   else
-    print 'Not in a git repo'
+    vim.notify 'Not in a git repo'
   end
 end
 
@@ -26,9 +26,9 @@ vim.api.nvim_create_user_command('CDgit', function()
 
   if git_root then
     vim.cmd('cd ' .. vim.fn.fnameescape(git_root))
-    print('cd → ' .. git_root)
+    vim.notify('cd → ' .. git_root)
   else
-    print 'Not in a git repository'
+    vim.notify 'Not in a git repository'
   end
 end, {})
 
