@@ -1,3 +1,43 @@
+local function nav_file(offset)
+  local current = vim.fn.expand('%:p'):gsub('\\', '/')
+  local dir = vim.fn.expand '%:p:h'
+  local files = vim.fn.glob(dir .. '/*', false, true)
+
+  files = vim.tbl_filter(function(f)
+    return vim.fn.isdirectory(f) == 0
+  end, files)
+
+  table.sort(files)
+
+  for i, f in ipairs(files) do
+    if f:gsub('\\', '/') == current then
+      local target = files[i + offset]
+      if target then
+        vim.cmd('edit ' .. vim.fn.fnameescape(target))
+      else
+        local msg = offset > 0 and 'Already at last file' or 'Already at first file'
+        vim.notify(msg, vim.log.levels.WARN)
+      end
+      return
+    end
+  end
+
+  vim.notify('Current file not found in directory listing', vim.log.levels.WARN)
+end
+
+vim.api.nvim_create_user_command('EditNext', function()
+  nav_file(1)
+end, {})
+
+vim.api.nvim_create_user_command('EditPrev', function()
+  nav_file(-1)
+end, {})
+
+vim.keymap.set('n', ']n', '<cmd>EditNext<CR>', { desc = 'Next file in dir' })
+vim.keymap.set('n', '<C-.>', '<cmd>EditNext<CR>', { desc = 'Next file in dir' })
+vim.keymap.set('n', '[n', '<cmd>EditPrev<CR>', { desc = 'Prev file in dir' })
+vim.keymap.set('n', '<C-,>', '<cmd>EditPrev<CR>', { desc = 'Prev file in dir' })
+
 local function get_git_root(dir)
   local root = vim.fn.systemlist('git -C "' .. dir .. '" rev-parse --show-toplevel')[1]
   if vim.v.shell_error == 0 and root ~= '' then
@@ -19,7 +59,6 @@ local function set_cwd_to_git_root()
   end
 end
 
--- User command to manually set cwd to git root
 vim.api.nvim_create_user_command('CDgit', function()
   local file_dir = vim.fn.expand '%:p:h'
   local git_root = get_git_root(file_dir)

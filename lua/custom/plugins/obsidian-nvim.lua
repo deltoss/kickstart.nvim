@@ -80,6 +80,7 @@ return {
     { '<leader>ns', '<cmd>Obsidian quick_switch<cr>', desc = '[S]earch Notes' },
     { '<leader>ng', '<cmd>Obsidian search<cr>', desc = '[G]rep Notes' },
     { '<leader>nd', '<cmd>Obsidian today<cr>', desc = '[D]aily Note' },
+    { '<C-/>', '<cmd>Obsidian today<cr>', desc = '[D]aily Note' },
 
     -- HACK: To insert a link in normal mode, when ':Obsidian link'
     -- command was only designed for visual mode
