@@ -4,6 +4,10 @@ local keymap = vim.keymap.set
 -- This is used for mini-surround, and other plugins.
 keymap({ 'n', 'v' }, 's', '<Nop>')
 
+-- In visual mode, $ catches the trailing newline character which is often undesired.
+-- Thus, map it to g_ keymap instead.
+keymap('v', '$', 'g_')
+
 -- Disable defaults gr* mappings (defaults with Neovim nightly)
 -- We use the more popular g* mappings
 pcall(vim.keymap.del, 'n', 'gra')
