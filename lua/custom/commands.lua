@@ -39,11 +39,18 @@ vim.keymap.set('n', '[n', '<cmd>EditPrev<CR>', { desc = 'Prev file in dir' })
 vim.keymap.set('n', '<C-,>', '<cmd>EditPrev<CR>', { desc = 'Prev file in dir' })
 
 local function get_git_root(dir)
-  local root = vim.fn.systemlist('git -C "' .. dir .. '" rev-parse --show-toplevel')[1]
-  if vim.v.shell_error == 0 and root ~= '' then
-    return root
+  local path = dir
+  while true do
+    if vim.uv.fs_stat(path .. '/.git') then
+      return path
+    end
+    local parent = vim.fn.fnamemodify(path, ':h')
+    if parent == path then
+      -- Reached filesystem root with no .git found
+      return nil
+    end
+    path = parent
   end
-  return nil
 end
 
 local function set_cwd_to_git_root()
