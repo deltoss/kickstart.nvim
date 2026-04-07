@@ -11,6 +11,12 @@ return {
       default_severity = 'warning', -- "error" or "warning"
       setqflist = true,
     },
+    server = {
+      ---@type nil | "Off" | "Critical" | "Error" | "Warning" | "Information" | "Verbose" | "All"
+      -- To see logs, run:
+      --   :Dotnet _server logdump
+      log_level = 'Verbose',
+    },
   },
   keys = {
     { '<leader><leader>nn', '<cmd>Dotnet<cr>', desc = 'List Dot[N]et Commands' },
