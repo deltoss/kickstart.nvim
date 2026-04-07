@@ -10,11 +10,6 @@ return {
       opts = {
         registries = {
           'github:mason-org/mason-registry',
-          -- See https://github.com/seblyng/roslyn.nvim?tab=readme-ov-file#-installation
-          -- There is an open pull request to put Rosylyn (for C#) in mason as an official lsp.
-          -- Once it's merged, this registry setup, and manually installing via
-          -- See https://github.com/mason-org/mason-registry/pull/6330
-          'github:Crashdummyy/mason-registry',
         },
       },
     },
@@ -332,29 +327,5 @@ return {
     -- Nushell LSP is from the CLI itself. See https://github.com/mason-org/mason-lspconfig.nvim/issues/553
     -- We only use lspconfig & not mason to manage the lsp, as there is no separate lsp package to install currently.
     vim.lsp.enable 'nushell'
-
-    vim.lsp.config('roslyn', {
-      settings = {
-        ['csharp|inlay_hints'] = {
-          csharp_enable_inlay_hints_for_implicit_object_creation = true,
-          csharp_enable_inlay_hints_for_implicit_variable_types = true,
-
-          csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-          csharp_enable_inlay_hints_for_types = true,
-          dotnet_enable_inlay_hints_for_indexer_parameters = true,
-          dotnet_enable_inlay_hints_for_literal_parameters = true,
-          dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-          dotnet_enable_inlay_hints_for_other_parameters = true,
-          dotnet_enable_inlay_hints_for_parameters = true,
-          dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-          dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-          dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-        },
-        ['csharp|code_lens'] = {
-          dotnet_enable_references_code_lens = true,
-        },
-      },
-    })
-    vim.lsp.enable 'roslyn'
   end,
 }
