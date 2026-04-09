@@ -50,6 +50,8 @@ return {
       { '<leader>n', group = '[N]otes' },
       { '<leader>nt', group = '+[T]emplates' },
       { '<localleader>i', group = '+Diagnostic [I]nformation' },
+      { '<localleader>s', group = '+[S]olution' },
+      { '<localleader>P', group = '+[P]ackages' },
       { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
       { '<leader>gd', group = '+[D]iffs', mode = { 'n', 'v' } },
       { '<leader>gh', group = '+[H]unks', mode = { 'n', 'v' } },
