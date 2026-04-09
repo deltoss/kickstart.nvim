@@ -148,9 +148,15 @@ keymap('n', '<C-c>', 'ciw', { noremap = true })
 keymap('v', '<C-c>', 'c', { noremap = true })
 
 -- Lua Executions
-keymap('n', '<leader>Ls', '<cmd>source %<CR>', { desc = '[S]ource Current File' })
-keymap('n', '<leader>Lx', ':.lua<CR>', { desc = 'E[x]ecute Line' })
-keymap('v', '<leader>Lx', ':lua<CR>', { desc = 'E[x]ecute' })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'lua',
+  callback = function(event)
+    local opts = { buffer = event.buf, silent = true }
+    keymap('n', '<localleader>s', '<cmd>source %<CR>', { desc = '[S]ource Current File', buffer = event.buf, silent = true })
+    keymap('n', '<localleader>x', ':.lua<CR>', { desc = 'E[x]ecute Line', buffer = event.buf, silent = true })
+    keymap('v', '<localleader>x', ':lua<CR>', { desc = 'E[x]ecute', buffer = event.buf, silent = true })
+  end,
+})
 
 -- Copy file paths
 keymap('n', '<leader>yp', ":let @+=expand('%:.')<cr>", { desc = 'Copy relative path' })
