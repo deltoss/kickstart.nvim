@@ -222,6 +222,7 @@ return {
             -- Elements can be strings or table with id and size keys.
             'repl',
             'watches',
+            'console',
           },
           size = 0.35, -- % of height
           position = 'bottom',
@@ -229,6 +230,7 @@ return {
         {
           elements = {
             'scopes',
+            'breakpoints',
           },
           size = 45, -- Number of columns
           position = 'right',
