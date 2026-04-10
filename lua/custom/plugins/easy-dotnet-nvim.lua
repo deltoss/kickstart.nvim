@@ -15,6 +15,16 @@ end
 return {
   'GustavEikaas/easy-dotnet.nvim',
   dependencies = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap', 'folke/snacks.nvim' },
+  init = function()
+    vim.filetype.add {
+      extension = {
+        sln = 'solution',
+        slnx = 'solution',
+        slnf = 'slnfilter',
+        csproj = 'csproj',
+      },
+    }
+  end,
   opts = {
     -- Integration with Snacks has a bug:
     --   Unhandled async error:
@@ -32,16 +42,6 @@ return {
       log_level = 'Verbose',
     },
   },
-  init = function()
-    vim.filetype.add {
-      extension = {
-        sln = 'solution',
-        slnx = 'solution',
-        slnf = 'slnfilter',
-        csproj = 'csproj',
-      },
-    }
-  end,
   keys = {
     { '<localleader><localleader>', '<cmd>Dotnet<cr>', desc = 'List Dotnet Commands', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
 
