@@ -25,23 +25,29 @@ return {
       },
     }
   end,
-  opts = {
-    -- Integration with Snacks has a bug:
-    --   Unhandled async error:
-    --   ...ata/lazy/easy-dotnet.nvim/lua/easy-dotnet/rpc/server.lua:79: E5560: Vimscript function "jobstart" must not be called in a fast event context
-    -- picker = 'snacks',
-    picker = 'telescope',
-    diagnostics = {
-      default_severity = 'warning', -- "error" or "warning"
-      setqflist = true,
-    },
-    server = {
-      ---@type nil | "Off" | "Critical" | "Error" | "Warning" | "Information" | "Verbose" | "All"
-      -- To see logs, run:
-      --   :Dotnet _server logdump
-      log_level = 'Verbose',
-    },
-  },
+  config = function()
+    local dotnet = require 'easy-dotnet'
+    dotnet.setup {
+      -- Integration with Snacks has a bug:
+      --   Unhandled async error:
+      --   ...ata/lazy/easy-dotnet.nvim/lua/easy-dotnet/rpc/server.lua:79: E5560: Vimscript function "jobstart" must not be called in a fast event context
+      -- picker = 'snacks',
+      picker = 'telescope',
+      lsp = {
+        preload_roslyn = false, -- Don't start loading roslyn until a relevant buffer is opened
+      },
+      diagnostics = {
+        default_severity = 'warning', -- "error" or "warning"
+        setqflist = true,
+      },
+      server = {
+        ---@type nil | "Off" | "Critical" | "Error" | "Warning" | "Information" | "Verbose" | "All"
+        -- To see logs, run:
+        --   :Dotnet _server logdump
+        log_level = 'Verbose',
+      },
+    }
+  end,
   keys = {
     { '<localleader><localleader>', '<cmd>Dotnet<cr>', desc = 'List Dotnet Commands', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
 
@@ -58,6 +64,7 @@ return {
 
     { '<localleader>D', '<cmd>Dotnet run profile<cr>', desc = 'Run without [D]ebugging', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
     { '<localleader>d', '<cmd>Dotnet debug profile<cr>', desc = '[D]ebug', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
+    { '<localleader><down>', '<cmd>DapContinue<cr>', desc = 'Continue', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
     { '<localleader>o', '<cmd>Dotnet terminal toggle<cr>', desc = '[O]utput', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
     { '<localleader>O', '<cmd>Dotnet outdated<cr>', desc = '[O]utdated', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
 
