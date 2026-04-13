@@ -1,6 +1,0 @@
-vim.o.shell = vim.fn.executable 'pwsh' == 1 and 'pwsh' or 'powershell'
-vim.o.shellcmdflag = '-NoLogo -NoProfile -Command [Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();'
-vim.o.shellredir = '2>&1 | Out-File %s'
-vim.o.shellpipe = '2>&1 | Out-File %s; exit $LastExitCode'
-vim.o.shellquote = ''
-vim.o.shellxquote = ''

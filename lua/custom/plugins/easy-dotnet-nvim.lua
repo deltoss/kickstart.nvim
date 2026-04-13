@@ -15,16 +15,6 @@ end
 return {
   'GustavEikaas/easy-dotnet.nvim',
   dependencies = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap', 'folke/snacks.nvim' },
-  init = function()
-    vim.filetype.add {
-      extension = {
-        sln = 'solution',
-        slnx = 'solution',
-        slnf = 'slnfilter',
-        csproj = 'csproj',
-      },
-    }
-  end,
   config = function()
     local dotnet = require 'easy-dotnet'
     dotnet.setup {

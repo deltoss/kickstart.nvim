@@ -1,5 +1,6 @@
 require 'custom.options'
 require 'custom.keymaps'
-require 'custom.use-powershell'
+require 'custom.filetypes'
+require 'custom.use-nushell'
 require 'custom.wezterm-integration'
 require 'custom.commands'
