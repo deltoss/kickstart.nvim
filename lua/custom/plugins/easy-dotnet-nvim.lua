@@ -45,6 +45,10 @@ return {
         -- To see logs, run:
         --   :Dotnet _server logdump
         log_level = 'Verbose',
+        -- For .NET Framework support. See https://github.com/GustavEikaas/easy-dotnet.nvim?tab=readme-ov-file#net-framework
+        -- You'll also need to run:
+        --   choco install nuget.commandline
+        use_visual_studio = true,
       },
     }
   end,
