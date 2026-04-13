@@ -8,12 +8,6 @@ return {
   },
   keys = {
     {
-      -- Open in the current working directory
-      '_',
-      '<cmd>Yazi cwd<cr>',
-      desc = "Open the file manager in nvim's working directory",
-    },
-    {
       '-',
       mode = { 'n', 'v' },
       '<cmd>Yazi<cr>',
