@@ -2,7 +2,7 @@ return {
   'LintaoAmons/bookmarks.nvim',
   -- pin the plugin at specific version for stability
   -- backup your bookmark sqlite db when there are breaking changes (major version change)
-  tag = '3.2.0',
+  tag = 'v4.0.0',
   dependencies = {
     { 'kkharji/sqlite.lua' },
     { 'nvim-telescope/telescope.nvim' }, -- currently has only telescopes supported, but PRs for other pickers are welcome
@@ -11,6 +11,13 @@ return {
   config = function()
     local opts = {
       -- See https://github.com/LintaoAmons/bookmarks.nvim/blob/main/lua/bookmarks/default-config.lua
+      signs = {
+        mark = {
+          icon = '',
+          color = 'grey',
+          line_bg = '#C0C0C0',
+        },
+      },
       treeview = {
         window_split_dimension = 50,
         keymap = {
