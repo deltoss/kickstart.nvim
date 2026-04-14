@@ -1,7 +1,3 @@
-vim.cmd [[
-  autocmd BufRead,BufNewFile *.tmpl set filetype=templ
-]]
-
 return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
