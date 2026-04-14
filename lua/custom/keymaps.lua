@@ -110,6 +110,24 @@ keymap({ 'n', 'v' }, '<leader>X', '"_X', { noremap = true })
 keymap('n', '<leader>c', '"_c', { noremap = true })
 keymap('v', '<leader>c', '"_c', { noremap = true })
 
+-- Incremental selection, Neovim 0.12+
+-- See: https://github.com/neovim/neovim/blob/master/runtime/lua/vim/_core/defaults.lua
+keymap({ 'x', 'o' }, 'v', function()
+  if vim.treesitter.get_parser(nil, nil, { error = false }) then
+    require('vim.treesitter._select').select_parent(vim.v.count1)
+  else
+    vim.lsp.buf.selection_range(vim.v.count1)
+  end
+end, { desc = 'Select parent (outer) node' })
+
+vim.keymap.set({ 'x', 'o' }, 'V', function()
+  if vim.treesitter.get_parser(nil, nil, { error = false }) then
+    require('vim.treesitter._select').select_child(vim.v.count1)
+  else
+    vim.lsp.buf.selection_range(-vim.v.count1)
+  end
+end, { desc = 'Select child (inner) node' })
+
 -- Help
 keymap('n', 'k', vim.lsp.buf.hover, { noremap = true })
 keymap('n', 'K', function()
