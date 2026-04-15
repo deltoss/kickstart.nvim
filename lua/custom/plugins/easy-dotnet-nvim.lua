@@ -18,11 +18,7 @@ return {
   config = function()
     local dotnet = require 'easy-dotnet'
     dotnet.setup {
-      -- Integration with Snacks has a bug:
-      --   Unhandled async error:
-      --   ...ata/lazy/easy-dotnet.nvim/lua/easy-dotnet/rpc/server.lua:79: E5560: Vimscript function "jobstart" must not be called in a fast event context
-      -- picker = 'snacks',
-      picker = 'telescope',
+      picker = 'snacks',
       lsp = {
         preload_roslyn = false, -- Don't start loading roslyn until a relevant buffer is opened
       },
@@ -48,8 +44,7 @@ return {
     { '<localleader>b', '<cmd>Dotnet build quickfix<cr>', desc = '[B]uild', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
     { '<localleader>B', '<cmd>Dotnet build solution quickfix<cr>', desc = '[B]uild Solution', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
     { '<localleader>c', '<cmd>Dotnet clean<cr>', desc = '[C]lean', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
-    { '<localleader>r', '<cmd>Dotnet clean<cr><cmd>Dotnet build quickfix<cr>', desc = '[R]ebuild', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
-    { '<localleader>R', '<cmd>Dotnet restore<cr>', desc = '[R]estore', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
+    { '<localleader>r', '<cmd>Dotnet restore<cr>', desc = '[R]estore', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
 
     { '<localleader>p', '<cmd>Dotnet project view<cr>', desc = '[P]roject View', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
     { '<localleader>Pa', '<cmd>Dotnet add package<cr>', desc = '[A]dd', ft = { 'cs', 'solution', 'slnfilter', 'csproj' } },
