@@ -32,6 +32,7 @@ return {
       'gitcommit',
       'git_rebase',
       'gitignore',
+      'xml',
     }
 
     -- NOTE: If languages fail to install or compilation hangs,
