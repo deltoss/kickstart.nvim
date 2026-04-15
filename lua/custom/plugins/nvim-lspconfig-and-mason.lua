@@ -225,6 +225,10 @@ return {
       -- ts_ls = {},
 
       stylua = {}, -- Used to format Lua code
+      yamlls = {},
+      powershell_es = {},
+      templ = {},
+      taplo = {},
 
       -- Special Lua Config, as recommended by neovim help docs
       lua_ls = {
@@ -267,19 +271,17 @@ return {
     -- You can press `g?` for help in this menu.
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
+      -- Add only formatters, debuggers, or CLI tools
+      -- For LSPs, add it to servers above, which needs special handling with Neovim's LSP
       'isort',
       'jq',
       'js-debug-adapter',
       'prettier',
       'prettierd',
       'stylua',
-      'taplo',
-      'templ',
       'xmlformatter',
       'yamlfmt',
-      'yaml-language-server',
       'yq',
-      'powershell-editor-services',
     })
     -- Only include if dotnet is installed
     if vim.fn.executable 'dotnet' == 1 then
