@@ -27,10 +27,10 @@ return {
         setqflist = true,
       },
       server = {
-        ---@type nil | "Off" | "Critical" | "Error" | "Warning" | "Information" | "Verbose" | "All"
-        -- To see logs, run:
+        -- Saves logs to /logs directory of your project
+        --   log_level = 'Verbose',
+        -- To see other logs, try:
         --   :Dotnet _server logdump
-        log_level = 'Verbose',
         -- For .NET Framework support. See https://github.com/GustavEikaas/easy-dotnet.nvim?tab=readme-ov-file#net-framework
         -- You'll also need to run:
         --   choco install nuget.commandline
