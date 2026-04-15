@@ -34,13 +34,30 @@ return {
       'gitignore',
     }
 
-    ts.setup {}
-
     -- NOTE: If languages fail to install or compilation hangs,
     -- ensure 'tree-sitter-cli' is installed (e.g., :MasonInstall tree-sitter-cli).
     -- If the issue persists, run :checkhealth nvim-treesitter to diagnose.
 
     -- Use :TSInstall for manual install languages
     ts.install(languages)
+
+    -- group so it only fires once at startup
+    local group = vim.api.nvim_create_augroup('ConfigureTreesitterFeatures', { clear = true })
+    vim.api.nvim_create_autocmd('FileType', {
+      group = group,
+      pattern = languages,
+      callback = function(args)
+        -- Enable highlighting for the buffer
+        vim.treesitter.start(args.buf)
+
+        -- Enable smarter indentation for the buffer
+        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+        -- Use treesitter to determine fold ranges
+        vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        -- Tell Neovim to fold using the foldexpr above
+        vim.wo[0][0].foldmethod = 'expr'
+      end,
+    })
   end,
 }
