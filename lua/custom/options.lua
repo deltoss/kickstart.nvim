@@ -1,8 +1,9 @@
--- See `:help vim.o`
+-- Use vim.o for simple scalar variables like strings, numbers or booleans.
+-- Use vim.opt for lists, tables or maps
+-- See `:help vim.o` or `:help vim.opt`
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
