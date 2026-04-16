@@ -1,4 +1,17 @@
+--  See `:help vim.keymap.set()`
 local keymap = vim.keymap.set
+
+-- Clear highlights on search when pressing <Esc> in normal mode
+--  See `:help hlsearch`
+keymap('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
+-- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
+-- is not what someone will guess without a bit more experience.
+--
+-- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
+-- or just use <C-\><C-n> to exit terminal mode
+keymap('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Remove default s mapping in normal and visual mode
 -- This is used for mini-surround, and other plugins.
@@ -158,7 +171,8 @@ keymap('n', '<leader>rw', ':%s/\\<<C-r><C-w>\\>//g<left><left>', { desc = '[W]or
 keymap('x', '<leader>rh', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>//g<Left><Left>", { desc = '[H]ighlighted text' })
 
 -- Visual mode: replace highlighted text with highlighted value + entered value
-keymap('x', '<leader>ra', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\", '/\\&~')<CR>/g<Left><Left>", { desc = '[A]ppend to highlighted text' })
+keymap('x', '<leader>ra', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\", '/\\&~')<CR>/g<Left><Left>",
+  { desc = '[A]ppend to highlighted text' })
 
 -- Quickly change word
 -- From https://github.com/folke/dot/blob/master/nvim/lua/config/keymaps.lua
@@ -170,7 +184,8 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'lua',
   callback = function(event)
     local opts = { buffer = event.buf, silent = true }
-    keymap('n', '<localleader>s', '<cmd>source %<CR>', { desc = '[S]ource Current File', buffer = event.buf, silent = true })
+    keymap('n', '<localleader>s', '<cmd>source %<CR>',
+      { desc = '[S]ource Current File', buffer = event.buf, silent = true })
     keymap('n', '<localleader>x', ':.lua<CR>', { desc = 'E[x]ecute Line', buffer = event.buf, silent = true })
     keymap('v', '<localleader>x', ':lua<CR>', { desc = 'E[x]ecute', buffer = event.buf, silent = true })
   end,
