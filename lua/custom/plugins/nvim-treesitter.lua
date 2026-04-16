@@ -58,6 +58,8 @@ return {
         vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
         -- Tell Neovim to fold using the foldexpr above
         vim.wo[0][0].foldmethod = 'expr'
+        -- Neovim defaults to closing all folds, set fold level to 99 to avoid this
+        vim.wo[0][0].foldlevel = 99
       end,
     })
   end,
