@@ -53,24 +53,49 @@ local function get_git_root(dir)
   end
 end
 
+local current_git_root = nil
+
+local function get_git_root(dir)
+  local path = dir
+  while true do
+    if vim.uv.fs_stat(path .. '/.git') then
+      return path
+    end
+    local parent = vim.fn.fnamemodify(path, ':h')
+    if parent == path then
+      -- Reached filesystem root with no .git found
+      return nil
+    end
+    path = parent
+  end
+end
+
 local function set_cwd_to_git_root()
   -- Get the directory of the current file
   local file_dir = vim.fn.expand '%:p:h'
   local git_root = get_git_root(file_dir)
 
   if git_root then
-    vim.cmd('cd ' .. vim.fn.fnameescape(git_root))
-    vim.notify('cd → ' .. git_root)
+    -- Only change directory if we're entering a different repo
+    if git_root ~= current_git_root then
+      current_git_root = git_root
+      vim.cmd('cd ' .. vim.fn.fnameescape(git_root))
+      vim.notify('cd → ' .. git_root)
+    end
   else
+    -- Not in a git repo
+    current_git_root = nil
     vim.notify 'Not in a git repo'
   end
 end
 
+-- User command to manually set cwd to git root
 vim.api.nvim_create_user_command('CDgit', function()
   local file_dir = vim.fn.expand '%:p:h'
   local git_root = get_git_root(file_dir)
 
   if git_root then
+    current_git_root = git_root
     vim.cmd('cd ' .. vim.fn.fnameescape(git_root))
     vim.notify('cd → ' .. git_root)
   else
