@@ -39,7 +39,7 @@ return {
     -- completely override the keymappings for yazi. This function will be
     -- called in the context of the yazi terminal buffer.
     set_keymappings_function = function(buffer_id, config, context)
-      vim.keymap.set({ 't' }, 'A', function()
+      vim.keymap.set({ 't' }, '<C-A>', function()
         local entry = context.ya_process.hovered_url
         if entry == nil then
           vim.notify('No fd entry in yazi.nvim', vim.log.levels.WARN)
