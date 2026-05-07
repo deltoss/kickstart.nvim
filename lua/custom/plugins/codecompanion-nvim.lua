@@ -14,13 +14,13 @@ return {
     require('codecompanion').setup {
       strategies = {
         chat = {
-          adapter = 'anthropic',
+          adapter = 'opencode',
         },
         inline = {
-          adapter = 'anthropic',
+          adapter = 'opencode',
         },
         cmd = {
-          adapter = 'anthropic',
+          adapter = 'opencode',
         },
       },
       adapters = {
