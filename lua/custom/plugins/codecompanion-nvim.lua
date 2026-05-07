@@ -12,15 +12,20 @@ return {
     vim.cmd [[cab cc CodeCompanion]]
 
     require('codecompanion').setup {
-      strategies = {
+      interactions = {
         chat = {
-          adapter = 'opencode',
-        },
-        inline = {
-          adapter = 'opencode',
-        },
-        cmd = {
-          adapter = 'opencode',
+          adapter = {
+            name = "opencode",
+          },
+          keymaps = {
+            fold_code = {
+              modes = { n = "zS" }, -- Default is gf, which conflicts with following a link
+            },
+            debug = {
+              modes = { n = "gm" }, -- Default is gd, which is going into definitions
+              description = "Show debug messages for the chat",
+            },
+          },
         },
       },
       adapters = {
