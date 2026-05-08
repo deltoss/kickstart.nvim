@@ -1,7 +1,7 @@
 -- Default to clang on Windows for tree-sitter compatibility.
 -- Otherwise, nvim.treesitter will try use cl as the compiler
 if not vim.env.CC then
-  vim.env.CC = "clang"
+  vim.env.CC = 'clang'
 end
 
 return {
