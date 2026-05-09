@@ -75,9 +75,8 @@ return {
       { '<leader>b', group = 'De[b]ug', mode = { 'n', 'v' } },
       { '<leader>e', group = '[E]rror' },
       { '<leader>S', group = '[S]cratch/[S]wap', mode = { 'n', 'v' } },
-      { '<leader>a', group = '[A]I', mode = { 'n', 'v' } },
-      { '<leader>ao', group = '+[O]pencode', mode = { 'n', 'v' } },
-      { '<leader>ac', group = '+[C]odeCompanion', mode = { 'n', 'v' } },
+      { '<leader>a', group = '[A]I (Code Companion)', mode = { 'n', 'v' } },
+      { '<leader>A', group = '[A]I (OpenCode)', mode = { 'n', 'v' } },
     },
   },
 }

@@ -1,3 +1,45 @@
+local function open_in_prev_win()
+  local line_text = vim.fn.getline '.'
+  local col = vim.fn.col '.' -- 1-indexed
+
+  local file, line
+
+  -- Search the current line for file:line patterns, check if cursor overlaps
+  local pos = 1
+  while pos <= #line_text do
+    local s, e, f, l = line_text:find('([%w%.%/%_%-]+):(%d+)', pos)
+    if not s then
+      break
+    end
+    if s <= col and col <= e then
+      file = f
+      line = l
+      break
+    end
+    pos = e + 1
+  end
+
+  -- Fallback: no line number, just use the file under cursor
+  if not file then
+    file = vim.fn.expand '<cfile>'
+  end
+
+  if not file or file == '' then
+    return
+  end
+  local stat = vim.uv.fs_stat(vim.fs.normalize(file))
+  if not stat or stat.type ~= 'file' then
+    return
+  end
+
+  vim.cmd 'wincmd p'
+  if line then
+    vim.cmd('edit +' .. line .. ' ' .. vim.fn.fnameescape(file))
+  else
+    vim.cmd('edit ' .. vim.fn.fnameescape(file))
+  end
+end
+
 return {
   'olimorris/codecompanion.nvim',
   dependencies = {
@@ -20,48 +62,6 @@ return {
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'codecompanion',
       callback = function()
-        local function open_in_prev_win()
-          local line_text = vim.fn.getline '.'
-          local col = vim.fn.col '.' -- 1-indexed
-
-          local file, line
-
-          -- Search the current line for file:line patterns, check if cursor overlaps
-          local pos = 1
-          while pos <= #line_text do
-            local s, e, f, l = line_text:find('([%w%.%/%_%-]+):(%d+)', pos)
-            if not s then
-              break
-            end
-            if s <= col and col <= e then
-              file = f
-              line = l
-              break
-            end
-            pos = e + 1
-          end
-
-          -- Fallback: no line number, just use the file under cursor
-          if not file then
-            file = vim.fn.expand '<cfile>'
-          end
-
-          if not file or file == '' then
-            return
-          end
-          local stat = vim.uv.fs_stat(vim.fs.normalize(file))
-          if not stat or stat.type ~= 'file' then
-            return
-          end
-
-          vim.cmd 'wincmd p'
-          if line then
-            vim.cmd('edit +' .. line .. ' ' .. vim.fn.fnameescape(file))
-          else
-            vim.cmd('edit ' .. vim.fn.fnameescape(file))
-          end
-        end
-
         vim.keymap.set('n', 'gf', open_in_prev_win, { buffer = true })
         vim.keymap.set('n', 'gF', open_in_prev_win, { buffer = true })
       end,
@@ -107,19 +107,19 @@ return {
   end,
   keys = {
     {
-      '<leader>acc',
+      '<leader>ac',
       '<cmd>CodeCompanionChat Toggle<cr>',
       desc = '[C]hat',
       mode = { 'n', 'v' },
     },
     {
-      '<leader>aca',
+      '<leader>aa',
       '<cmd>CodeCompanionChat Add<cr>',
       desc = '[A]dd',
       mode = { 'v' },
     },
     {
-      '<leader>acm',
+      '<leader>am',
       function()
         require('codecompanion').prompt 'commit'
       end,
@@ -127,7 +127,7 @@ return {
       mode = { 'n', 'v' },
     },
     {
-      '<leader>ace',
+      '<leader>ae',
       function()
         require('codecompanion').prompt 'explain'
       end,
@@ -135,7 +135,7 @@ return {
       mode = { 'n', 'v' },
     },
     {
-      '<leader>acf',
+      '<leader>af',
       function()
         require('codecompanion').prompt 'fix'
       end,
@@ -143,7 +143,7 @@ return {
       mode = { 'n', 'v' },
     },
     {
-      '<leader>acd',
+      '<leader>ad',
       function()
         require('codecompanion').prompt 'lsp'
       end,
@@ -151,7 +151,7 @@ return {
       mode = { 'n', 'v' },
     },
     {
-      '<leader>act',
+      '<leader>at',
       function()
         require('codecompanion').prompt 'test'
       end,
@@ -159,18 +159,18 @@ return {
       mode = { 'n', 'v' },
     },
     {
-      '<leader>acp',
+      '<leader>ap',
       '<cmd>CodeCompanionActions<cr>',
       desc = '[P]alette',
       mode = { 'n', 'v' },
     },
     {
-      '<leader>acC',
+      '<leader>aC',
       ':CodeCompanionCmd ',
       desc = 'Neovim [C]ommands',
     },
     {
-      '<leader>acP',
+      '<leader>aP',
       ':CodeCompanion /',
       desc = '[P]rompts',
     },

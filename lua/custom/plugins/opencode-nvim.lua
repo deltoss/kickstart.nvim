@@ -45,24 +45,17 @@ return {
     -- Required for `opts.auto_reload`.
     vim.o.autoread = true
 
-    -- Recommended/example keymaps.
-    vim.keymap.set({ 'n', 'x' }, '<leader>aoq', function()
+    vim.keymap.set({ 'n', 'x' }, '<leader>Aq', function()
       require('opencode').ask('@this: ', { submit = true })
     end, { desc = 'Ask Opencode a [Q]uestion' })
-    vim.keymap.set({ 'n', 'x' }, '<leader>aox', function()
+    vim.keymap.set({ 'n', 'x' }, '<leader>Ax', function()
       require('opencode').select()
     end, { desc = 'E[x]ecute Opencode Action…' })
-    vim.keymap.set({ 'n', 'x' }, '<leader>aoa', function()
+    vim.keymap.set({ 'n', 'x' }, '<leader>Aa', function()
       require('opencode').prompt '@this'
     end, { desc = '[A]dd to Opencode' })
-    vim.keymap.set({ 'n', 't' }, '<leader>aot', function()
+    vim.keymap.set({ 'n', 't' }, '<leader>At', function()
       require('opencode').toggle()
     end, { desc = '[T]oggle Opencode' })
-    vim.keymap.set('n', '<S-C-u>', function()
-      require('opencode').command 'session.half.page.up'
-    end, { desc = 'Opencode Half Page Up' })
-    vim.keymap.set('n', '<S-C-d>', function()
-      require('opencode').command 'session.half.page.down'
-    end, { desc = 'Opencode Half Page Down' })
   end,
 }
