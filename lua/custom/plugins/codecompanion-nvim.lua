@@ -4,6 +4,69 @@ return {
     'nvim-lua/plenary.nvim',
   },
   config = function()
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'CodeCompanionChatCreated',
+      callback = function(args)
+        local chat = require('codecompanion').buf_get_chat(args.data.bufnr)
+        if chat then
+          chat:add_buf_message {
+            role = 'user',
+            content = '#{buffer} ',
+          }
+        end
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'codecompanion',
+      callback = function()
+        local function open_in_prev_win()
+          local line_text = vim.fn.getline '.'
+          local col = vim.fn.col '.' -- 1-indexed
+
+          local file, line
+
+          -- Search the current line for file:line patterns, check if cursor overlaps
+          local pos = 1
+          while pos <= #line_text do
+            local s, e, f, l = line_text:find('([%w%.%/%_%-]+):(%d+)', pos)
+            if not s then
+              break
+            end
+            if s <= col and col <= e then
+              file = f
+              line = l
+              break
+            end
+            pos = e + 1
+          end
+
+          -- Fallback: no line number, just use the file under cursor
+          if not file then
+            file = vim.fn.expand '<cfile>'
+          end
+
+          if not file or file == '' then
+            return
+          end
+          local stat = vim.uv.fs_stat(vim.fs.normalize(file))
+          if not stat or stat.type ~= 'file' then
+            return
+          end
+
+          vim.cmd 'wincmd p'
+          if line then
+            vim.cmd('edit +' .. line .. ' ' .. vim.fn.fnameescape(file))
+          else
+            vim.cmd('edit ' .. vim.fn.fnameescape(file))
+          end
+        end
+
+        vim.keymap.set('n', 'gf', open_in_prev_win, { buffer = true })
+        vim.keymap.set('n', 'gF', open_in_prev_win, { buffer = true })
+      end,
+    })
+
     local homeDir = os.getenv 'HOME'
     homeDir = homeDir or os.getenv 'USERPROFIlE'
     local keys = require('custom.utils').read_json_file(homeDir .. '/.config/codecompanion.nvim/api_keys.json')
@@ -15,15 +78,15 @@ return {
       interactions = {
         chat = {
           adapter = {
-            name = "opencode",
+            name = 'opencode',
           },
           keymaps = {
             fold_code = {
-              modes = { n = "zS" }, -- Default is gf, which conflicts with following a link
+              modes = { n = 'zS' }, -- Default is gf, which conflicts with following a link
             },
             debug = {
-              modes = { n = "gm" }, -- Default is gd, which is going into definitions
-              description = "Show debug messages for the chat",
+              modes = { n = 'gA' }, -- Default is gd, which is going into definitions
+              description = 'Show debug messages for the chat',
             },
           },
         },
