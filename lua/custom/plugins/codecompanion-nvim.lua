@@ -1,45 +1,3 @@
-local function open_in_prev_win()
-  local line_text = vim.fn.getline '.'
-  local col = vim.fn.col '.' -- 1-indexed
-
-  local file, line
-
-  -- Search the current line for file:line patterns, check if cursor overlaps
-  local pos = 1
-  while pos <= #line_text do
-    local s, e, f, l = line_text:find('([%w%.%/%_%-]+):(%d+)', pos)
-    if not s then
-      break
-    end
-    if s <= col and col <= e then
-      file = f
-      line = l
-      break
-    end
-    pos = e + 1
-  end
-
-  -- Fallback: no line number, just use the file under cursor
-  if not file then
-    file = vim.fn.expand '<cfile>'
-  end
-
-  if not file or file == '' then
-    return
-  end
-  local stat = vim.uv.fs_stat(vim.fs.normalize(file))
-  if not stat or stat.type ~= 'file' then
-    return
-  end
-
-  vim.cmd 'wincmd p'
-  if line then
-    vim.cmd('edit +' .. line .. ' ' .. vim.fn.fnameescape(file))
-  else
-    vim.cmd('edit ' .. vim.fn.fnameescape(file))
-  end
-end
-
 return {
   'olimorris/codecompanion.nvim',
   dependencies = {
@@ -62,8 +20,9 @@ return {
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'codecompanion',
       callback = function()
-        vim.keymap.set('n', 'gf', open_in_prev_win, { buffer = true })
-        vim.keymap.set('n', 'gF', open_in_prev_win, { buffer = true })
+        local file_nav = require 'custom.modules.file-nav'
+        vim.keymap.set('n', 'gf', file_nav.open_in_prev_win, { buffer = true })
+        vim.keymap.set('n', 'gF', file_nav.open_in_prev_win, { buffer = true })
       end,
     })
 
