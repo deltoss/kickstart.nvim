@@ -69,18 +69,36 @@ return {
     end,
   },
   keys = {
+    {
+      'gf',
+      function()
+        local line = vim.api.nvim_get_current_line()
+        local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+        -- crude check: is there a [[...]] or [...](...) near the cursor?
+        local before = line:sub(1, col)
+        local after = line:sub(col)
+        local on_link = (before:match '%[%[[^%]]*$' and after:match '^[^%[]*%]%]') or (before:match '%[[^%]]*$' and after:match '^[^%]]*%]%(')
+        if on_link then
+          vim.cmd 'Obsidian follow_link'
+        else
+          vim.cmd 'normal gf'
+        end
+      end,
+      ft = 'markdown',
+      desc = 'Follow obsidian link or go to file',
+    },
     { '<leader>ntn', '<cmd>Obsidian new_from_template<cr>', desc = '[N]ew Note' },
-    { '<leader>nti', '<cmd>Obsidian template<cr>',          desc = '[I]nsert to Current Note' },
+    { '<leader>nti', '<cmd>Obsidian template<cr>', desc = '[I]nsert to Current Note' },
 
     -- Don't use below. Prefer to use templates, which controls where the note gets placed
     -- { '<leader>nn', '<cmd>Obsidian new<cr>', desc = '[N]ew Note' },
-    { '<leader>nn',  '<cmd>Obsidian new_from_template<cr>', desc = '[N]ew Note' },
-    { '<leader>nc',  '<cmd>Obsidian toc<cr>',               desc = 'Show Table of [C]ontents' },
+    { '<leader>nn', '<cmd>Obsidian new_from_template<cr>', desc = '[N]ew Note' },
+    { '<leader>nc', '<cmd>Obsidian toc<cr>', desc = 'Show Table of [C]ontents' },
 
-    { '<leader>ns',  '<cmd>Obsidian quick_switch<cr>',      desc = '[S]earch Notes' },
-    { '<leader>ng',  '<cmd>Obsidian search<cr>',            desc = '[G]rep Notes' },
-    { '<leader>nd',  '<cmd>Obsidian today<cr>',             desc = '[D]aily Note' },
-    { '<C-/>',       '<cmd>Obsidian today<cr>',             desc = '[D]aily Note' },
+    { '<leader>ns', '<cmd>Obsidian quick_switch<cr>', desc = '[S]earch Notes' },
+    { '<leader>ng', '<cmd>Obsidian search<cr>', desc = '[G]rep Notes' },
+    { '<leader>nd', '<cmd>Obsidian today<cr>', desc = '[D]aily Note' },
+    { '<C-/>', '<cmd>Obsidian today<cr>', desc = '[D]aily Note' },
 
     -- HACK: To insert a link in normal mode, when ':Obsidian link'
     -- command was only designed for visual mode
@@ -95,16 +113,16 @@ return {
       desc = '[L]ink to Existing Note',
     },
 
-    { '<leader>np',       '<cmd>Obsidian links<cr>',              desc = '[P]review Links' },
-    { '<leader>nb',       '<cmd>Obsidian backlinks<cr>',          desc = 'Show [B]acklinks' },
+    { '<leader>np', '<cmd>Obsidian links<cr>', desc = '[P]review Links' },
+    { '<leader>nb', '<cmd>Obsidian backlinks<cr>', desc = 'Show [B]acklinks' },
     { '<leader>n<Right>', '<cmd>Obsidian follow_link vsplit<cr>', desc = 'Open Link [Right]' },
-    { '<leader>n<Down>',  '<cmd>Obsidian follow_link hsplit<cr>', desc = 'Open Link [Down]' },
+    { '<leader>n<Down>', '<cmd>Obsidian follow_link hsplit<cr>', desc = 'Open Link [Down]' },
 
-    { '<leader>no',       '<cmd>Obsidian workspace<cr>',          desc = 'Switch [W]orkspace' },
+    { '<leader>no', '<cmd>Obsidian workspace<cr>', desc = 'Switch [W]orkspace' },
 
-    { '<leader>no',       '<cmd>Obsidian open<cr>',               desc = 'Open in [O]bsidian App' },
-    { '<leader>nr',       '<cmd>Obsidian rename<cr>',             desc = '[R]ename Note' },
-    { '<leader>ni',       '<cmd>Obsidian paste_img<cr>',          desc = 'Paste [I]mage' },
+    { '<leader>no', '<cmd>Obsidian open<cr>', desc = 'Open in [O]bsidian App' },
+    { '<leader>nr', '<cmd>Obsidian rename<cr>', desc = '[R]ename Note' },
+    { '<leader>ni', '<cmd>Obsidian paste_img<cr>', desc = 'Paste [I]mage' },
 
     {
       '<leader>ne',
