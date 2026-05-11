@@ -61,6 +61,16 @@ return {
             })
           end,
         },
+        acp = {
+          claude_code = function()
+            local key = keys and keys.anthropic or nil
+            return require("codecompanion.adapters").extend("claude_code", {
+              env = {
+                ANTHROPIC_API_KEY = key,
+              },
+            })
+          end,
+        },
       },
     }
   end,
