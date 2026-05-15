@@ -15,13 +15,13 @@ end
 return {
   'GustavEikaas/easy-dotnet.nvim',
   dependencies = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap', 'folke/snacks.nvim' },
-  enabled = false,
   config = function()
     local dotnet = require 'easy-dotnet'
     dotnet.setup {
       picker = 'snacks',
+      background_scanning = false, -- Disable MSBuild prewarming on startup
       lsp = {
-        preload_roslyn = false, -- Don't start loading roslyn until a relevant buffer is opened
+        preload_roslyn = false,    -- Don't start loading roslyn until a relevant buffer is opened
       },
       diagnostics = {
         default_severity = 'warning', -- "error" or "warning"
