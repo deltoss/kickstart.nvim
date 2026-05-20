@@ -60,6 +60,14 @@ return {
               },
             })
           end,
+          openai = function()
+            local key = keys and keys.openai or nil
+            return require('codecompanion.adapters').extend('openai', {
+              env = {
+                api_key = key,
+              },
+            })
+          end,
         },
         acp = {
           claude_code = function()
@@ -67,6 +75,17 @@ return {
             return require("codecompanion.adapters").extend("claude_code", {
               env = {
                 ANTHROPIC_API_KEY = key,
+              },
+            })
+          end,
+          codex = function()
+            local key = keys and keys.openai or nil
+            return require("codecompanion.adapters").extend("codex", {
+              defaults = {
+                auth_method = "openai-api-key", -- "openai-api-key"|"codex-api-key"|"chatgpt"
+              },
+              env = {
+                OPENAI_API_KEY = key,
               },
             })
           end,
