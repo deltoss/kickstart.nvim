@@ -276,12 +276,11 @@ return {
       'isort',
       'jq',
       'js-debug-adapter',
-      'prettier',
-      'prettierd',
       'stylua',
       'xmlformatter',
       'yamlfmt',
       'yq',
+      'biome', -- Linter/prettier for Javascript/Typescript
     })
     -- Only include if dotnet is installed
     if vim.fn.executable 'dotnet' == 1 then
