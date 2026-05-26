@@ -5,6 +5,7 @@ vim.filetype.add {
     slnx = 'solution',
     slnf = 'slnfilter',
     csproj = 'csproj',
+    http = 'http', -- See https://neovim.getkulala.net/docs/getting-started/requirements
   },
 }
 
