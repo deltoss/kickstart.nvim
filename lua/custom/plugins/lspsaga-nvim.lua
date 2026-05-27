@@ -17,7 +17,7 @@ return {
     }
   end,
   dependencies = {
-    'nvim-treesitter/nvim-treesitter', -- optional
-    'nvim-tree/nvim-web-devicons', -- optional
+    'romus204/tree-sitter-manager.nvim',
+    'nvim-tree/nvim-web-devicons',
   },
 }

@@ -36,7 +36,7 @@ return {
     {
       '<leader>sH',
       function()
-        Snacks.picker.files { cwd = vim.fn.expand '~/HTTP/', ignored = true }
+        Snacks.picker.files { cwd = vim.fn.expand '~/HTTP/' }
       end,
       desc = '[H]TTP Files',
     },

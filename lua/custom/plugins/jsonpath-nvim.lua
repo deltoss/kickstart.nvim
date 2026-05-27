@@ -1,7 +1,7 @@
 return {
   'phelipetls/jsonpath.nvim',
   ft = 'json',
-  dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  dependencies = { 'romus204/tree-sitter-manager.nvim' },
   config = function()
     -- show json path in the winbar
     if vim.fn.exists '+winbar' == 1 then
