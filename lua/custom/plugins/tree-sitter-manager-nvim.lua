@@ -1,9 +1,3 @@
--- Default to clang on Windows for tree-sitter compatibility.
--- Otherwise, treesitter will try use cl as the compiler
-if not vim.env.CC then
-  vim.env.CC = 'clang'
-end
-
 return {
   'romus204/tree-sitter-manager.nvim',
   dependencies = {}, -- tree-sitter CLI must be installed system-wide
@@ -38,7 +32,7 @@ return {
         'xml',
       },
       auto_install = true, -- if enabled, install missing parsers when editing a new file
-      highlight = true, -- treesitter highlighting is enabled by default
+      highlight = true,    -- treesitter highlighting is enabled by default
     }
   end,
 }
