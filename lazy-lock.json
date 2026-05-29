@@ -22,7 +22,7 @@
   "img-clip.nvim": { "branch": "main", "commit": "b6ddfb97b5600d99afe3452d707444afda658aca" },
   "jsonfly.nvim": { "branch": "main", "commit": "3d58635cb195a5435743e7882c6ac7cff710204f" },
   "jsonpath.nvim": { "branch": "main", "commit": "9e7a3c2aec3465a8f7c86cec6424cf98ee62ee24" },
-  "kulala.nvim": { "branch": "main", "commit": "87601ddef556f21888c59e0a2713873ad73f9c29" },
+  "kulala.nvim": { "branch": "main", "commit": "7d60be1f091cc40a64d5a14b926d060b205fc24b" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "lazydev.nvim": { "branch": "main", "commit": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d" },
   "lspsaga.nvim": { "branch": "main", "commit": "562d9724e3869ffd1801c572dd149cc9f8d0cc36" },
