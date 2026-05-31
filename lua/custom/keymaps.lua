@@ -110,7 +110,7 @@ keymap('n', '<leader><Right>', ':vsplit<CR>', { desc = 'Vertical split (right)' 
 
 -- Navigation on new tab or split
 keymap('n', 'gs', '<C-W>vgf', { desc = 'Go to file on new split', noremap = true, silent = true })
-keymap('n', 'gT', '<C-W>gf', { desc = 'Go to file on new tab', noremap = true, silent = true })
+keymap('n', 'gt', '<C-W>gf', { desc = 'Go to file on new tab', noremap = true, silent = true })
 
 -- Tab operations
 keymap('n', '<', ':tabprev<CR>', { desc = 'Previous' })
@@ -175,7 +175,8 @@ keymap('n', '<leader>rw', ':%s/\\<<C-r><C-w>\\>//g<left><left>', { desc = '[W]or
 keymap('x', '<leader>rh', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>//g<Left><Left>", { desc = '[H]ighlighted text' })
 
 -- Visual mode: replace highlighted text with highlighted value + entered value
-keymap('x', '<leader>ra', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\", '/\\&~')<CR>/g<Left><Left>", { desc = '[A]ppend to highlighted text' })
+keymap('x', '<leader>ra', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\", '/\\&~')<CR>/g<Left><Left>",
+  { desc = '[A]ppend to highlighted text' })
 
 -- Quickly change word
 -- From https://github.com/folke/dot/blob/master/nvim/lua/config/keymaps.lua
@@ -187,7 +188,8 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'lua',
   callback = function(event)
     local opts = { buffer = event.buf, silent = true }
-    keymap('n', '<localleader>s', '<cmd>source %<CR>', { desc = '[S]ource Current File', buffer = event.buf, silent = true })
+    keymap('n', '<localleader>s', '<cmd>source %<CR>',
+      { desc = '[S]ource Current File', buffer = event.buf, silent = true })
     keymap('n', '<localleader>x', ':.lua<CR>', { desc = 'E[x]ecute Line', buffer = event.buf, silent = true })
     keymap('v', '<localleader>x', ':lua<CR>', { desc = 'E[x]ecute', buffer = event.buf, silent = true })
   end,
