@@ -81,11 +81,29 @@ return {
         if on_link then
           vim.cmd 'Obsidian follow_link'
         else
-          vim.cmd 'normal gf'
+          vim.cmd 'normal! gf'
         end
       end,
       ft = 'markdown',
       desc = 'Follow obsidian link or go to file',
+    },
+    {
+      'gs',
+      function()
+        local line = vim.api.nvim_get_current_line()
+        local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+        -- crude check: is there a [[...]] or [...](...) near the cursor?
+        local before = line:sub(1, col)
+        local after = line:sub(col)
+        local on_link = (before:match '%[%[[^%]]*$' and after:match '^[^%[]*%]%]') or (before:match '%[[^%]]*$' and after:match '^[^%]]*%]%(')
+        if on_link then
+          vim.cmd 'Obsidian follow_link vsplit'
+        else
+          vim.cmd 'normal! <C-W>vgf'
+        end
+      end,
+      ft = 'markdown',
+      desc = 'Follow obsidian link or go to file in split',
     },
     { '<leader>ntn', '<cmd>Obsidian new_from_template<cr>', desc = '[N]ew Note' },
     { '<leader>nti', '<cmd>Obsidian template<cr>', desc = '[I]nsert to Current Note' },
