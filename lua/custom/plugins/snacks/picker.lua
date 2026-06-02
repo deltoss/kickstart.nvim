@@ -6,7 +6,7 @@ return {
   },
   keys = {
     {
-      '<leader>sf',
+      '<leader>sF',
       function()
         Snacks.picker.smart()
       end,
@@ -69,7 +69,7 @@ return {
       desc = '[D]iagnostics',
     },
     {
-      '<leader>sF',
+      '<leader>sf',
       function()
         Snacks.picker.files()
       end,
