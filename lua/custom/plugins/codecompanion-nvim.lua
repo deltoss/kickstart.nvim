@@ -11,7 +11,7 @@ return {
         if chat then
           chat:add_buf_message {
             role = 'user',
-            content = '#{buffer} ',
+            content = '\n#{buffer} ',
           }
         end
       end,
@@ -72,7 +72,7 @@ return {
         acp = {
           claude_code = function()
             local key = keys and keys.anthropic or nil
-            return require("codecompanion.adapters").extend("claude_code", {
+            return require('codecompanion.adapters').extend('claude_code', {
               env = {
                 ANTHROPIC_API_KEY = key,
               },
@@ -80,9 +80,9 @@ return {
           end,
           codex = function()
             local key = keys and keys.openai or nil
-            return require("codecompanion.adapters").extend("codex", {
+            return require('codecompanion.adapters').extend('codex', {
               defaults = {
-                auth_method = "openai-api-key", -- "openai-api-key"|"codex-api-key"|"chatgpt"
+                auth_method = 'openai-api-key', -- "openai-api-key"|"codex-api-key"|"chatgpt"
               },
               env = {
                 OPENAI_API_KEY = key,
