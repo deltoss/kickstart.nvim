@@ -7,6 +7,13 @@ vim.filetype.add {
     csproj = 'csproj',
     http = 'http', -- See https://neovim.getkulala.net/docs/getting-started/requirements
   },
+  -- Patterns take priority over the `tmpl = 'templ'` extension above,
+  -- so these double-extension templates resolve to their inner language.
+  pattern = {
+    ['.*%.nu%.tmpl'] = 'nu',
+    ['.*%.sh%.tmpl'] = 'bash',
+    ['.*%.ps1%.tmpl'] = 'ps1',
+  },
 }
 
 vim.api.nvim_create_autocmd('FileType', {
