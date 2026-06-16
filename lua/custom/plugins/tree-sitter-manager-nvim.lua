@@ -33,9 +33,10 @@ return {
         'git_rebase',
         'gitignore',
         'xml',
+        'ini',
       },
       auto_install = true, -- if enabled, install missing parsers when editing a new file
-      highlight = true,    -- treesitter highlighting is enabled by default
+      highlight = true, -- treesitter highlighting is enabled by default
     }
   end,
 }
