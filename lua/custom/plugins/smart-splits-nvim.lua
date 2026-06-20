@@ -1,57 +1,59 @@
+-- There are issues with Zellij integration, so disable it completely
+vim.g.smart_splits_multiplexer_integration = false
 return {
   'mrjones2014/smart-splits.nvim',
   keys = {
     {
-      '<C-A-Left>',
+      '<S-Left>',
       function()
         require('smart-splits').resize_left()
       end,
       desc = 'Resize left',
     },
     {
-      '<C-A-Down>',
+      '<S-Down>',
       function()
         require('smart-splits').resize_down()
       end,
       desc = 'Resize down',
     },
     {
-      '<C-A-Up>',
+      '<S-Up>',
       function()
         require('smart-splits').resize_up()
       end,
       desc = 'Resize up',
     },
     {
-      '<C-A-Right>',
+      '<S-Right>',
       function()
         require('smart-splits').resize_right()
       end,
       desc = 'Resize right',
     },
     {
-      '<A-Left>',
+      '<C-Left>',
       function()
         require('smart-splits').move_cursor_left()
       end,
       desc = 'Activate left',
     },
     {
-      '<A-Down>',
+      '<C-Down>',
       function()
         require('smart-splits').move_cursor_down()
       end,
       desc = 'Activate down',
     },
     {
-      '<A-Up>',
+      '<C-Up>',
       function()
         require('smart-splits').move_cursor_up()
       end,
       desc = 'Activate up',
     },
     {
-      '<A-Right>',
+      '<C-Right>',
       function()
         require('smart-splits').move_cursor_right()
       end,
