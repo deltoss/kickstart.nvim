@@ -18,6 +18,9 @@ return {
 
     -- Useful status updates for LSP.
     { 'j-hui/fidget.nvim', opts = {} },
+
+    -- Autocompletions for popular json configs
+    'b0o/schemastore.nvim',
   },
   config = function()
     local function is_lsp_attached_for_current_buffer()
@@ -219,10 +222,30 @@ return {
       -- rust_analyzer = {},
 
       stylua = {}, -- Used to format Lua code
-      yamlls = {},
+      yamlls = {
+        settings = {
+          yaml = {
+            -- Disable yamlls built-in schema store; use SchemaStore.nvim instead.
+            schemaStore = {
+              enable = false,
+              url = '',
+            },
+            schemas = require('schemastore').yaml.schemas(),
+          },
+        },
+      },
       powershell_es = {},
       templ = {},
       taplo = {},
+
+      jsonls = {
+        settings = {
+          json = {
+            schemas = require('schemastore').json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      },
 
       -- Special Lua Config, as recommended by neovim help docs
       lua_ls = {
