@@ -1,3 +1,4 @@
+vim.g.smart_splits_multiplexer_integration = false
 return {
   'mrjones2014/smart-splits.nvim',
   opts = {
@@ -27,9 +28,7 @@ return {
     -- }
     -- NOTE: `at_edge = 'wrap'` is not supported on Kitty terminal
     -- multiplexer, as there is no way to determine layout via the CLI
-    at_edge = function(context)
-      vim.cmd 'silent !zellij action switch-mode normal'
-    end,
+    at_edge = 'stop',
   },
   keys = {
     {
