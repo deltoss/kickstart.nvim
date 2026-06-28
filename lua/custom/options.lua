@@ -24,13 +24,10 @@ vim.o.showmode = false -- Don't show the mode, since it's already in the status 
 vim.o.showmatch = true -- Show matching brackets/parentheses
 vim.o.smoothscroll = true -- Scroll by screen lines instead of jumping by text lines
 vim.o.scroll = 8 -- Set how many lines Ctrl-U and Ctrl-D scroll
-vim.o.spell = true -- Enable spell checking
-vim.o.spelllang = 'en' -- Set spell checking language
 vim.o.relativenumber = true -- Displays relative numbers at the gutter
 vim.o.conceallevel = 2
 vim.o.linebreak = true -- Wrap lines at the end of a word (not in the middle)
-vim.o.colorcolumn = '120' -- Visual vertical guide at specified column
-vim.o.textwidth = 120 -- Hard-wrap text at specified columns
+vim.o.colorcolumn = '80' -- Visual vertical guide at specified column
 vim.o.inccommand = 'split' -- Preview substitutions live, as you type!
 vim.o.splitright = true -- Open vertical splits to the right
 vim.o.splitbelow = true -- Open horizontal splits below
@@ -99,5 +96,13 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'yaml', 'json', 'xml', 'toml' },
   callback = function()
     vim.opt_local.foldmethod = 'indent'
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'markdown', 'text', 'gitcommit' },
+  callback = function()
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = 'en'
   end,
 })
