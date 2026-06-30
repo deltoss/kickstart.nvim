@@ -74,6 +74,25 @@ Per-call overrides are supported -- any config key can be passed at call time:
 require("everywhere").pick({ regex = false, max_results = 500 })
 ```
 
+## Git repositories
+
+List every git repository found by the backend (any folder containing a `.git`
+entry) and jump to one via the picker:
+
+```vim
+:EverywhereGitRepos
+```
+
+```lua
+require("everywhere").git_repos()
+
+-- Keymap
+vim.keymap.set("n", "<leader>gr", require("everywhere").git_repos, { desc = "Git repositories" })
+```
+
+Unlike `pick()`, this is a static list (no live query) -- the picker fuzzy-filters
+the results, and every repository is listed (no `max_results` cap).
+
 ## Health check
 
 Run `:checkhealth everywhere` to verify the configured backend tool is installed and reachable.

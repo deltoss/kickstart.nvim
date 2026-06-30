@@ -1,3 +1,5 @@
+local backends = require("everywhere.backends")
+
 local M = {}
 
 local defaults = {
@@ -7,146 +9,105 @@ local defaults = {
   match_path = false,
   regex = true,
   max_results = 100,
-  backends = {
-    everything = { cmd = "es",      sort = false, offset = 0 },
-    plocate    = { cmd = "plocate", database = nil },
-  },
+  backends = backends.defaults(),
 }
 
 M.config = vim.deepcopy(defaults)
+M.backends = backends.order
 
-local BACKENDS = { "everything", "plocate" }
-
-local function everything_args(opts, query_parts)
-  local b = opts.backends.everything
-  local args = {}
-  if opts.case_sensitive then table.insert(args, "-case") end
-  if opts.whole_word    then table.insert(args, "-whole-word") end
-  if opts.match_path    then table.insert(args, "-match-path") end
-  if b.sort             then table.insert(args, "-s") end
-  -- In Lua, 0 is truthy, so check > 0 to avoid passing -offset 0
-  if b.offset and b.offset > 0 then
-    table.insert(args, "-offset")
-    table.insert(args, tostring(b.offset))
-  end
-  if opts.max_results then
-    table.insert(args, "-max-results")
-    table.insert(args, tostring(opts.max_results))
-  end
-  if opts.regex then table.insert(args, "-regex") end -- must come after all other flags
-  vim.list_extend(args, query_parts)
-  return args
-end
-
-local function plocate_args(opts, query_parts)
-  local b = opts.backends.plocate
-  local args = {}
-  -- plocate is case-sensitive by default; -i makes it insensitive
-  if not opts.case_sensitive then table.insert(args, "-i") end
-  if opts.whole_word then table.insert(args, "-w") end
-  -- plocate ORs multiple terms by default; -A requires all to match
-  if #query_parts > 1 then table.insert(args, "-A") end
-  if opts.max_results then
-    table.insert(args, "-l")
-    table.insert(args, tostring(opts.max_results))
-  end
-  if b.database then
-    table.insert(args, "-d")
-    table.insert(args, b.database)
-  end
-  -- plocate matches the full path by default; -b restricts to filename only
-  if not opts.match_path then table.insert(args, "-b") end
-  if opts.regex then table.insert(args, "--regex") end
-  vim.list_extend(args, query_parts)
-  return args
-end
-
+-- Split a query into terms, keeping "quoted phrases" together.
 local function split_search(search)
-  local parts = {}
-  local remaining = search
+  local parts, remaining = {}, search
   for quoted in search:gmatch('"[^"]*"') do
-    table.insert(parts, quoted:sub(2, -2))
+    parts[#parts + 1] = quoted:sub(2, -2)
     remaining = remaining:gsub('"[^"]*"', "", 1)
   end
   for word in remaining:gmatch("%S+") do
-    table.insert(parts, word)
+    parts[#parts + 1] = word
   end
   return parts
 end
 
-local function resolve_backend(opts)
-  if opts.backend ~= "auto" then
-    return opts.backend
-  end
-  for _, name in ipairs(BACKENDS) do
-    if vim.fn.executable(opts.backends[name].cmd) == 1 then
-      return name
-    end
-  end
-  return nil
+local function no_backend()
+  vim.notify("everywhere.nvim: no backend found (install Everything or plocate)", vim.log.levels.WARN)
+  return function() end
 end
 
-local function source(opts, ctx)
-  local search = ctx.filter.search or ""
-  if search == "" then
-    return function() end
+-- Builds a snacks transform that maps each output line to a file item.
+local function to_item(map)
+  return function(item)
+    local path = vim.trim(item.text)
+    if path == "" then return false end
+    item.file = map and map(path) or path
+    item.text = item.file
   end
-  local backend_name = resolve_backend(opts)
-  if not backend_name then
-    vim.notify(
-      "everywhere.nvim: no backend found (tried: " .. table.concat(BACKENDS, ", ") .. ")",
-      vim.log.levels.WARN
-    )
-    return function() end
-  end
-  local query_parts = split_search(search)
-  local args = backend_name == "everything"
-    and everything_args(opts, query_parts)
-    or  plocate_args(opts, query_parts)
+end
+
+-- build(adapter, conf) returns the command args and an optional path mapper.
+local function run(opts, ctx, build)
+  local name = backends.resolve(opts)
+  if not name then return no_backend() end
+  local conf = opts.backends[name]
+  local args, map = build(backends.adapters[name], conf)
   return require("snacks.picker.source.proc").proc(ctx:opts({
-    cmd = opts.backends[backend_name].cmd,
+    cmd = conf.cmd,
     args = args,
-    transform = function(item)
-      local path = vim.trim(item.text)
-      if path == "" then return false end
-      item.file = path
-      item.text = path
-    end,
+    transform = to_item(map),
   }), ctx)
 end
 
--- Defined after source so finder can reference it directly
-local picker_base = {
+local function file_finder(opts, ctx)
+  local search = ctx.filter.search or ""
+  if search == "" then return function() end end
+  local query = split_search(search)
+  return run(opts, ctx, function(adapter, conf)
+    return adapter.file_args(opts, conf, query)
+  end)
+end
+
+local function git_finder(opts, ctx)
+  return run(opts, ctx, function(adapter, conf)
+    return adapter.git_args(opts, conf), adapter.git_root
+  end)
+end
+
+local file_picker = {
   live = true,
   supports_live = true,
   need_search = true,
   format = "file",
   preview = "file",
-  finder = source,
+  finder = file_finder,
+}
+
+local git_picker = {
+  format = "file",
+  preview = "file",
+  confirm = "jump",
+  finder = git_finder,
 }
 
 function M.setup(opts)
   M.config = vim.tbl_deep_extend("force", defaults, opts or {})
-  local ok, snacks_picker = pcall(require, "snacks.picker")
+  local ok, picker = pcall(require, "snacks.picker")
   if not ok then return end
-  snacks_picker.sources = snacks_picker.sources or {}
-  snacks_picker.sources.everywhere = vim.tbl_extend("force", picker_base, M.config, {
-    title = "File Search",
-  })
+  picker.sources = picker.sources or {}
+  picker.sources.everywhere = vim.tbl_extend("force", file_picker, M.config, { title = "File Search" })
 end
 
 function M.pick(opts)
   local cfg = vim.tbl_deep_extend("force", M.config, opts or {})
-  local name = resolve_backend(cfg)
-  -- Pass the resolved name so source() skips the executable check on each call
-  cfg.backend = name
+  cfg.backend = backends.resolve(cfg)
   local titles = { everything = "Everything", plocate = "plocate" }
-  Snacks.picker.pick(vim.tbl_extend("force", picker_base, cfg, {
-    title = titles[name] or "File Search",
+  Snacks.picker.pick(vim.tbl_extend("force", file_picker, cfg, {
+    title = titles[cfg.backend] or "File Search",
   }))
 end
 
--- Single source of truth for the supported backend list
-M.backends = BACKENDS
+function M.git_repos(opts)
+  local cfg = vim.tbl_deep_extend("force", M.config, opts or {})
+  cfg.backend = backends.resolve(cfg)
+  Snacks.picker.pick(vim.tbl_extend("force", git_picker, cfg, { title = "Git Repositories" }))
+end
 
 return M
