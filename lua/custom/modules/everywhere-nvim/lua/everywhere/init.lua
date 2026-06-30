@@ -87,7 +87,7 @@ local function resolve_backend(opts)
 end
 
 local function source(opts, ctx)
-  local search = opts.search or ""
+  local search = ctx.filter.search or ""
   if search == "" then
     return function() end
   end
