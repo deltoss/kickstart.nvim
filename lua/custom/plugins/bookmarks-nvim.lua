@@ -1,16 +1,17 @@
 return {
   'LintaoAmons/bookmarks.nvim',
-  -- pin the plugin at specific version for stability
+  -- Tracking 'main' for the snacks picker backend (not yet in a tagged release).
   -- backup your bookmark sqlite db when there are breaking changes (major version change)
-  tag = 'v4.0.0',
+  branch = 'main',
   dependencies = {
     { 'kkharji/sqlite.lua' },
-    { 'nvim-telescope/telescope.nvim' }, -- currently has only telescopes supported, but PRs for other pickers are welcome
+    { 'folke/snacks.nvim' },
     { 'stevearc/dressing.nvim' }, -- optional: better UI
   },
   config = function()
     local opts = {
       -- See https://github.com/LintaoAmons/bookmarks.nvim/blob/main/lua/bookmarks/default-config.lua
+      picker_backend = 'snacks',
       signs = {
         mark = {
           icon = '',
@@ -35,7 +36,7 @@ return {
           },
         },
       },
-    } -- check the "./lua/bookmarks/default-config.lua" file for all the options
+    }                                -- check the "./lua/bookmarks/default-config.lua" file for all the options
     require('bookmarks').setup(opts) -- you must call setup to init sqlite db
   end,
   init = function()

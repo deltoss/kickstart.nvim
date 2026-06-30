@@ -30,9 +30,9 @@ return {
             key = 'z',
           },
           {
-            desc = ' Everything Search',
+            desc = ' Everywhere Search',
             group = 'DiagnosticHint',
-            action = 'Telescope everything',
+            action = 'Everywhere',
             key = 'e',
           },
           {
