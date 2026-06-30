@@ -13,7 +13,6 @@ local defaults = {
 }
 
 M.config = vim.deepcopy(defaults)
-M.backends = backends.order
 
 -- Split a query into terms, keeping "quoted phrases" together.
 local function split_search(search)
@@ -95,18 +94,23 @@ function M.setup(opts)
   picker.sources.everywhere = vim.tbl_extend("force", file_picker, M.config, { title = "File Search" })
 end
 
-function M.pick(opts)
+local titles = { everything = "Everything", plocate = "plocate" }
+
+local function configure(opts)
   local cfg = vim.tbl_deep_extend("force", M.config, opts or {})
   cfg.backend = backends.resolve(cfg)
-  local titles = { everything = "Everything", plocate = "plocate" }
+  return cfg
+end
+
+function M.pick(opts)
+  local cfg = configure(opts)
   Snacks.picker.pick(vim.tbl_extend("force", file_picker, cfg, {
     title = titles[cfg.backend] or "File Search",
   }))
 end
 
 function M.git_repos(opts)
-  local cfg = vim.tbl_deep_extend("force", M.config, opts or {})
-  cfg.backend = backends.resolve(cfg)
+  local cfg = configure(opts)
   Snacks.picker.pick(vim.tbl_extend("force", git_picker, cfg, { title = "Git Repositories" }))
 end
 
