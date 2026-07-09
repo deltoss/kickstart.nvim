@@ -2,7 +2,25 @@ return {
   'snacks.nvim', -- only the name of the plugin needs to be specified since it already exists
   ---@type snacks.Config
   opts = {
-    picker = { enabled = true },
+    picker = {
+      enabled = true,
+      sources = {
+        grep = {
+          win = {
+            input = {
+              keys = {
+                ["<c-f>"] = { "toggle_live", mode = { "i", "n" } },
+              },
+            },
+            list = {
+              keys = {
+                ["<c-f>"] = "print_path",
+              },
+            },
+          },
+        },
+      },
+    },
   },
   keys = {
     {
