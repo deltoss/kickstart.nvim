@@ -37,7 +37,7 @@ return {
       interactions = {
         chat = {
           adapter = {
-            name = 'opencode',
+            name = 'claude_code', -- opencode
           },
           keymaps = {
             fold_code = {
