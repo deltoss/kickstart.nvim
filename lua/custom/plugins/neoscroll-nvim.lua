@@ -6,6 +6,17 @@ return {
       -- Default easing function used in any animation where
       -- the `easing` argument has not been explicitly supplied
       easing = 'quadratic',
+
+      -- neoscroll suppresses CursorMoved/WinScrolled (via eventignore) for the
+      -- whole animation, so nvim-origami's fold-highlight tracking (which only
+      -- listens for CursorMoved) never sees the cursor land on its final row.
+      -- Resync it directly here once the scroll finishes.
+      post_hook = function()
+        local winid = vim.api.nvim_get_current_win()
+        local bufnr = vim.api.nvim_win_get_buf(winid)
+        local row = vim.api.nvim_win_get_cursor(winid)[1]
+        require('custom.utils.code_folds').update_current_fold(row, bufnr, winid)
+      end,
     }
     local keymap = {
       -- Use the "sine" easing function
