@@ -195,7 +195,8 @@ keymap('n', '<leader>rw', ':%s/\\<<C-r><C-w>\\>//g<left><left>', { desc = '[W]or
 keymap('x', '<leader>rh', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>//g<Left><Left>", { desc = '[H]ighlighted text' })
 
 -- Visual mode: replace highlighted text with highlighted value + entered value
-keymap('x', '<leader>ra', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\", '/\\&~')<CR>/g<Left><Left>", { desc = '[A]ppend to highlighted text' })
+keymap('x', '<leader>ra', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\", '/\\&~')<CR>/g<Left><Left>",
+  { desc = '[A]ppend to highlighted text' })
 
 -- Quickly change word
 -- From https://github.com/folke/dot/blob/master/nvim/lua/config/keymaps.lua
@@ -207,16 +208,18 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'lua',
   callback = function(event)
     local opts = { buffer = event.buf, silent = true }
-    keymap('n', '<localleader>s', '<cmd>source %<CR>', { desc = '[S]ource Current File', buffer = event.buf, silent = true })
+    keymap('n', '<localleader>s', '<cmd>source %<CR>',
+      { desc = '[S]ource Current File', buffer = event.buf, silent = true })
     keymap('n', '<localleader>x', ':.lua<CR>', { desc = 'E[x]ecute Line', buffer = event.buf, silent = true })
     keymap('v', '<localleader>x', ':lua<CR>', { desc = 'E[x]ecute', buffer = event.buf, silent = true })
   end,
 })
 
 -- Copy file paths
-keymap('n', '<leader>yp', ":let @+=expand('%:.')<cr>", { desc = 'Copy relative path' })
-keymap('n', '<leader>yP', ':let @+=@%<cr>', { desc = 'Copy absolute path' })
-keymap('n', '<leader>yp', ":let @+=expand('%:.:h')<cr>", { desc = 'Copy relative directory path' })
-keymap('n', '<leader>yP', ":let @+=expand('%:p:h')<cr>", { desc = 'Copy absolute directory path' })
-keymap('n', '<leader>yn', ":let @+=expand('%:t:r')<cr>", { desc = 'Copy filename' })
-keymap('n', '<leader>yf', ":let @+=expand('%:t')<cr>", { desc = 'Copy filename with extension' })
+keymap('n', '<leader>yy', ':let @+=@%<cr>', { desc = 'Yank Path' })
+keymap('n', '<leader>yp', ':let @+=@%<cr>', { desc = 'Yank [P]ath' })
+keymap('n', '<leader>yP', ":let @+=expand('%:.')<cr>", { desc = 'Yank [P]ath (Relative)' })
+keymap('n', '<leader>yd', ":let @+=expand('%:p:h')<cr>", { desc = 'Yank [D]irectory Path' })
+keymap('n', '<leader>yD', ":let @+=expand('%:.:h')<cr>", { desc = 'Yank [D]irectory Path (Relative)' })
+keymap('n', '<leader>yf', ":let @+=expand('%:t')<cr>", { desc = 'Yank [F]ilename' })
+keymap('n', '<leader>yF', ":let @+=expand('%:t:r')<cr>", { desc = 'Yank [F]ilename Without Extension' })
