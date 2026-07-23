@@ -9,7 +9,7 @@ return {
     {
       '<leader>sG',
       function()
-        require('grug-far').open({
+        require('grug-far').toggle_instance({
           engine = 'astgrep',
           instanceName = 'far',
           staticTitle = 'Find and Replace',
@@ -17,6 +17,7 @@ return {
           transient = true
         })
       end,
+      mode = { 'n', 'x' },
       desc = 'ast-[G]rep',
     },
   },

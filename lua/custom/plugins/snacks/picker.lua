@@ -125,12 +125,20 @@ return {
       desc = '[G]rep',
     },
     {
+      '<leader>sg',
+      function()
+        Snacks.picker.grep_word()
+      end,
+      desc = '[G]rep',
+      mode = { 'x' },
+    },
+    {
       '<leader>sw',
       function()
         Snacks.picker.grep_word()
       end,
-      desc = 'Selection or [W]ord',
-      mode = { 'n', 'x' },
+      desc = 'Grep [W]ord',
+      mode = { 'n' },
     },
     {
       '<leader>sb',
