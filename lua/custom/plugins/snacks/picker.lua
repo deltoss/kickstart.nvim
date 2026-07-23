@@ -70,7 +70,7 @@ return {
       function()
         Snacks.picker.commands()
       end,
-      desc = 'Commands',
+      desc = '[C]ommands',
     },
     {
       '<leader>:',
@@ -101,7 +101,7 @@ return {
       desc = '[R]ecent Files',
     },
     {
-      '<leader>sp',
+      '<leader>sP',
       function()
         Snacks.picker.projects {
           patterns = { '*.sln', 'readme.md', '.git', '_darcs', '.hg', '.bzr', '.svn', 'package.json', 'Makefile' },
@@ -189,11 +189,11 @@ return {
       desc = '[T]hemes',
     },
     {
-      '<leader>sG',
+      '<leader>sp',
       function()
         Snacks.picker.git_files()
       end,
-      desc = '[G]it Files',
+      desc = '[P]roject Files',
     },
     -- git
     {
