@@ -8,7 +8,6 @@ return {
     {
       '<leader>gg',
       function()
-        vim.cmd 'CDgit'
         Snacks.lazygit()
       end,
       desc = 'Lazygit',
@@ -16,7 +15,6 @@ return {
     {
       '<leader>gL',
       function()
-        vim.cmd 'CDgit'
         Snacks.lazygit.log()
       end,
       desc = 'Lazygit [L]og',
