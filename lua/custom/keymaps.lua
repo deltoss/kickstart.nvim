@@ -28,6 +28,7 @@ pcall(vim.keymap.del, 'n', 'gri')
 pcall(vim.keymap.del, 'n', 'grn')
 pcall(vim.keymap.del, 'n', 'grr')
 pcall(vim.keymap.del, 'n', 'grt')
+pcall(vim.keymap.del, 'n', 'grx')
 
 -- Close mappings
 keymap('n', 'Zq', ':q<cr>', { desc = '[Q]uit' })
@@ -66,11 +67,7 @@ keymap('c', '<C-r><C-r>', '<C-r>*', { noremap = true })
 -- keymap({ 'n', 'v' }, 'N', 'Nzz')
 
 -- Wrapped line navigation
-keymap('n', '<C-Up>', 'gk', { noremap = true })
-keymap('v', '<C-Up>', 'gk', { noremap = true })
 keymap('i', '<Up>', '<C-o>gk', { noremap = true })
-keymap('n', '<C-Down>', 'gj', { noremap = true })
-keymap('v', '<C-Down>', 'gj', { noremap = true })
 keymap('i', '<Down>', '<C-o>gj', { noremap = true })
 
 -- Save with Ctrl+S
@@ -99,8 +96,8 @@ keymap('i', '<C-d>', '<C-o>dw', { noremap = true, desc = 'Delete the next word' 
 keymap('i', '<C-k>', '<C-o>D', { noremap = true, desc = 'Delete to end of line' })
 
 -- Buffer operations
-keymap('n', '<', ':bn<CR>', { noremap = true, silent = true })
-keymap('n', '>', ':bp<CR>', { noremap = true, silent = true })
+keymap('n', '<leader><', ':bn<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>>', ':bp<CR>', { noremap = true, silent = true })
 
 -- Window operations
 keymap('n', '<leader><Up>', ':split<CR>', { desc = 'Horizontal split (above)' })
@@ -133,9 +130,9 @@ keymap('n', 'gs', '<C-W>vgf', { desc = 'Go to file on new split', noremap = true
 keymap('n', 'gt', '<C-W>gf', { desc = 'Go to file on new tab', noremap = true, silent = true })
 
 -- Tab operations
-keymap('n', '<', ':tabprev<CR>', { desc = 'Previous' })
-keymap('n', '>', ':tabnext<CR>', { desc = 'Next' })
-keymap('n', '<C-t>', ':tabedit %<CR>', { desc = 'New tab' })
+keymap('n', '<', '<cmd>tabprev<CR>', { desc = 'Previous', nowait = true, silent = true })
+keymap('n', '>', '<cmd>tabnext<CR>', { desc = 'Next', nowait = true, silent = true })
+keymap('n', '<C-t>', '<cmd>tabedit %<CR>', { desc = 'New tab', silent = true })
 
 -- Delete without yanking
 keymap({ 'n', 'v' }, '<leader>d', '"_d', { noremap = true })

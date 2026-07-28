@@ -17,7 +17,10 @@ return {
 
     local fold_util = require 'custom.utils.code_folds'
 
-    vim.keymap.set('n', '<CR>', 'za', { noremap = true, silent = true })
+    vim.keymap.set('n', '<CR>', function()
+      -- Keep default <CR> in special buffers (quickfix, help, terminal, etc.)
+      return vim.bo.buftype == '' and 'za' or '<CR>'
+    end, { expr = true, noremap = true, silent = true })
     vim.keymap.set('n', '[[', fold_util.goto_previous_fold, { noremap = true, silent = true })
     vim.keymap.set('n', ']]', 'zj', { noremap = true, silent = true })
 
