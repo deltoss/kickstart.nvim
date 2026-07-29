@@ -213,8 +213,8 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Copy file paths
-keymap('n', '<leader>yy', ':let @+=@%<cr>', { desc = 'Yank Path' })
-keymap('n', '<leader>yp', ':let @+=@%<cr>', { desc = 'Yank [P]ath' })
+keymap('n', '<leader>yy', ":let @+=expand('%:p')<cr>", { desc = 'Yank Path' })
+keymap('n', '<leader>yp', ":let @+=expand('%:p')<cr>", { desc = 'Yank [P]ath' })
 keymap('n', '<leader>yP', ":let @+=expand('%:.')<cr>", { desc = 'Yank [P]ath (Relative)' })
 keymap('n', '<leader>yd', ":let @+=expand('%:p:h')<cr>", { desc = 'Yank [D]irectory Path' })
 keymap('n', '<leader>yD', ":let @+=expand('%:.:h')<cr>", { desc = 'Yank [D]irectory Path (Relative)' })
