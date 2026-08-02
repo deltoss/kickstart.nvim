@@ -275,5 +275,12 @@ return {
       vim.lsp.config(name, server)
       vim.lsp.enable(name)
     end
+
+    -- Nushell LSP is shipped with the `nu` binary itself (`nu --lsp`), so it's
+    -- not installable via Mason. Enabled separately to keep it out of
+    -- `ensure_installed` above.
+    if vim.fn.executable 'nu' == 1 then
+      vim.lsp.enable 'nushell'
+    end
   end,
 }
