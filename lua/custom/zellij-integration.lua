@@ -19,3 +19,28 @@ keymap('n', '<leader>w<Left>', function()
   local cwd = vim.fn.getcwd()
   vim.fn.jobstart({ 'zellij', 'action', 'new-pane', '--direction', 'left', '--cwd', cwd }, { detach = true })
 end, { desc = 'Split Pane Left' })
+
+if vim.env.ZELLIJ then
+  local last_name = nil
+
+  local function rename_pane()
+    local buf = vim.api.nvim_get_current_buf()
+    if vim.bo[buf].buftype ~= '' then
+      return
+    end
+
+    local file = vim.api.nvim_buf_get_name(buf)
+    local name = file == '' and 'nvim' or ('nvim ' .. vim.fn.fnamemodify(file, ':p:~'))
+    if name == last_name then
+      return
+    end
+    last_name = name
+
+    vim.fn.jobstart({ 'zellij', 'action', 'rename-pane', name }, { detach = true })
+  end
+
+  vim.api.nvim_create_autocmd({ 'BufEnter', 'BufFilePost' }, {
+    group = vim.api.nvim_create_augroup('ZellijPaneName', { clear = true }),
+    callback = rename_pane,
+  })
+end
