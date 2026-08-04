@@ -31,12 +31,14 @@ if vim.env.ZELLIJ then
 
     local file = vim.api.nvim_buf_get_name(buf)
     local name = file == '' and 'nvim' or ('nvim ' .. vim.fn.fnamemodify(file, ':p:~'))
+    local tail = file == '' and 'nvim' or vim.fn.fnamemodify(file, ':t')
     if name == last_name then
       return
     end
     last_name = name
 
-    vim.fn.jobstart({ 'zellij', 'action', 'rename-pane', name }, { detach = true })
+    vim.fn.jobstart({ 'zellij', 'action', 'rename-pane', '👾 ' .. name }, { detach = true })
+    vim.fn.jobstart({ 'zellij', 'action', 'rename-tab', '👾 ' .. tail }, { detach = true })
   end
 
   vim.api.nvim_create_autocmd({ 'BufEnter', 'BufFilePost' }, {
