@@ -136,7 +136,7 @@ return {
     { '<leader>n<Right>', '<cmd>Obsidian follow_link vsplit<cr>', desc = 'Open Link [Right]' },
     { '<leader>n<Down>', '<cmd>Obsidian follow_link hsplit<cr>', desc = 'Open Link [Down]' },
 
-    { '<leader>no', '<cmd>Obsidian workspace<cr>', desc = 'Switch [W]orkspace' },
+    { '<leader>nw', '<cmd>Obsidian workspace<cr>', desc = 'Switch [W]orkspace' },
 
     { '<leader>no', '<cmd>Obsidian open<cr>', desc = 'Open in [O]bsidian App' },
     { '<leader>nr', '<cmd>Obsidian rename<cr>', desc = '[R]ename Note' },

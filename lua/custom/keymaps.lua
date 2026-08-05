@@ -13,10 +13,6 @@ keymap('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- or just use <C-\><C-n> to exit terminal mode
 keymap('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- Remove default s mapping in normal and visual mode
--- This is used for mini-surround, and other plugins.
-keymap({ 'n', 'v' }, 's', '<Nop>')
-
 -- In visual mode, $ catches the trailing newline character which is often undesired.
 -- Thus, map it to g_ keymap instead.
 keymap('v', '$', 'g_')

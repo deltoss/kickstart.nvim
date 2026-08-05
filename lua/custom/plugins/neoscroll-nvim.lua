@@ -1,7 +1,7 @@
 return {
   'karb94/neoscroll.nvim',
   config = function()
-    neoscroll = require 'neoscroll'
+    local neoscroll = require 'neoscroll'
     neoscroll.setup {
       -- Default easing function used in any animation where
       -- the `easing` argument has not been explicitly supplied
