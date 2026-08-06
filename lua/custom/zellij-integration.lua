@@ -21,8 +21,6 @@ keymap('n', '<leader>w<Left>', function()
 end, { desc = 'Split Pane Left' })
 
 if vim.env.ZELLIJ then
-  -- Pane title via OSC 2. A CLI-set pane name overrides it, so clear any.
-  vim.fn.jobstart({ 'zellij', 'action', 'undo-rename-pane' }, { detach = true })
   vim.o.title = true
   vim.o.titlestring = [[👾 %{bufname() == '' ? 'nvim' : 'nvim ' .. expand('%:p:~')}]]
 
