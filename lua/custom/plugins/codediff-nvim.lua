@@ -112,6 +112,48 @@ return {
     'folke/snacks.nvim',
   },
   cmd = 'CodeDiff',
+  init = function()
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'CodeDiffOpen',
+      callback = function() vim.t.codediff_loaded = true end,
+    })
+    -- Format the inconsistent line endings for diffing purposes
+    vim.api.nvim_create_autocmd('BufReadPost', {
+      callback = function(args)
+        if not vim.t.codediff_loaded then return end
+        if vim.bo[args.buf].fileformat ~= 'unix' then return end
+
+        for _, line in ipairs(vim.api.nvim_buf_get_lines(args.buf, 0, 100, false)) do
+          if line:sub(-1) == '\r' then
+            vim.cmd('edit! ++ff=dos')
+            return
+          end
+        end
+      end,
+    })
+    -- Initializes easy-dotnet LSP for csharp reviews
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'CodeDiffOpen',
+      callback = function()
+        local fts = { cs = true, fsharp = true }
+        local found = false
+        for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+          if fts[vim.bo[vim.api.nvim_win_get_buf(win)].filetype] then
+            found = true
+            break
+          end
+        end
+        if not found then return end
+
+        local root = vim.fs.root(0, { '*.sln', '*.slnx' }) or vim.fn.getcwd()
+        local sln = vim.fn.glob(root .. '/*.sln', false, true)[1]
+            or vim.fn.glob(root .. '/*.slnx', false, true)[1]
+        if not sln then return end
+
+        require('easy-dotnet').solution_select(sln)
+      end,
+    })
+  end,
   opts = {
     diff = {
       compute_moves = true,        -- Detect moved code blocks (opt-in, matches VSCode experimental.showMoves)
