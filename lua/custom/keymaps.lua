@@ -27,12 +27,7 @@ pcall(vim.keymap.del, 'n', 'grt')
 pcall(vim.keymap.del, 'n', 'grx')
 
 -- Close mappings
-keymap('n', 'ZQ', ':q<cr>', { desc = '[Q]uit' })
-keymap('n', '<leader>zq', ':q<cr>', { desc = '[Q]uit' })
-keymap('n', 'ZW', ':wq<cr>', { desc = '[W]rite and Quit' })
-keymap('n', '<leader>zw', ':wq<cr>', { desc = '[W]rite and Quit' })
-keymap('n', 'ZB', ':bd<cr>', { desc = 'Close [B]uffer' })
-keymap('n', '<leader>zb', ':bd<cr>', { desc = 'Close [B]uffer' })
+keymap('n', '<leader>B', ':bd<cr>', { desc = 'Close [B]uffer' })
 
 -- Spelling correction
 keymap('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { noremap = true, silent = true })
@@ -50,6 +45,13 @@ keymap('i', '<C-y>', '<C-o><C-r>', { noremap = true })
 keymap('i', '<C-r><C-r>', '<C-r>*', { noremap = true })
 keymap('i', '<C-r>r', '<C-r>*', { noremap = true })
 keymap('c', '<C-r><C-r>', '<C-r>*', { noremap = true })
+
+-- Better Navigation - Note this interferes with neoscroll plugin
+-- keymap({ 'n', 'v' }, '<C-u>', '<C-u>zz')
+-- keymap({ 'n', 'v' }, '<C-d>', '<C-d>zz')
+-- keymap({ 'n', 'v' }, '<C-e>', '<C-d>zz')
+-- keymap({ 'n', 'v' }, 'n', 'nzz')
+-- keymap({ 'n', 'v' }, 'N', 'Nzz')
 
 -- Wrapped line navigation
 keymap('i', '<Up>', '<C-o>gk', { noremap = true })
@@ -198,6 +200,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Copy file paths
+keymap('n', '<leader>yy', ":let @+=expand('%:p')<cr>", { desc = 'Yank Path' })
 keymap('n', '<leader>yp', ":let @+=expand('%:p')<cr>", { desc = 'Yank [P]ath' })
 keymap('n', '<leader>yP', ":let @+=expand('%:.')<cr>", { desc = 'Yank [P]ath (Relative)' })
 keymap('n', '<leader>yd', ":let @+=expand('%:p:h')<cr>", { desc = 'Yank [D]irectory Path' })

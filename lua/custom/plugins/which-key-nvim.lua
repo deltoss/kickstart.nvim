@@ -74,7 +74,6 @@ return {
       { '<leader>w',          group = '[W]ezterm' },
       { '<leader>r',          group = '[R]eplace' },
       { '<leader>k',          group = 'Pee[k]' },
-      { '<leader>z',          group = 'Close' },
       { '<leader>P',          group = '[P]aste',               mode = { 'n', 'v' } },
       { '<leader><leader>',   group = 'Extended Commands' },
       { '<leader><leader>s',  group = '[S]urround' },
