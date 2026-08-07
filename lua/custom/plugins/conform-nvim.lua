@@ -33,7 +33,7 @@ end, {
 })
 
 -- Helper to run external formatter tools
-local function run_formatter(cmd, tool)
+local function run_formatter(cmd, tool, mode)
   if vim.fn.executable(tool) == 0 then
     vim.notify(tool .. ' is not installed or not in PATH', vim.log.levels.ERROR)
     return
@@ -56,11 +56,11 @@ local function format()
   local is_yaml = ft == 'yaml' or ft == 'yml' or filename:match '%.ya?ml$'
 
   if is_xml then
-    run_formatter('yq -p xml -o xml', 'yq')
+    run_formatter('yq -p xml -o xml', 'yq', mode)
   elseif is_json then
-    run_formatter('jq .', 'jq')
+    run_formatter('jq .', 'jq', mode)
   elseif is_yaml then
-    run_formatter('yq -p yaml -o yaml', 'yq')
+    run_formatter('yq -p yaml -o yaml', 'yq', mode)
   else
     require('conform').format { async = true, lsp_format = 'fallback' }
   end

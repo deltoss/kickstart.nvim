@@ -13,10 +13,6 @@ keymap('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- or just use <C-\><C-n> to exit terminal mode
 keymap('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- Remove default s mapping in normal and visual mode
--- This is used for mini-surround, and other plugins.
-keymap({ 'n', 'v' }, 's', '<Nop>')
-
 -- In visual mode, $ catches the trailing newline character which is often undesired.
 -- Thus, map it to g_ keymap instead.
 keymap('v', '$', 'g_')
@@ -31,16 +27,7 @@ pcall(vim.keymap.del, 'n', 'grt')
 pcall(vim.keymap.del, 'n', 'grx')
 
 -- Close mappings
-keymap('n', 'Zq', ':q<cr>', { desc = '[Q]uit' })
-keymap('n', 'ZQ', ':q<cr>', { desc = '[Q]uit' })
-keymap('n', '<leader>zq', ':q<cr>', { desc = '[Q]uit' })
-keymap('n', '<leader>zz', ':q<cr>', { desc = '[Q]uit' })
-keymap('n', 'ZW', ':wq<cr>', { desc = '[W]rite and Quit' })
-keymap('n', 'Zw', ':wq<cr>', { desc = '[W]rite and Quit' })
-keymap('n', '<leader>zw', ':wq<cr>', { desc = '[W]rite and Quit' })
-keymap('n', 'Zb', ':bd<cr>', { desc = 'Close [B]uffer' })
-keymap('n', 'ZB', ':bd<cr>', { desc = 'Close [B]uffer' })
-keymap('n', '<leader>zb', ':bd<cr>', { desc = '[B]uffer' })
+keymap('n', '<leader>B', ':bd<cr>', { desc = 'Close [B]uffer' })
 
 -- Spelling correction
 keymap('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { noremap = true, silent = true })
