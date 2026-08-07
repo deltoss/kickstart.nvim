@@ -12,7 +12,7 @@ return {
   },
   keys = {
     {
-      '<leader>zm',
+      '<leader>Dm',
       function()
         Snacks.notifier.hide()
       end,
