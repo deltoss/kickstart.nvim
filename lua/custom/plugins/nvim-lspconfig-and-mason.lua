@@ -276,6 +276,9 @@ return {
       vim.lsp.enable(name)
     end
 
+    -- Installed separately with `cargo install openscad-lsp`.
+    vim.lsp.enable 'openscad_lsp'
+
     -- Nushell LSP is shipped with the `nu` binary itself (`nu --lsp`), so it's
     -- not installable via Mason. Enabled separately to keep it out of
     -- `ensure_installed` above.
