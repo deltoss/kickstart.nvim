@@ -72,18 +72,38 @@ return {
         map('<leader>rr', vim.lsp.buf.rename, '[R]ename')
         map('k', vim.lsp.buf.hover, 'Pee[k] Documentation')
         map('ga', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
-        map('gr', function() Snacks.picker.lsp_references() end, '[G]oto [R]eferences')
-        map('gI', function() Snacks.picker.lsp_incoming_calls() end, '[G]oto [I]ncoming')
-        map('gO', function() Snacks.picker.lsp_outgoing_calls() end, '[G]oto [O]utgoing')
+        map('gr', function()
+          Snacks.picker.lsp_references()
+        end, '[G]oto [R]eferences')
+        map('gI', function()
+          Snacks.picker.lsp_incoming_calls()
+        end, '[G]oto [I]ncoming')
+        map('gO', function()
+          Snacks.picker.lsp_outgoing_calls()
+        end, '[G]oto [O]utgoing')
 
-        map(']d', function() vim.diagnostic.jump { count = 1, float = true } end, 'Diagnostic')
-        map('[d', function() vim.diagnostic.jump { count = -1, float = true } end, 'Diagnostic')
-        map(']e', function() vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.ERROR, float = true } end, 'Error')
-        map('[e', function() vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR, float = true } end, 'Error')
+        map(']d', function()
+          vim.diagnostic.jump { count = 1, float = true }
+        end, 'Diagnostic')
+        map('[d', function()
+          vim.diagnostic.jump { count = -1, float = true }
+        end, 'Diagnostic')
+        map(']e', function()
+          vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.ERROR, float = true }
+        end, 'Error')
+        map('[e', function()
+          vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR, float = true }
+        end, 'Error')
 
-        map('gi', function() Snacks.picker.lsp_implementations() end, '[G]oto [I]mplementation')
-        map('gd', function() Snacks.picker.lsp_definitions() end, '[G]oto [D]efinition')
-        map('gD', function() Snacks.picker.lsp_type_definitions() end, '[G]oto [T]ype [D]efinition')
+        map('gi', function()
+          Snacks.picker.lsp_implementations()
+        end, '[G]oto [I]mplementation')
+        map('gd', function()
+          Snacks.picker.lsp_definitions()
+        end, '[G]oto [D]efinition')
+        map('gD', function()
+          Snacks.picker.lsp_type_definitions()
+        end, '[G]oto [T]ype [D]efinition')
 
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
@@ -257,6 +277,7 @@ return {
       'jq',
       'js-debug-adapter',
       'stylua',
+      'typescript-language-server', -- Provides TypeScript tsserver for typescript-tools.nvim; ts_ls stays disabled.
       'xmlformatter',
       'yamlfmt',
       'yq',
