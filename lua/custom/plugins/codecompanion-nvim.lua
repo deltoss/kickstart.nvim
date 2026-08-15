@@ -37,7 +37,7 @@ return {
       interactions = {
         chat = {
           adapter = {
-            name = 'claude_code', -- opencode
+            name = 'pi',
           },
           keymaps = {
             fold_code = {
@@ -70,6 +70,52 @@ return {
           end,
         },
         acp = {
+          -- See https://github.com/olimorris/codecompanion.nvim/discussions/3215
+          pi = function()
+            local helpers = require 'codecompanion.adapters.acp.helpers'
+            return {
+              name = 'pi',
+              formatted_name = 'pi coding agent',
+              type = 'acp',
+              roles = {
+                llm = 'assistant',
+                user = 'user',
+              },
+              commands = {
+                default = {
+                  'npx',
+                  '-y',
+                  'pi-acp',
+                },
+              },
+              defaults = {
+                mcpServers = {},
+                timeout = 20000,
+              },
+              parameters = {
+                protocolVersion = 1,
+                clientCapabilities = {
+                  fs = { readTextFile = true, writeTextFile = true },
+                },
+                clientInfo = {
+                  name = 'CodeCompanion.nvim',
+                  version = '1.0.0',
+                },
+              },
+              handlers = {
+                setup = function(self)
+                  return true
+                end,
+                auth = function(self)
+                  return true
+                end,
+                form_messages = function(self, messages, capabilities)
+                  return helpers.form_messages(self, messages, capabilities)
+                end,
+                on_exit = function(self, code) end,
+              },
+            }
+          end,
           claude_code = function()
             local key = keys and keys.anthropic or nil
             return require('codecompanion.adapters').extend('claude_code', {
