@@ -3,12 +3,13 @@ return {
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
   ft = { 'typescript', 'typescriptreact' },
   opts = {
-    settings = {
-      -- CodeLens
-      -- WARNING: Experimental feature also in VSCode, because it might hit performance of server.
-      -- possible values: ("off"|"all"|"implementations_only"|"references_only")
-      code_lens = 'all',
-    },
+    root_dir = function(bufnr, on_dir)
+      if vim.fs.root(bufnr, { 'deno.json', 'deno.jsonc', 'deno.lock' }) then
+        return
+      end
+
+      on_dir(vim.fs.root(bufnr, { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' }) or vim.fn.getcwd())
+    end,
   },
   keys = {
     {
