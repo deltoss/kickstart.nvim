@@ -1,14 +1,38 @@
+local filetypes = { 'http', 'rest' }
+
 return {
   'mistweaverco/kulala.nvim',
+  ft = filetypes,
   keys = {
-    { '<localleader>s', desc = 'Send request' },
-    { '<localleader>a', desc = 'Send all requests' },
-    { '<localleader>S', desc = 'Open scratchpad' },
+    {
+      '<localleader>s',
+      function()
+        require('kulala').run()
+      end,
+      mode = { 'n', 'v' },
+      ft = filetypes,
+      desc = 'Send request',
+    },
+    {
+      '<localleader>a',
+      function()
+        require('kulala').run_all()
+      end,
+      mode = { 'n', 'v' },
+      ft = filetypes,
+      desc = 'Send all requests',
+    },
+    {
+      '<localleader>S',
+      function()
+        require('kulala').scratchpad()
+      end,
+      ft = filetypes,
+      desc = 'Open scratchpad',
+    },
   },
-  ft = { 'http', 'rest' },
   opts = {
-    global_keymaps = true,
-    global_keymaps_prefix = '<localleader>',
+    global_keymaps = false,
     kulala_keymaps_prefix = '',
   },
 }
