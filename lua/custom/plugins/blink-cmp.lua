@@ -33,6 +33,31 @@ return { -- Autocompletion
       --
       -- See :h blink-cmp-config-keymap for defining your own keymap
       preset = 'default',
+      ['<C-k>'] = {
+        function(cmp)
+          local docs = require 'blink.cmp.completion.windows.documentation'
+          if not docs.win:is_open() then
+            return cmp.show_documentation()
+          end
+
+          vim.schedule(function()
+            if not docs.win:is_open() then
+              return
+            end
+
+            local lines = vim.api.nvim_buf_get_lines(docs.win:get_buf(), 0, -1, false)
+            local _, winid = vim.lsp.util.open_floating_preview(lines, 'markdown', {
+              close_events = {},
+              focusable = true,
+              max_height = docs.win.config.max_height,
+              max_width = docs.win.config.max_width,
+            })
+            vim.api.nvim_set_current_win(winid)
+            vim.cmd.stopinsert()
+          end)
+          return true
+        end,
+      },
       -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
       --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
     },

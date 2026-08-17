@@ -79,7 +79,6 @@ keymap('i', '<C-BS>', '<C-w>', { noremap = true, desc = 'Delete the previous wor
 keymap('i', '<C-H>', '<C-w>', { noremap = true, desc = 'Delete the previous word' })
 keymap('i', '<C-Del>', '<C-o>dw', { noremap = true, desc = 'Delete the next word' })
 keymap('i', '<C-d>', '<C-o>dw', { noremap = true, desc = 'Delete the next word' })
-keymap('i', '<C-k>', '<C-o>D', { noremap = true, desc = 'Delete to end of line' })
 
 -- Buffer operations
 keymap('n', '<leader><', ':bn<CR>', { noremap = true, silent = true })
@@ -154,9 +153,7 @@ keymap('n', 'K', function()
   vim.lsp.buf.signature_help() -- First calls shows the window
   vim.lsp.buf.signature_help() -- Second call brings focus to the floating window
 end, { noremap = true })
-keymap('i', '<C-k>', function()
-  vim.lsp.buf.signature_help()
-end, { noremap = true }) -- Note this is overwritten by blink.cmp by default
+-- Insert-mode <C-k> is mapped by blink.cmp in lua/custom/plugins/blink-cmp.lua.
 
 -- Code actions
 keymap({ 'n', 'v' }, '<leader>.', vim.lsp.buf.code_action, { desc = 'Code actions' })
