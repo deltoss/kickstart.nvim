@@ -119,6 +119,12 @@ return {
           claude_code = function()
             local key = keys and keys.anthropic or nil
             return require('codecompanion.adapters').extend('claude_code', {
+              defaults = {
+                -- Values: default | acceptEdits | auto | bypassPermissions
+                session_config_options = {
+                  mode = 'auto',
+                },
+              },
               env = {
                 ANTHROPIC_API_KEY = key,
               },
