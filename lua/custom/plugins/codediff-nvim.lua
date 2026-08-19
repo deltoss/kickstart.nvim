@@ -156,6 +156,7 @@ return {
   end,
   opts = {
     diff = {
+      layout = 'inline',
       compute_moves = true,        -- Detect moved code blocks (opt-in, matches VSCode experimental.showMoves)
       conflict_result_height = 40, -- Height of result pane in bottom layout (% of total height)
     },
