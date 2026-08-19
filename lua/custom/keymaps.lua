@@ -32,14 +32,6 @@ keymap('n', '<leader>Db', ':bd<cr>', { desc = '[B]uffer' })
 keymap('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { noremap = true, silent = true })
 keymap('n', '<C-l>', '[s1z=`]', { noremap = true, silent = true })
 
--- Undo/redo mappings
-keymap('n', '<C-z>', 'u', { noremap = true })
-keymap('v', '<C-z>', 'u', { noremap = true })
-keymap('i', '<C-z>', '<C-o>u', { noremap = true })
-keymap('n', '<C-y>', '<C-r>', { noremap = true })
-keymap('v', '<C-y>', '<C-r>', { noremap = true })
-keymap('i', '<C-y>', '<C-o><C-r>', { noremap = true })
-
 -- Paste mappings
 keymap('i', '<C-r><C-r>', '<C-r>*', { noremap = true })
 keymap('i', '<C-r>r', '<C-r>*', { noremap = true })
@@ -93,7 +85,7 @@ keymap('n', '<leader><Right>', ':vsplit<CR>', { desc = 'Vertical split (right)' 
 -- Toggle zoom (maximize / restore layout)
 local zoomed = false
 local saved_layout = nil
-vim.keymap.set('n', '<leader>wz', function()
+vim.keymap.set('n', '<C-z>', function()
   if zoomed then
     if saved_layout then
       vim.cmd(saved_layout)
@@ -175,7 +167,8 @@ keymap('n', '<leader>rw', ':%s/\\<<C-r><C-w>\\>//g<left><left>', { desc = '[W]or
 keymap('x', '<leader>rh', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>//g<Left><Left>", { desc = '[H]ighlighted text' })
 
 -- Visual mode: replace highlighted text with highlighted value + entered value
-keymap('x', '<leader>ra', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\", '/\\&~')<CR>/g<Left><Left>", { desc = '[A]ppend to highlighted text' })
+keymap('x', '<leader>ra', "y:%s/\\V<C-r>=escape(@\", '/\\')<CR>/<C-r>=escape(@\", '/\\&~')<CR>/g<Left><Left>",
+  { desc = '[A]ppend to highlighted text' })
 
 -- Quickly change word
 -- From https://github.com/folke/dot/blob/master/nvim/lua/config/keymaps.lua
@@ -187,7 +180,8 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'lua',
   callback = function(event)
     local opts = { buffer = event.buf, silent = true }
-    keymap('n', '<localleader>s', '<cmd>source %<CR>', { desc = '[S]ource Current File', buffer = event.buf, silent = true })
+    keymap('n', '<localleader>s', '<cmd>source %<CR>',
+      { desc = '[S]ource Current File', buffer = event.buf, silent = true })
     keymap('n', '<localleader>x', ':.lua<CR>', { desc = 'E[x]ecute Line', buffer = event.buf, silent = true })
     keymap('v', '<localleader>x', ':lua<CR>', { desc = 'E[x]ecute', buffer = event.buf, silent = true })
   end,
