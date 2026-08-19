@@ -85,7 +85,7 @@ keymap('n', '<leader><Right>', ':vsplit<CR>', { desc = 'Vertical split (right)' 
 -- Toggle zoom (maximize / restore layout)
 local zoomed = false
 local saved_layout = nil
-vim.keymap.set('n', '<C-z>', function()
+vim.keymap.set('n', '<leader>z', function()
   if zoomed then
     if saved_layout then
       vim.cmd(saved_layout)
