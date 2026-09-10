@@ -32,28 +32,28 @@ return {
   },
   keys = {
     {
-      '<S-Left>',
+      '<C-S-Left>',
       function()
         require('smart-splits').resize_left()
       end,
       desc = 'Resize left',
     },
     {
-      '<S-Down>',
+      '<C-S-Down>',
       function()
         require('smart-splits').resize_down()
       end,
       desc = 'Resize down',
     },
     {
-      '<S-Up>',
+      '<C-S-Up>',
       function()
         require('smart-splits').resize_up()
       end,
       desc = 'Resize up',
     },
     {
-      '<S-Right>',
+      '<C-S-Right>',
       function()
         require('smart-splits').resize_right()
       end,
