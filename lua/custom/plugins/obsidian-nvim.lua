@@ -88,7 +88,7 @@ return {
       desc = 'Follow obsidian link or go to file',
     },
     {
-      'gs',
+      'gS',
       function()
         local line = vim.api.nvim_get_current_line()
         local col = vim.api.nvim_win_get_cursor(0)[2] + 1

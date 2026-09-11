@@ -79,6 +79,7 @@ return {
       { '<leader>P', group = '[P]aste', mode = { 'n', 'v' } },
       { '<leader><leader>', group = 'Extended Commands' },
       { '<leader><leader>s', group = '[S]urround' },
+      { 'gs', group = '[S]urround', mode = { 'n', 'v' } },
       { '<leader><leader>o', group = '[O]ptions' },
       { '<leader><leader>of', group = '+[F]ormatter (Conform)' },
       { '<leader>b', group = 'De[b]ug', mode = { 'n', 'v' } },
