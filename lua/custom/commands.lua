@@ -80,7 +80,7 @@ vim.api.nvim_create_user_command('CDlsp', function()
   end
 end, {})
 
-vim.keymap.set('n', '<leader>cl', '<cmd>CDlsp<CR>', { desc = '[L]sp Root Directory' })
+vim.keymap.set('n', '<localleader>cr', '<cmd>CDlsp<CR>', { desc = '[C]hange to LSP [R]oot' })
 
 vim.api.nvim_create_autocmd('BufEnter', {
   callback = function(event)

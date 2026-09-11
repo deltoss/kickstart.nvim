@@ -12,19 +12,5 @@ return {
       end,
       desc = 'Lazygit',
     },
-    {
-      '<leader>gL',
-      function()
-        Snacks.lazygit.log()
-      end,
-      desc = 'Lazygit [L]og',
-    },
-    {
-      '<leader>gF',
-      function()
-        Snacks.lazygit.log_file()
-      end,
-      desc = 'Lazygit [L]og Current [F]ile',
-    },
   },
 }
