@@ -282,8 +282,7 @@ return {
       'xmlformatter',
       'yamlfmt',
       'yq',
-      'biome', -- Linter/prettier for Javascript/Typescript
-      'prettier',
+      'biome', -- Formatter and linter for Javascript/Typescript
     })
     -- Only include if dotnet is installed
     if vim.fn.executable 'dotnet' == 1 then

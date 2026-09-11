@@ -38,11 +38,7 @@ local function web_formatters(bufnr)
   if vim.fs.root(bufnr, deno_roots) then
     return { 'deno_fmt' }
   end
-  if vim.fs.root(bufnr, { 'biome.json', 'biome.jsonc', '.biome.json', '.biome.jsonc' }) then
-    return { 'biome' }
-  end
-  -- Conform prefers project-local binaries and reads the project's Prettier config.
-  return { 'prettierd', 'prettier', stop_after_first = true }
+  return { 'biome' }
 end
 
 local function format()
