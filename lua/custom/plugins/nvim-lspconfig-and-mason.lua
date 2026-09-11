@@ -283,6 +283,7 @@ return {
       'yamlfmt',
       'yq',
       'biome', -- Linter/prettier for Javascript/Typescript
+      'prettier',
     })
     -- Only include if dotnet is installed
     if vim.fn.executable 'dotnet' == 1 then

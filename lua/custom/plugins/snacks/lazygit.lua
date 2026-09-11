@@ -10,21 +10,21 @@ return {
       function()
         Snacks.lazygit()
       end,
-      desc = 'Lazygit',
+      desc = 'Open Lazygit',
     },
     {
-      '<leader>gL',
+      '<leader>Gl',
       function()
         Snacks.lazygit.log()
       end,
-      desc = 'Lazygit [L]og',
+      desc = 'Repository [L]og',
     },
     {
-      '<leader>gF',
+      '<leader>Gf',
       function()
         Snacks.lazygit.log_file()
       end,
-      desc = 'Lazygit [L]og Current [F]ile',
+      desc = 'Current [F]ile Log',
     },
   },
 }

@@ -105,7 +105,7 @@ vim.keymap.set('n', '<leader>ww', '<C-w>c', { desc = 'Close pane' })
 vim.keymap.set('n', '<leader>wn', '<C-w>n', { desc = 'New pane' })
 
 -- Navigation on new tab or split
-keymap('n', 'gs', '<C-W>vgf', { desc = 'Go to file on new split', noremap = true, silent = true })
+keymap('n', 'gS', '<C-W>vgf', { desc = 'Go to file on new split', noremap = true, silent = true })
 keymap('n', 'gt', '<C-W>gf', { desc = 'Go to file on new tab', noremap = true, silent = true })
 
 -- Tab operations
