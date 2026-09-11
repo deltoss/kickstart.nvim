@@ -6,11 +6,25 @@ return {
   },
   keys = {
     {
-      '<leader>gg',
+      '<leader>Gg',
       function()
         Snacks.lazygit()
       end,
-      desc = 'Lazygit',
+      desc = 'Open Lazygit',
+    },
+    {
+      '<leader>Gl',
+      function()
+        Snacks.lazygit.log()
+      end,
+      desc = 'Repository [L]og',
+    },
+    {
+      '<leader>Gf',
+      function()
+        Snacks.lazygit.log_file()
+      end,
+      desc = 'Current [F]ile Log',
     },
   },
 }
