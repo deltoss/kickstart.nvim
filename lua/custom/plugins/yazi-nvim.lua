@@ -21,7 +21,7 @@ return {
   },
   ---@type YaziConfig | {}
   opts = {
-    open_for_directories = true,
+    open_for_directories = false,
     change_neovim_cwd_on_close = false,
     keymaps = {
       show_help = '<f2>',
