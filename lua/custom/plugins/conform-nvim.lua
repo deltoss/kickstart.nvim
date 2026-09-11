@@ -32,37 +32,40 @@ end, {
   desc = 'Re-enable autoformat-on-save',
 })
 
--- Helper to run external formatter tools
-local function run_formatter(cmd, tool, mode)
-  if vim.fn.executable(tool) == 0 then
-    vim.notify(tool .. ' is not installed or not in PATH', vim.log.levels.ERROR)
-    return
-  end
+local deno_roots = { 'deno.json', 'deno.jsonc', 'deno.lock' }
 
-  if mode == 'v' or mode == 'V' then
-    vim.cmd("'<,'>!" .. cmd)
-  else
-    vim.cmd('%!' .. cmd)
+local function web_formatters(bufnr)
+  if vim.fs.root(bufnr, deno_roots) then
+    return { 'deno_fmt' }
   end
+  if vim.fs.root(bufnr, { 'biome.json', 'biome.jsonc', '.biome.json', '.biome.jsonc' }) then
+    return { 'biome' }
+  end
+  -- Conform prefers project-local binaries and reads the project's Prettier config.
+  return { 'prettierd', 'prettier', stop_after_first = true }
 end
 
 local function format()
-  local ft = vim.bo.filetype
-  local filename = vim.fn.expand '%:t'
+  local conform = require 'conform'
   local mode = vim.fn.mode()
-
-  local is_xml = ft == 'xml' or filename:match '%.xml$'
-  local is_json = ft == 'json' or filename:match '%.json$'
-  local is_yaml = ft == 'yaml' or ft == 'yml' or filename:match '%.ya?ml$'
-
-  if is_xml then
-    run_formatter('yq -p xml -o xml', 'yq', mode)
-  elseif is_json then
-    run_formatter('jq .', 'jq', mode)
-  elseif is_yaml then
-    run_formatter('yq -p yaml -o yaml', 'yq', mode)
+  -- These tools format complete documents. Send only selected lines so their
+  -- diff cannot include adjacent changes outside the selection.
+  if (mode == 'v' or mode == 'V') and vim.tbl_contains({ 'json', 'yaml', 'xml' }, vim.bo.filetype) then
+    local bufnr = vim.api.nvim_get_current_buf()
+    local first, last = vim.fn.line 'v', vim.fn.line '.'
+    first, last = math.min(first, last), math.max(first, last)
+    local lines = vim.api.nvim_buf_get_lines(bufnr, first - 1, last, false)
+    local err, formatted = conform.format_lines(conform.list_formatters_for_buffer(bufnr), lines, {
+      bufnr = bufnr,
+      stop_after_first = true,
+    })
+    if err then
+      vim.notify(err.message, vim.log.levels.ERROR)
+    elseif formatted and #formatted > 0 and not vim.deep_equal(lines, formatted) then
+      vim.api.nvim_buf_set_lines(bufnr, first - 1, last, false, formatted)
+    end
   else
-    require('conform').format { async = true, lsp_format = 'fallback' }
+    conform.format { async = true, lsp_format = 'fallback' }
   end
 end
 
@@ -74,8 +77,8 @@ return {
     {
       '<leader>f',
       format,
-      mode = '',
-      desc = '[F]ormat buffer',
+      mode = { 'n', 'x' },
+      desc = '[F]ormat buffer or selection',
     },
     {
       '<leader><leader>ofd',
@@ -102,23 +105,34 @@ return {
   opts = {
     formatters_by_ft = {
       -- For list of filetypes, type :echo getcompletion('<BlankOrSearchTerm>', 'filetype')
-      csh = { 'csharpier' },
+      cs = { 'csharpier' },
       css = { 'css_beautify' },
       json = { 'jq' },
+      jsonc = web_formatters,
       yaml = { 'yamlfmt', 'yq', stop_after_first = true },
-      xml = { 'xmlformatter', 'yq', stop_after_first = true },
+      xml = { 'xmlformatter', 'yq_xml', stop_after_first = true },
       toml = { 'taplo' },
-      template = { 'templ' },
+      templ = { 'templ' },
       lua = { 'stylua' },
       python = { 'isort', 'black' },
       rust = { 'rustfmt', lsp_format = 'fallback' },
-      javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      javascript = web_formatters,
+      javascriptreact = web_formatters,
+      typescript = web_formatters,
+      typescriptreact = web_formatters,
     },
-    init = function()
-      -- If you want the formatexpr, here is the place to set it
-      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-    end,
-    notify_on_error = false,
+    formatters = {
+      deno_fmt = {
+        cwd = function(_, ctx)
+          return vim.fs.root(ctx.dirname, deno_roots)
+        end,
+      },
+      yq_xml = {
+        inherit = 'yq',
+        args = { '-p', 'xml', '-o', 'xml', '-P', '-' },
+      },
+    },
+    notify_on_error = true,
     format_on_save = function(bufnr)
       -- Disable with a global or buffer-local variable
       if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
@@ -139,4 +153,7 @@ return {
       end
     end,
   },
+  init = function()
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+  end,
 }

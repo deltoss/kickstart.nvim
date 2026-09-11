@@ -15,25 +15,11 @@ return {
       options = {
         theme = 'ayu_light',
       },
-      tabline = {
-        lualine_a = { 'location' },
-        lualine_b = { 'progress' },
-        lualine_c = { 'filename' },
-        lualine_x = {
-          'bo:buftype',
-          'encoding',
-        },
-        lualine_y = {
-          { 'filetype', colored = true },
-        },
-        lualine_z = {
-          { 'fileformat', symbols = { unix = 'LF', dos = 'CRLF', mac = 'CR' } },
-        },
-      },
       sections = {
         lualine_a = { 'mode', job_indicator },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
         lualine_c = {
+          'filename',
           {
             function()
               return vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
@@ -46,8 +32,13 @@ return {
           { require('noice').api.status.mode.get, cond = require('noice').api.status.mode.has },
           { require('noice').api.status.search.get, cond = require('noice').api.status.search.has },
         },
-        lualine_y = {},
-        lualine_z = {},
+        lualine_y = {
+          'bo:buftype',
+          'encoding',
+          { 'filetype', colored = true },
+          { 'fileformat', symbols = { unix = 'LF', dos = 'CRLF', mac = 'CR' } },
+        },
+        lualine_z = { 'progress', 'location' },
       },
     }
   end,
