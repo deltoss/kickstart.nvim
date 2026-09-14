@@ -149,7 +149,4 @@ return {
       end
     end,
   },
-  init = function()
-    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-  end,
 }
