@@ -2,15 +2,12 @@ return {
   'romus204/tree-sitter-manager.nvim',
   dependencies = {}, -- tree-sitter CLI must be installed system-wide
   config = function()
-    -- Arduino sketches are C++, so reuse the C++ parser for the `arduino` filetype.
-    vim.treesitter.language.register('cpp', 'arduino')
-
     require('tree-sitter-manager').setup {
       -- list of parsers to install at the start of a neovim session. If set to "all", install all parsers.
       ensure_installed = {
         'bash',
         'c',
-        'cpp',
+        'arduino',
         'diff',
         'html',
         'lua',
