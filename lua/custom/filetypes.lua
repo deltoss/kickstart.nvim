@@ -22,9 +22,6 @@ vim.filetype.add {
   },
 }
 
--- Arduino sketches use the `arduino` filetype but are C++ underneath.
-vim.treesitter.language.register('cpp', 'arduino')
-
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'tmpl' },
   callback = function()
