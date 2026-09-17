@@ -263,8 +263,7 @@ return {
       },
     }
 
-    -- Arduino LSP depends on the system-installed Arduino CLI, so only manage
-    -- it on machines where Arduino development is actually configured.
+    -- Only include if Arduino CLI is installed
     if vim.fn.executable 'arduino-cli' == 1 then
       servers.arduino_language_server = {}
     end
