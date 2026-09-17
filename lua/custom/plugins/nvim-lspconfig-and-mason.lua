@@ -263,6 +263,11 @@ return {
       },
     }
 
+    -- Only include if Arduino CLI is installed
+    if vim.fn.executable 'arduino-cli' == 1 then
+      servers.arduino_language_server = {}
+    end
+
     -- Ensure the servers and tools above are installed
     --
     -- To check the current status of installed tools and/or manually install
