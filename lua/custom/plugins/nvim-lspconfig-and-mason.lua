@@ -201,6 +201,7 @@ return {
     local servers = {
       denols = {},
       clangd = {},
+      arduino_language_server = {}, -- Requires arduino-cli to be installed separately.
       -- gopls = {},
       -- pyright = {},
       -- rust_analyzer = {},
