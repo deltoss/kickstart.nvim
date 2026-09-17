@@ -201,7 +201,6 @@ return {
     local servers = {
       denols = {},
       clangd = {},
-      arduino_language_server = {}, -- Requires arduino-cli to be installed separately.
       -- gopls = {},
       -- pyright = {},
       -- rust_analyzer = {},
@@ -263,6 +262,12 @@ return {
         },
       },
     }
+
+    -- Arduino LSP depends on the system-installed Arduino CLI, so only manage
+    -- it on machines where Arduino development is actually configured.
+    if vim.fn.executable 'arduino-cli' == 1 then
+      servers.arduino_language_server = {}
+    end
 
     -- Ensure the servers and tools above are installed
     --
