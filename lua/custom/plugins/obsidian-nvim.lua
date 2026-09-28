@@ -1,3 +1,20 @@
+-- Opens `target` (optionally wrapped in `<...>`) relative to the current buffer's directory.
+local function open_relative_file(target, open_cmd)
+  local current_file = vim.api.nvim_buf_get_name(0)
+  if current_file == '' then
+    return false
+  end
+  local file = target:match('^<(.+)>$') or target
+  local path = vim.fs.normalize(vim.fs.dirname(current_file) .. '/' .. file)
+  local stat = vim.uv.fs_stat(path)
+  if stat and stat.type == 'file' then
+    vim.cmd(open_cmd .. ' ' .. vim.fn.fnameescape(path))
+    return true
+  end
+  return false
+end
+
+-- Inline links: `[text](target)` or `[text](<target with spaces>)`.
 local function open_local_file_link(open_cmd)
   local text = vim.api.nvim_get_current_line()
   local col = vim.api.nvim_win_get_cursor(0)[2] + 1
@@ -9,18 +26,52 @@ local function open_local_file_link(open_cmd)
       return false
     end
     if start_col <= col and col <= end_col then
-      local current_file = vim.api.nvim_buf_get_name(0)
-      if current_file == '' then
-        return false
-      end
-      local file = target:match('^<(.+)>$') or target
-      local path = vim.fs.normalize(vim.fs.dirname(current_file) .. '/' .. file)
-      local stat = vim.uv.fs_stat(path)
-      if stat and stat.type == 'file' then
-        vim.cmd(open_cmd .. ' ' .. vim.fn.fnameescape(path))
-        return true
-      end
+      return open_relative_file(target, open_cmd)
+    end
+    pos = end_col + 1
+  end
+end
+
+-- Parses a link reference definition: `[label]: <target>` or `[label]: target`.
+local function parse_reference_definition(line)
+  local label, target = line:match('^%s*%[([^%]]+)%]:%s*(<[^>]+>)')
+  if not label then
+    label, target = line:match('^%s*%[([^%]]+)%]:%s*(%S+)')
+  end
+  return label, target
+end
+
+-- Labels are case-insensitive per CommonMark.
+local function find_reference_target(label)
+  local wanted = label:lower()
+  for _, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, -1, false)) do
+    local def_label, target = parse_reference_definition(line)
+    if def_label and def_label:lower() == wanted then
+      return target
+    end
+  end
+end
+
+-- Reference-style links: `[text][label]`, collapsed `[label][]`, or the cursor
+-- on a `[label]: <target>` definition line.
+local function open_reference_link(open_cmd)
+  local text = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+
+  local _, def_target = parse_reference_definition(text)
+  if def_target then
+    return open_relative_file(def_target, open_cmd)
+  end
+
+  local pos = 1
+  while true do
+    local start_col, end_col, link_text, label = text:find('%[([^%]]+)%]%[([^%]]*)%]', pos)
+    if not start_col then
       return false
+    end
+    if start_col <= col and col <= end_col then
+      local target = find_reference_target(label ~= '' and label or link_text)
+      return target ~= nil and open_relative_file(target, open_cmd)
     end
     pos = end_col + 1
   end
@@ -29,7 +80,7 @@ end
 local function follow_file(key)
   local in_tab = key == 'gt' or key == 'gT'
   local open_cmd = key == 'gS' and 'vsplit' or (in_tab and 'tabedit' or 'edit')
-  if open_local_file_link(open_cmd) then
+  if open_local_file_link(open_cmd) or open_reference_link(open_cmd) then
     return
   end
 
