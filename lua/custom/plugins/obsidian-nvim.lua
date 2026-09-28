@@ -1,3 +1,60 @@
+local function open_local_file_link(open_cmd)
+  local text = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+  local pos = 1
+
+  while true do
+    local start_col, end_col, target = text:find('%[[^%]]+%]%((.-)%)', pos)
+    if not start_col then
+      return false
+    end
+    if start_col <= col and col <= end_col then
+      local current_file = vim.api.nvim_buf_get_name(0)
+      if current_file == '' then
+        return false
+      end
+      local file = target:match('^<(.+)>$') or target
+      local path = vim.fs.normalize(vim.fs.dirname(current_file) .. '/' .. file)
+      local stat = vim.uv.fs_stat(path)
+      if stat and stat.type == 'file' then
+        vim.cmd(open_cmd .. ' ' .. vim.fn.fnameescape(path))
+        return true
+      end
+      return false
+    end
+    pos = end_col + 1
+  end
+end
+
+local function follow_file(key)
+  local in_tab = key == 'gt' or key == 'gT'
+  local open_cmd = key == 'gS' and 'vsplit' or (in_tab and 'tabedit' or 'edit')
+  if open_local_file_link(open_cmd) then
+    return
+  end
+
+  if key == 'gf' or key == 'gS' then
+    local line = vim.api.nvim_get_current_line()
+    local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+    -- crude check: is there a [[...]] or [...](...) near the cursor?
+    local before = line:sub(1, col)
+    local after = line:sub(col)
+    local on_link = (before:match '%[%[[^%]]*$' and after:match '^[^%[]*%]%]') or (before:match '%[[^%]]*$' and after:match '^[^%]]*%]%(')
+    if on_link then
+      vim.cmd(key == 'gS' and 'Obsidian follow_link vsplit' or 'Obsidian follow_link')
+      return
+    end
+  end
+
+  if key == 'gS' then
+    vim.cmd 'vertical wincmd F'
+    return
+  end
+
+  local file_key = (key == 'gF' or key == 'gT') and 'gF' or 'gf'
+  vim.cmd((in_tab and 'wincmd ' or 'normal! ') .. file_key)
+end
+
 return {
   'obsidian-nvim/obsidian.nvim',
   lazy = true,
@@ -72,35 +129,39 @@ return {
     {
       'gf',
       function()
-        local line = vim.api.nvim_get_current_line()
-        local col = vim.api.nvim_win_get_cursor(0)[2] + 1
-        -- crude check: is there a [[...]] or [...](...) near the cursor?
-        local before = line:sub(1, col)
-        local after = line:sub(col)
-        local on_link = (before:match '%[%[[^%]]*$' and after:match '^[^%[]*%]%]') or (before:match '%[[^%]]*$' and after:match '^[^%]]*%]%(')
-        if on_link then
-          vim.cmd 'Obsidian follow_link'
-        else
-          vim.cmd 'normal! gf'
-        end
+        follow_file 'gf'
       end,
       ft = 'markdown',
       desc = 'Follow obsidian link or go to file',
     },
     {
+      'gF',
+      function()
+        follow_file 'gF'
+      end,
+      ft = 'markdown',
+      desc = 'Follow local file link or go to file:line',
+    },
+    {
+      'gt',
+      function()
+        follow_file 'gt'
+      end,
+      ft = 'markdown',
+      desc = 'Open local file link in new tab',
+    },
+    {
+      'gT',
+      function()
+        follow_file 'gT'
+      end,
+      ft = 'markdown',
+      desc = 'Open local file link or file:line in new tab',
+    },
+    {
       'gS',
       function()
-        local line = vim.api.nvim_get_current_line()
-        local col = vim.api.nvim_win_get_cursor(0)[2] + 1
-        -- crude check: is there a [[...]] or [...](...) near the cursor?
-        local before = line:sub(1, col)
-        local after = line:sub(col)
-        local on_link = (before:match '%[%[[^%]]*$' and after:match '^[^%[]*%]%]') or (before:match '%[[^%]]*$' and after:match '^[^%]]*%]%(')
-        if on_link then
-          vim.cmd 'Obsidian follow_link vsplit'
-        else
-          vim.cmd 'normal! <C-W>vgf'
-        end
+        follow_file 'gS'
       end,
       ft = 'markdown',
       desc = 'Follow obsidian link or go to file in split',

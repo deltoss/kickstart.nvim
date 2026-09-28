@@ -117,13 +117,6 @@ return {
           Snacks.picker.lsp_workspace_symbols()
         end, 'Workspace [S]ymbols')
 
-        -- Jump to the type of the word under your cursor.
-        --  Useful when you're not sure what type a variable is and you want to see
-        --  the definition of its *type*, not where it was *defined*.
-        map('gT', function()
-          Snacks.picker.lsp_type_definitions()
-        end, '[G]oto [T]ype Definition')
-
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         --    See `:help CursorHold` for information about when this is executed
