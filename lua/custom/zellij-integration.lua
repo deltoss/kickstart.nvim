@@ -4,10 +4,19 @@ local keymap = vim.keymap.set
 -- so reuse Neovim's own shell (see use-nushell.lua) as that command.
 local shell = vim.o.shell
 
+-- Zellij's --stacked cannot be combined with --direction.
+local function stacked_or_split(split)
+  if vim.env.ZELLIJ and vim.fn.executable('zellij') == 1 then
+    local cwd = vim.fn.getcwd()
+    vim.fn.jobstart({ 'zellij', 'action', 'new-pane', '--stacked', '--cwd', cwd, '--close-on-exit', '--', shell }, { detach = true })
+  else
+    vim.cmd(split)
+  end
+end
+
 keymap('n', '<leader>w<Up>', function()
-  local cwd = vim.fn.getcwd()
-  vim.fn.jobstart({ 'zellij', 'action', 'new-pane', '--direction', 'up', '--cwd', cwd, '--close-on-exit', '--', shell }, { detach = true })
-end, { desc = 'Split Pane Top' })
+  stacked_or_split 'aboveleft split'
+end, { desc = 'Stack Pane / Split Above' })
 
 keymap('n', '<leader>w<Right>', function()
   local cwd = vim.fn.getcwd()
@@ -15,9 +24,8 @@ keymap('n', '<leader>w<Right>', function()
 end, { desc = 'Split Pane Right' })
 
 keymap('n', '<leader>w<Down>', function()
-  local cwd = vim.fn.getcwd()
-  vim.fn.jobstart({ 'zellij', 'action', 'new-pane', '--direction', 'down', '--cwd', cwd, '--close-on-exit', '--', shell }, { detach = true })
-end, { desc = 'Split Pane Down' })
+  stacked_or_split 'belowright split'
+end, { desc = 'Stack Pane / Split Below' })
 
 keymap('n', '<leader>w<Left>', function()
   local cwd = vim.fn.getcwd()
