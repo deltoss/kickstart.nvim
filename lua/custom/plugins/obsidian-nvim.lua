@@ -32,6 +32,54 @@ local function open_local_file_link(open_cmd)
   end
 end
 
+local function open_obsidian_uri(uri)
+  local vault = uri:match('[?&]vault=([^&]+)')
+  local file = uri:match('[?&]file=([^&]+)')
+  if uri:match('^obsidian://open%?') and vault and file then
+    if vim.fn.executable 'notesmd-cli' == 0 then
+      vim.notify('notesmd-cli not found in PATH', vim.log.levels.ERROR)
+      return
+    end
+    local path = vim.uri_decode(file):gsub('\\', '/')
+    vim.system({ 'notesmd-cli', 'open', path, '--vault', vim.uri_decode(vault) }, { text = true }, function(result)
+      if result.code ~= 0 then
+        vim.schedule(function()
+          local message = result.stderr or ''
+          if message == '' then
+            message = result.stdout or ''
+          end
+          vim.notify(message ~= '' and message or 'notesmd-cli failed to open note', vim.log.levels.ERROR)
+        end)
+      end
+    end)
+    return
+  end
+
+  local job, err = vim.ui.open(uri)
+  if not job then
+    vim.notify(err, vim.log.levels.ERROR)
+  end
+end
+
+-- Open an external Obsidian URI instead of treating it as a file path.
+local function open_obsidian_uri_link()
+  local text = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+  local pos = 1
+
+  while true do
+    local start_col, end_col, target = text:find('%[[^%]]+%]%((obsidian://.-)%)', pos)
+    if not start_col then
+      return false
+    end
+    if start_col <= col and col <= end_col then
+      open_obsidian_uri(target)
+      return true
+    end
+    pos = end_col + 1
+  end
+end
+
 -- Parses a link reference definition: `[label]: <target>` or `[label]: target`.
 local function parse_reference_definition(line)
   local label, target = line:match('^%s*%[([^%]]+)%]:%s*(<[^>]+>)')
@@ -80,6 +128,9 @@ end
 local function follow_file(key)
   local in_tab = key == 'gt' or key == 'gT'
   local open_cmd = key == 'gS' and 'vsplit' or (in_tab and 'tabedit' or 'edit')
+  if (key == 'gf' or key == 'gF') and open_obsidian_uri_link() then
+    return
+  end
   if open_local_file_link(open_cmd) or open_reference_link(open_cmd) then
     return
   end
@@ -115,6 +166,7 @@ return {
       enabled = false,
     },
     legacy_commands = false,
+    open = { func = open_obsidian_uri },
     workspaces = {
       {
         name = 'Zettelkasten',
