@@ -25,8 +25,6 @@ return {
         'sql',
         'javascript',
         -- This uses rest.nvim's parser, which doesn't follow .http standard by JetBrains.
-        -- Instead, use Kulala.nvim's parser, which comes with the plugin. See
-        --   https://github.com/mistweaverco/kulala.nvim/issues/888#issuecomment-4560915377
         -- 'http',
         'dockerfile',
         'templ',
