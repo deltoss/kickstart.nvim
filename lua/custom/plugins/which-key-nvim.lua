@@ -67,7 +67,6 @@ return {
       { '<leader>gH',         group = '+Git[H]ub',             mode = { 'n', 'v' } },
       { '<leader>gv',         group = '+Diff[v]iew',           mode = { 'n', 'v' } },
       { '<leader>h',          group = '[H]unk',                mode = { 'v' } },
-      { '<leader>h',          group = '[H]TTP (Bruno)',        mode = { 'n' } },
       { '<leader>L',          group = '[L]ua' },
       { '<leader>m',          group = '[M]arks' },
       { '<leader>M',          group = '[M]arkdown' },
