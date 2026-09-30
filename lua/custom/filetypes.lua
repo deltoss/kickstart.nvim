@@ -6,6 +6,7 @@ vim.filetype.add {
     slnf = 'slnfilter',
     csproj = 'csproj',
     http = 'http',
+    bru = 'bruno',
     scad = 'openscad',
     systemd = 'ini', -- systemd syntax uses ini syntax under the hood
     container = 'ini', -- Podman quadlets uses systemd, and thus ini
