@@ -50,7 +50,7 @@ return {
   opts = {
     collection_paths = {
       { name = 'Main', path = vim.fn.expand '~/HTTP/Bruno/' },
-      { name = 'Legacy', path = vim.fn.expand '~/.bruno/Collections/' },
+      { name = 'Bruno Default', path = vim.fn.expand '~/.bruno/Collections/' },
     },
     picker = 'snacks',
     show_formatted_output = true,
