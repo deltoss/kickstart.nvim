@@ -1,3 +1,37 @@
+local function launch_bruno()
+  local system = vim.uv.os_uname().sysname
+  local command = { 'bruno' }
+  if system == 'Windows_NT' then
+    local exe = vim.fn.expand '$LOCALAPPDATA/Programs/Bruno/Bruno.exe'
+    if vim.fn.executable(exe) == 0 then
+      vim.notify('Bruno executable not found: ' .. exe, vim.log.levels.ERROR)
+      return
+    end
+    -- Avoid jobstart's hidden-window startup flag on Windows.
+    local ok, process, err = pcall(vim.ui.open, exe)
+    if not ok or not process then
+      vim.notify('Failed to launch Bruno: ' .. tostring(ok and err or process), vim.log.levels.ERROR)
+    end
+    return
+  elseif system == 'Darwin' then
+    command = { '/usr/bin/open', '-a', 'Bruno' }
+  end
+
+  local ok, job = pcall(vim.fn.jobstart, command, {
+    detach = true,
+    on_exit = function(_, code)
+      if code ~= 0 then
+        vim.schedule(function()
+          vim.notify('Bruno launcher exited with code ' .. code, vim.log.levels.ERROR)
+        end)
+      end
+    end,
+  })
+  if not ok or job <= 0 then
+    vim.notify('Failed to launch Bruno: ' .. (ok and command[1] or tostring(job)), vim.log.levels.ERROR)
+  end
+end
+
 return {
   'deltoss/bruno.nvim',
   main = 'bruno',
@@ -14,6 +48,7 @@ return {
   keys = {
     { '<leader>sB', '<cmd>BrunoSearch<cr>', mode = 'n', desc = 'Search Bruno requests' },
     { '<localleader>s', '<cmd>update<cr><cmd>BrunoRun<cr>', ft = { 'bruno' }, desc = 'Send request' },
+    { '<localleader>o', launch_bruno, ft = { 'bruno' }, desc = 'Open Bruno' },
     { '<localleader>e', '<cmd>BrunoEnv<cr>', ft = { 'bruno' }, desc = 'Select environment' },
     { '<localleader>f', '<cmd>BrunoSearch<cr>', ft = { 'bruno' }, desc = 'Search requests' },
     { '<localleader>S', '<cmd>BrunoToggleFormat<cr>', ft = { 'bruno' }, desc = 'Toggle response formatting' },
