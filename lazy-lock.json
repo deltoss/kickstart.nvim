@@ -4,7 +4,7 @@
   "aerial.nvim": { "branch": "master", "commit": "645d108a5242ec7b378cbe643eb6d04d4223f034" },
   "blink.cmp": { "branch": "main", "commit": "78336bc89ee5365633bcf754d93df01678b5c08f" },
   "bookmarks.nvim": { "branch": "main", "commit": "230da0acf7645da4f066bd93f1fd490a5660cd11" },
-  "bruno.nvim": { "branch": "main", "commit": "79bf11039da8406c957428b3168e4678eed3c4f3" },
+  "bruno.nvim": { "branch": "main", "commit": "4639880032bcbfe9dfe7f673b833a92398832e17" },
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
   "bullets.vim": { "branch": "master", "commit": "28c22791153a90bb61a86fbeeae0f812e048ade7" },
   "codecompanion.nvim": { "branch": "main", "commit": "9af12c15d0604f429e034ea7542f6cd038ff909a" },
