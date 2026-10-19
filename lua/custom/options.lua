@@ -23,7 +23,6 @@ vim.o.cursorline = true -- Show which line your cursor is on
 vim.o.showmode = false -- Don't show the mode, since it's already in the status line
 vim.o.showmatch = true -- Show matching brackets/parentheses
 vim.o.smoothscroll = true -- Scroll by screen lines instead of jumping by text lines
-vim.o.scroll = 8 -- Set how many lines Ctrl-U and Ctrl-D scroll
 vim.o.relativenumber = true -- Displays relative numbers at the gutter
 vim.o.conceallevel = 2
 vim.o.linebreak = true -- Wrap lines at the end of a word (not in the middle)

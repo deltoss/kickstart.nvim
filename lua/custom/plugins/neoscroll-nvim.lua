@@ -21,14 +21,14 @@ return {
     local keymap = {
       -- Use the "sine" easing function
       ['<C-u>'] = function()
-        neoscroll.ctrl_u { duration = 250, easing = 'sine' }
+        neoscroll.scroll(-8, { duration = 250, easing = 'sine' })
       end,
       ['<C-d>'] = function()
-        neoscroll.ctrl_d { duration = 250, easing = 'sine' }
+        neoscroll.scroll(8, { duration = 250, easing = 'sine' })
       end,
       -- Map Ctrl+e to Ctrl+d
       ['<C-e>'] = function()
-        neoscroll.ctrl_d { duration = 250, easing = 'sine' }
+        neoscroll.scroll(8, { duration = 250, easing = 'sine' })
       end,
       -- Use the "circular" easing function
       ['<C-b>'] = function()
