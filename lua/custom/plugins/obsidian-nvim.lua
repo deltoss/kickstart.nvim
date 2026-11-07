@@ -4,7 +4,7 @@ local function open_relative_file(target, open_cmd)
   if current_file == '' then
     return false
   end
-  local file = target:match('^<(.+)>$') or target
+  local file = target:match '^<(.+)>$' or target
   local path = vim.fs.normalize(vim.fs.dirname(current_file) .. '/' .. file)
   local stat = vim.uv.fs_stat(path)
   if stat and stat.type == 'file' then
@@ -33,9 +33,9 @@ local function open_local_file_link(open_cmd)
 end
 
 local function open_obsidian_uri(uri)
-  local vault = uri:match('[?&]vault=([^&]+)')
-  local file = uri:match('[?&]file=([^&]+)')
-  if uri:match('^obsidian://open%?') and vault and file then
+  local vault = uri:match '[?&]vault=([^&]+)'
+  local file = uri:match '[?&]file=([^&]+)'
+  if uri:match '^obsidian://open%?' and vault and file then
     if vim.fn.executable 'notesmd-cli' == 0 then
       vim.notify('notesmd-cli not found in PATH', vim.log.levels.ERROR)
       return
@@ -82,9 +82,9 @@ end
 
 -- Parses a link reference definition: `[label]: <target>` or `[label]: target`.
 local function parse_reference_definition(line)
-  local label, target = line:match('^%s*%[([^%]]+)%]:%s*(<[^>]+>)')
+  local label, target = line:match '^%s*%[([^%]]+)%]:%s*(<[^>]+>)'
   if not label then
-    label, target = line:match('^%s*%[([^%]]+)%]:%s*(%S+)')
+    label, target = line:match '^%s*%[([^%]]+)%]:%s*(%S+)'
   end
   return label, target
 end
@@ -204,12 +204,6 @@ return {
     },
     frontmatter = {
       enabled = false,
-    },
-    completion = {
-      -- Enables completion using nvim_cmp
-      nvim_cmp = false,
-      -- Enables completion using blink.cmp
-      blink = true,
     },
     note_id_func = function(title)
       -- In this case a note with the title 'My new note' will be given an ID that looks
