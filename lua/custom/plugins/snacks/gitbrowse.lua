@@ -4,6 +4,9 @@ return {
   opts = {
     gitbrowse = {
       enabled = true,
+      config = function(opts)
+        table.insert(opts.remote_patterns, { '^https://ssh%.bitbucket%.org/', 'https://bitbucket.org/' })
+      end,
       url_patterns = {
         ['bitbucket%.org'] = {
           branch = '/src/{branch}',
